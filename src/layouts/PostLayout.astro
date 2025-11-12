@@ -1,0 +1,153 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  frontmatter?: {
+    title: string;
+    description?: string;
+    subtitle?: string;
+    date?: Date | string;
+    author?: string;
+    lang?: string;
+    translations?: Record<string, string>;
+  };
+  title?: string;
+  description?: string;
+  subtitle?: string;
+  date?: Date | string;
+  author?: string;
+  lang?: string;
+  translations?: Record<string, string>;
+}
+
+// Support both direct props and frontmatter (for markdown files)
+const props = Astro.props.frontmatter || Astro.props;
+const { title, description, subtitle, date, author, lang = 'en', translations = {} } = props;
+
+// Language flag emojis
+const languageFlags: Record<string, string> = {
+  'en': '🇺🇸',
+  'ja': '🇯🇵',
+  'es': '🇪🇸',
+  'fr': '🇫🇷',
+  'de': '🇩🇪',
+  'zh': '🇨🇳',
+  'ko': '🇰🇷',
+};
+
+// Translations for "by" (author attribution)
+const byTranslations: Record<string, string> = {
+  'en': 'by',
+  'ja': '著者:',
+  'es': 'por',
+  'fr': 'par',
+  'de': 'von',
+  'zh': '作者:',
+  'ko': '저자:',
+};
+
+// Convert date to Date object if it's a string
+let dateObj: Date | undefined;
+let formattedDate: string | undefined;
+
+// Map language codes to locale codes for date formatting
+const localeMap: Record<string, string> = {
+  'en': 'en-US',
+  'ja': 'ja-JP',
+  'es': 'es-ES',
+  'fr': 'fr-FR',
+  'de': 'de-DE',
+  'zh': 'zh-CN',
+  'ko': 'ko-KR',
+};
+
+if (date) {
+  dateObj = typeof date === 'string' ? new Date(date) : date;
+  const locale = localeMap[lang] || 'en-US';
+  formattedDate = new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  }).format(dateObj);
+}
+---
+
+<BaseLayout title={title} description={description}>
+  <main class="content">
+    <article>
+      <header>
+        <h1>{title}</h1>
+        {subtitle && <small>{subtitle}</small>}
+
+        {/* Timestamp metadata */}
+        {date && dateObj && (
+          <div class="post-meta">
+            <time datetime={dateObj.toISOString()}>{formattedDate}</time>
+            {author && <span> {byTranslations[lang] || 'by'} {author}</span>}
+          </div>
+        )}
+
+        {/* Language switcher */}
+        {Object.keys(translations).length > 0 && (
+          <div class="language-switcher">
+            {Object.entries(translations).map(([langCode, url]) => (
+              <a href={url} class="language-link" title={`Switch to ${langCode.toUpperCase()}`}>
+                {languageFlags[langCode] || langCode.toUpperCase()}
+              </a>
+            ))}
+          </div>
+        )}
+      </header>
+
+      <div class="page-content">
+        <slot />
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .post-meta {
+    font-size: 0.85em;
+    opacity: 0.5;
+    margin-top: 2vmin;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-transform: lowercase;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .post-meta {
+      opacity: 0.6;
+    }
+  }
+
+  .language-switcher {
+    display: flex;
+    gap: 0.5em;
+    font-size: 1.5em;
+    margin-top: 2vmin;
+    margin-bottom: 4vmin;
+  }
+
+  .language-link {
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: inline-block;
+  }
+
+  .language-link:hover,
+  .language-link:focus {
+    opacity: 1;
+    transform: scale(1.2);
+    text-decoration: none;
+  }
+
+  .language-link:focus-visible {
+    outline: 2px solid var(--link-color);
+    outline-offset: 4px;
+    border-radius: 4px;
+  }
+</style>
+

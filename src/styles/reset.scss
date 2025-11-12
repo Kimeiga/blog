@@ -1,0 +1,111 @@
+// Reset
+// -----------------------------------------------------------------------------
+
+// Padding offset mixin (needed for body padding)
+@mixin padding-offset($padding-left, $padding-right: $padding-left) {
+  padding-left: $padding-left;
+  padding-right: $padding-right;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+  text-size-adjust: none;
+  text-rendering: optimizelegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: var(--background-color);
+}
+
+body {
+  --space-body: var(--space-lg);
+  padding-top: 0;
+  padding-bottom: 0;
+  @include padding-offset(var(--space-body));
+  margin: 0 auto 0;
+  font-family: var(--fontstack-default);
+  font-size: var(--font-size);
+  font-feature-settings: var(--font-features);
+  line-height: var(--line-height);
+  color: var(--text-color);
+  background: var(--background-color);
+
+  @media (max-width: $breakpoint-md) {
+    --space-body: var(--space-md);
+  }
+
+  @media (max-width: $breakpoint-sm) {
+    --space-body: var(--space-sm);
+  }
+}
+
+a,
+button {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color .5s ease, border-color .5s ease, background .5s ease, opacity 1.5s ease;
+
+  &:hover,
+  &:focus {
+    transition: color .1s ease, border-color .1s ease, background .1s ease, opacity .1s ease;
+    text-decoration: underline;
+  }
+
+  &[disabled] {
+    opacity: .4;
+    cursor: not-allowed;
+  }
+}
+
+button {
+  appearance: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+// Reset fonts for relevant elements
+input,
+button,
+select,
+textarea {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+// Reset unusual Firefox-on-Android default style
+button,
+input,
+select[multiple],
+textarea {
+  background-image: none;
+}
+
+img,
+hr {
+  border: 0;
+}
+
+del {
+  text-decoration: line-through;
+}
+
+::placeholder {
+  color: var(--text-color);
+  opacity: .2;
+}
+
+:focus::placeholder {
+  color: var(--link-color);
+}
+

@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Get all blog posts
+const posts = await Astro.glob('./*.md');
+
+// Filter out translations (files ending with -jp, -es, -fr, etc.)
+// Only show default language posts (en or no lang specified)
+const defaultPosts = posts.filter(post => {
+  const url = post.url || '';
+  // Exclude posts with language suffixes like -jp, -es, -fr, -de, -zh, -ko
+  return !url.match(/-(?:jp|es|fr|de|zh|ko)$/);
+});
+
+const sortedPosts = defaultPosts.sort((a, b) =>
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+);
+---
+
+<BaseLayout title="Blog" description="Thoughts on development, design, and technology">
+  <main class="content">
+    <article>
+      <header>
+        <h1>Blog</h1>
+        <small>Thoughts on development, design, and technology</small>
+      </header>
+
+      <div class="page-content">
+        {sortedPosts.map((post) => (
+          <section class="list">
+            <h1>
+              <a href={post.url} style={post.frontmatter.color ? `color: ${post.frontmatter.color}` : ''}>
+                {post.frontmatter.title}
+              </a>
+            </h1>
+          </section>
+        ))}
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .list h1 {
+    font-size: 50px !important;
+  }
+
+  @media (max-width: 640px) {
+    .list h1 {
+      font-size: 36px !important;
+    }
+  }
+</style>
+
+
+

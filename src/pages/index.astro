@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SITE_CONFIG } from '../config';
+---
+
+<BaseLayout>
+  <article>
+    <header class="page-header">
+      <h1>{SITE_CONFIG.name}</h1>
+      <p class="subtitle">{SITE_CONFIG.description}</p>
+    </header>
+    <div class="page-content">
+      <h2>Welcome!</h2>
+      <p>
+        Hi, I'm {SITE_CONFIG.author}, a software developer passionate about building 
+        elegant solutions to complex problems. This is my corner of the internet where 
+        I share my projects and thoughts on software development.
+      </p>
+      
+      <h2>What I Do</h2>
+      <p>
+        I specialize in full-stack web development, with a focus on modern JavaScript 
+        frameworks, cloud architecture, and developer tooling. I love exploring new 
+        technologies and sharing what I learn along the way.
+      </p>
+      
+      <h2>Recent Posts</h2>
+      <p>
+        Check out my <a href="/blog/">blog</a> for technical articles, tutorials, 
+        and thoughts on software development.
+      </p>
+      
+      <h2>Projects</h2>
+      <p>
+        View my <a href="/work/">work</a> to see some of the projects I've built 
+        and contributed to.
+      </p>
+    </div>
+  </article>
+</BaseLayout>
+

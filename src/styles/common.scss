@@ -1,0 +1,484 @@
+// Common
+// -----------------------------------------------------------------------------
+
+// Global polish improvements
+html {
+  // Smooth scrolling for anchor links
+  scroll-behavior: smooth;
+}
+
+// Custom text selection color
+::selection {
+  background: var(--link-color);
+  color: var(--background-color);
+}
+
+// Clearfix mixin
+@mixin cf {
+  &::before,
+  &::after {
+    display: table;
+    content: "";
+  }
+
+  &::after {
+    clear: both;
+  }
+}
+
+// Heading mixin
+@mixin heading {
+  font-size: var(--heading-scale-1);
+  font-weight: bold;
+  letter-spacing: var(--heading-letter-spacing);
+}
+
+// Sub-heading mixin
+@mixin sub-heading {
+  font-size: 72%;
+  font-weight: normal;
+  opacity: .5;
+}
+
+// Padding offset mixin
+@mixin padding-offset($padding-left, $padding-right: $padding-left) {
+  padding-left: $padding-left;
+  padding-right: $padding-right;
+}
+
+// Margin offset mixin
+@mixin margin-offset($margin-left, $margin-right: $margin-left) {
+  margin-left: $margin-left;
+  margin-right: $margin-right;
+}
+
+// Main navigation
+.navigation {
+  padding-top: var(--nav-padding);
+  padding-bottom: var(--nav-padding);
+  margin-right: calc(var(--nav-item-space) * -1);
+  margin-left: calc(var(--nav-item-space) * -1);
+  font-size: 90%;
+  font-weight: bold;
+
+  li {
+    display: inline-block;
+    line-height: 2;
+
+    a {
+      padding: .5em var(--nav-item-space);
+      transition: color 0.2s ease;
+
+      &:hover,
+      &:focus {
+        color: var(--link-color);
+        text-decoration: none;
+      }
+
+      // Better focus state for accessibility
+      &:focus-visible {
+        outline: 2px solid var(--link-color);
+        outline-offset: 4px;
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
+// Currently activated page or category class
+.current {
+  a {
+    color: var(--link-color);
+  }
+}
+
+// Main content
+.content {
+  margin-bottom: 16vmin;
+  @include cf;
+
+  // Remove extra space for the last paragraph in the container
+  article {
+    > *:last-child {
+      margin-bottom: 0 !important;
+
+      > *:last-child {
+        margin-bottom: 0 !important;
+
+        > *:last-child {
+          margin-bottom: 0 !important;
+
+          > *:last-child {
+            margin-bottom: 0 !important;
+          }
+        }
+      }
+    }
+  }
+
+  // Post / page content first element fix
+  .post-content,
+  .page-content {
+    > *:first-child {
+      margin-top: 0;
+
+      > *:first-child {
+        margin-top: 0;
+      }
+    }
+  }
+
+  a {
+    font-weight: bold;
+    transition: color 0.2s ease;
+
+    &:focus-visible {
+      outline: 2px solid var(--link-color);
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+  }
+
+  p {
+    margin-bottom: 1.6rem;
+    line-height: calc(var(--line-height) * 1.2);
+  }
+
+  // Lists with custom bullets/numbers
+  ul,
+  ol {
+    margin-bottom: 1.8rem;
+    list-style: none;
+    counter-reset: list;
+
+    @media (max-width: $breakpoint-sm) {
+      margin-left: 1em;
+    }
+
+    li {
+      position: relative;
+      margin-bottom: .4em;
+      line-height: calc(var(--line-height) * 1.2);
+
+      &::before {
+        position: absolute;
+        display: flex;
+        justify-content: flex-end;
+        width: 4em;
+        margin-top: 0;
+        margin-left: -4em;
+        text-align: right;
+        opacity: .4;
+        pointer-events: none;
+      }
+
+      > ul,
+      > ol {
+        margin-left: 1em;
+        margin-bottom: 0;
+      }
+    }
+  }
+
+  ul li::before {
+    content: "-";
+    padding-right: .5em;
+  }
+
+  ol li::before {
+    counter-increment: list;
+    content: counter(list) ".";
+    padding-right: .25em;
+  }
+
+  // Code blocks
+  pre,
+  code {
+    font-family: var(--fontstack-monospace);
+    color: var(--code-color);
+  }
+
+  pre {
+    background: var(--code-color-5);
+  }
+
+  code {
+    font-size: 92%;
+    overflow-wrap: break-word;
+  }
+
+  // Code blocks with syntax highlighting
+  pre,
+  .highlight > pre,
+  .highlighter-rouge pre.highlight,
+  .astro-code {
+    --space-code: var(--space-xs);
+    padding-top: var(--space-xs);
+    padding-bottom: var(--space-xs);
+    @include padding-offset(var(--space-code));
+    @include margin-offset(calc(var(--space-code) * -1));
+    margin-bottom: 1.8rem;
+    overflow-x: auto;
+    font-size: 80%;
+    line-height: calc(var(--line-height) * 1.2);
+    -webkit-overflow-scrolling: touch;
+
+    @media (max-width: $breakpoint-md) {
+      --space-code: var(--space-md);
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      --space-code: var(--space-sm);
+    }
+
+    // Reset overflow for code in code blocks
+    code {
+      overflow-wrap: normal;
+    }
+  }
+
+  // Astro's Shiki code blocks with dual theme support
+  .astro-code {
+    background: var(--code-color-5) !important;
+
+    code {
+      font-family: var(--fontstack-monospace);
+      font-size: 100%;
+    }
+
+    // Use light theme colors by default
+    span {
+      color: var(--shiki-light) !important;
+    }
+  }
+
+  // Dark mode: use dark theme colors
+  :root[data-theme="dark"] .astro-code {
+    span {
+      color: var(--shiki-dark) !important;
+    }
+  }
+
+  header {
+    --header-height: 100vh;
+    --space-header: var(--space-lg);
+    display: flex;
+    min-height: calc(var(--header-height) - (var(--nav-padding) * 4) - (var(--nav-item-space) * 4) - (1ex * .9 * 2));
+    padding-top: 10vmin;
+    padding-bottom: 10vmin;
+    margin-bottom: 16vmin;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--text-color-3);
+    @include padding-offset(var(--space-header));
+    @include margin-offset(calc(var(--space-header) * -1));
+
+    @media (max-width: $breakpoint-md) {
+      --header-height: 70vh;
+      --space-header: var(--space-md);
+      padding-top: 16vmin;
+      padding-bottom: 16vmin;
+    }
+
+    @media (max-width: $breakpoint-sm) {
+      --space-header: var(--space-sm);
+    }
+
+    h1 {
+      @include heading();
+      margin-left: -2px;
+      hyphens: none;
+      line-height: 1.1;
+
+      @media (max-width: $breakpoint-sm) {
+        font-size: 280%;
+      }
+    }
+
+    h2 {
+      margin: 1.2vmin 0 0;
+    }
+
+    small {
+      display: block;
+      margin-top: 2vmin;
+    }
+  }
+
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 10vmin 0 1rem;
+    @include sub-heading();
+  }
+
+  blockquote {
+    position: relative;
+    margin-bottom: 2.8rem;
+    margin-left: calc(var(--space-xs) * -1);
+    font-size: 90%;
+
+    @media (max-width: $breakpoint-sm) {
+      margin-left: 0;
+    }
+
+    > p {
+      padding-left: var(--space-xs);
+      border-left: var(--border-md) solid var(--link-color);
+      color: var(--text-color-60);
+      padding-bottom: 1.6em;
+      margin-bottom: 0;
+
+      &:last-of-type {
+        padding-bottom: 0;
+        margin-bottom: .4em;
+      }
+
+      @media (max-width: $breakpoint-sm) {
+        @include padding-offset(calc(var(--space-sm) - var(--border-md)), var(--space-sm));
+        @include margin-offset(calc(var(--space-sm) * -1));
+      }
+    }
+  }
+
+  code {
+    font-family: var(--fontstack-monospace);
+    padding: .1em .4em;
+    font-size: 90%;
+    background: var(--code-color-5);
+    border-radius: 2px;
+  }
+
+  pre {
+    overflow-x: auto;
+    margin-bottom: 1.8rem;
+    padding: 1em;
+    background: var(--code-color-5);
+    border-radius: 2px;
+
+    code {
+      padding: 0;
+      background: none;
+    }
+  }
+}
+
+// Post list in "work" and "note"
+.list {
+  display: block;
+  margin: 0 0 .4rem;
+  transition: transform 0.2s ease;
+
+  h1 {
+    @include heading();
+    font-size: var(--heading-scale-2);
+    line-height: 1.1;
+    opacity: 1;
+    margin: 0;
+
+    @media (max-width: $breakpoint-sm) {
+      font-size: 180%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: var(--link-color);
+      }
+    }
+  }
+
+  .external {
+    @media (max-width: $breakpoint-sm) {
+      display: none;
+    }
+  }
+}
+
+// A dot symbol for external links
+.external {
+  .dot {
+    display: inline-block;
+    width: .7rem;
+    height: .7rem;
+    margin: 0 .1em;
+    vertical-align: middle;
+    background: var(--text-color);
+    border-radius: 50%;
+    transition: transform .4s ease;
+
+    &--post {
+      margin-left: 1rem;
+    }
+  }
+
+  &:hover,
+  &:focus {
+    .dot {
+      transform: scale(1.4);
+    }
+  }
+}
+
+// Post date margin fix
+.post-modified-date {
+  font-size: 75%;
+  opacity: .5;
+}
+
+// Post meta
+.post-meta {
+  color: var(--text-color-50);
+  font-size: .9em;
+}
+
+// Footer
+.footer {
+  padding: 0 0 16vmin;
+  margin-right: calc(var(--nav-item-space) * -1);
+  margin-left: calc(var(--nav-item-space) * -1);
+  font-size: 80%;
+  text-transform: lowercase;
+
+  // Align footer text with main content
+  p {
+    padding-left: var(--nav-item-space);
+    padding-right: var(--nav-item-space);
+  }
+
+  ul {
+    li {
+      display: inline-block;
+      line-height: 1.8;
+
+      a {
+        padding: .5em var(--nav-item-space);
+      }
+    }
+  }
+}
+
+// Responsive
+@media (max-width: $breakpoint-sm) {
+  .navigation {
+    font-size: 100%;
+  }
+
+  .page-header h1 {
+    font-size: 2em;
+  }
+
+  .content h1 {
+    font-size: 2em;
+  }
+
+  .work-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

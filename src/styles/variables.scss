@@ -1,0 +1,138 @@
+// Variables
+// -----------------------------------------------------------------------------
+
+// Breakpoints
+$breakpoint-lg: 1600px;
+$breakpoint-md: 1080px;
+$breakpoint-sm: 640px;
+$breakpoint-xs: 400px;
+
+:root {
+  // Typography
+  --fontstack-prefix: -apple-system, BlinkMacSystemFont,;
+  --fontstack-sans-serif: "Helvetica Neue", Arial, sans-serif;
+  --fontstack-serif: Georgia, serif;
+  --fontstack-monospace: Menlo, Consolas, monospace;
+  --fontstack-default: var(--fontstack-prefix) var(--fontstack-sans-serif);
+
+  // Fluid typography using clamp()
+  // Format: clamp(min, preferred, max)
+  // The preferred value uses viewport width for smooth scaling
+
+  // Body font size: 18px on mobile (400px), 22px on desktop (1600px)
+  // Formula: min + (max - min) * ((100vw - minVW) / (maxVW - minVW))
+  // Simplified: 18px + 4 * ((100vw - 400px) / 1200px)
+  --font-size: clamp(1.125rem, 0.9167rem + 0.5208vw, 1.375rem);
+
+  // Heading scale multipliers (these will scale more dramatically)
+  // H1 (large): 450% of body = ~81px mobile, ~99px desktop
+  --heading-scale-1: clamp(5.0625rem, 4.1667rem + 2.8125vw, 6.1875rem);
+
+  // H2 (medium): 200% of body = ~36px mobile, ~44px desktop
+  --heading-scale-2: clamp(2.25rem, 1.8333rem + 1.0417vw, 2.75rem);
+
+  // H3 (small): 150% of body = ~27px mobile, ~33px desktop
+  --heading-scale-3: clamp(1.6875rem, 1.375rem + 0.7813vw, 2.0625rem);
+
+  --font-features: "halt", "cv01", "cv02", "cv03";
+  --line-height: calc(20 / 14);
+  --heading-letter-spacing: -.04em;
+
+  // Layout - Spacing scales linearly with viewport width
+  --space-lg: 24vw;  // Large padding (body sides on desktop)
+  --space-md: 8vw;   // Medium padding
+  --space-sm: 4vw;   // Small padding (body sides on mobile)
+  --space-xs: 1.2vw; // Extra small (code blocks)
+
+  --border-lg: 4px;
+  --border-md: 2px;
+  --border-sm: 1px;
+
+  // Nav - Uses vmax for consistent sizing
+  --nav-padding: .75vmax;
+  --nav-item-space: 1.4vmax;
+
+  // Color - text color (light mode) - light blue tint
+  --text-color-h: 210;
+  --text-color-s: 30%;
+  --text-color-l: 10%;
+  --text-color-hsl: var(--text-color-h), var(--text-color-s), var(--text-color-l);
+
+  --text-color: hsl(var(--text-color-hsl));
+  --text-color-0: hsla(var(--text-color-hsl), 0);
+  --text-color-3: hsla(var(--text-color-hsl), .03);
+  --text-color-5: hsla(var(--text-color-hsl), .05);
+  --text-color-10: hsla(var(--text-color-hsl), .1);
+  --text-color-20: hsla(var(--text-color-hsl), .2);
+  --text-color-30: hsla(var(--text-color-hsl), .3);
+  --text-color-40: hsla(var(--text-color-hsl), .4);
+  --text-color-50: hsla(var(--text-color-hsl), .5);
+  --text-color-60: hsla(var(--text-color-hsl), .6);
+  --text-color-70: hsla(var(--text-color-hsl), .7);
+  --text-color-80: hsla(var(--text-color-hsl), .8);
+  --text-color-90: hsla(var(--text-color-hsl), .9);
+
+  // Color - link color (light mode) - vibrant blue
+  --link-color-h: 210;
+  --link-color-s: 100%;
+  --link-color-l: 50%;
+  --link-color-hsl: var(--link-color-h), var(--link-color-s), var(--link-color-l);
+
+  --link-color: hsl(var(--link-color-hsl));
+
+  // Color - background color (light mode)
+  --background-color: #fff;
+
+  // Color - code color
+  --code-color-h: calc(var(--link-color-h) + 30);
+  --code-color-s: calc(var(--link-color-s) * .2 + 30%);
+  --code-color-l: var(--link-color-l);
+  --code-color-hsl: var(--code-color-h), var(--code-color-s), var(--code-color-l);
+
+  --code-color: hsl(var(--code-color-hsl));
+  --code-color-5: hsla(var(--code-color-hsl), .05);
+}
+
+// Dark mode (default)
+:root[data-theme="dark"] {
+  // Dark mode text color - light text on dark background with blue tint
+  --text-color-h: 210;
+  --text-color-s: 20%;
+  --text-color-l: 90%;
+  --text-color-hsl: var(--text-color-h), var(--text-color-s), var(--text-color-l);
+
+  --text-color: hsl(var(--text-color-hsl));
+  --text-color-0: hsla(var(--text-color-hsl), 0);
+  --text-color-3: hsla(var(--text-color-hsl), .03);
+  --text-color-5: hsla(var(--text-color-hsl), .05);
+  --text-color-10: hsla(var(--text-color-hsl), .1);
+  --text-color-20: hsla(var(--text-color-hsl), .2);
+  --text-color-30: hsla(var(--text-color-hsl), .3);
+  --text-color-40: hsla(var(--text-color-hsl), .4);
+  --text-color-50: hsla(var(--text-color-hsl), .5);
+  --text-color-60: hsla(var(--text-color-hsl), .6);
+  --text-color-70: hsla(var(--text-color-hsl), .7);
+  --text-color-80: hsla(var(--text-color-hsl), .8);
+  --text-color-90: hsla(var(--text-color-hsl), .9);
+
+  // Dark mode link color - brighter blue
+  --link-color-h: 210;
+  --link-color-s: 100%;
+  --link-color-l: 65%;
+  --link-color-hsl: var(--link-color-h), var(--link-color-s), var(--link-color-l);
+
+  --link-color: hsl(var(--link-color-hsl));
+
+  // Dark mode background - dark gray/black
+  --background-color: #0a0a0a;
+
+  // Dark mode code color
+  --code-color-h: calc(var(--link-color-h) + 30);
+  --code-color-s: calc(var(--link-color-s) * .2 + 30%);
+  --code-color-l: var(--link-color-l);
+  --code-color-hsl: var(--code-color-h), var(--code-color-s), var(--code-color-l);
+
+  --code-color: hsl(var(--code-color-hsl));
+  --code-color-5: hsla(var(--code-color-hsl), .05);
+}
+

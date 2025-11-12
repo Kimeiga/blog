@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// Get all work projects
+const projects = await Astro.glob('./*.md');
+
+// Filter out translations (files ending with -jp, -es, -fr, etc.)
+// Only show default language posts (en or no lang specified)
+const defaultProjects = projects.filter(project => {
+  const url = project.url || '';
+  // Exclude posts with language suffixes like -jp, -es, -fr, -de, -zh, -ko
+  return !url.match(/-(?:jp|es|fr|de|zh|ko)$/);
+});
+
+const sortedProjects = defaultProjects.sort((a, b) =>
+  new Date(b.frontmatter.date).getTime() - new Date(a.frontmatter.date).getTime()
+);
+---
+
+<BaseLayout title="Work" description="Projects and case studies">
+  <main class="content">
+    <article>
+      <header>
+        <h1>Work</h1>
+        <small>Projects & Case Studies</small>
+      </header>
+
+      <div class="page-content">
+        {sortedProjects.map((project) => (
+          <section class="list">
+            <h1>
+              <a href={project.url} style={project.frontmatter.color ? `color: ${project.frontmatter.color}` : ''}>
+                {project.frontmatter.title}
+              </a>
+            </h1>
+          </section>
+        ))}
+      </div>
+    </article>
+  </main>
+</BaseLayout>
+
+<style>
+  .list h1 {
+    font-size: 50px !important;
+  }
+
+  @media (max-width: 640px) {
+    .list h1 {
+      font-size: 36px !important;
+    }
+  }
+</style>
+
+
+
