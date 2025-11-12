@@ -2,7 +2,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://example.com',
+  site: 'https://kimeiga.github.io',
+  base: '/blog',
   markdown: {
     shikiConfig: {
       // Use GitHub's polished themes for light/dark mode
