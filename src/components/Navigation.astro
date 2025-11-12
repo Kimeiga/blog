@@ -2,17 +2,27 @@
 import { SITE_CONFIG } from '../config';
 
 const { pathname } = Astro.url;
+const base = import.meta.env.BASE_URL;
+
+// Helper to create base-aware URLs
+const getUrl = (path: string) => {
+  // Remove trailing slash from base, ensure path starts with /
+  const cleanBase = base.replace(/\/$/, '');
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${cleanBase}${cleanPath}`;
+};
 ---
 
 <nav class="navigation">
   <ul>
     {SITE_CONFIG.navigation.map((item) => {
-      const isCurrent = pathname === item.url ||
-                       (item.url !== '/' && pathname.startsWith(item.url));
+      const fullUrl = getUrl(item.url);
+      const isCurrent = pathname === fullUrl ||
+                       (item.url !== '/' && pathname.startsWith(fullUrl));
       return (
         <li class={isCurrent ? 'current' : ''}>
           <a
-            href={item.url}
+            href={fullUrl}
             style={`--nav-link-color: ${item.color}`}
           >
             {item.title}
