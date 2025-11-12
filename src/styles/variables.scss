@@ -25,13 +25,13 @@ $breakpoint-xs: 400px;
   --font-size: clamp(1.125rem, 0.9167rem + 0.5208vw, 1.375rem);
 
   // Heading scale multipliers (these will scale more dramatically)
-  // H1 (large): 450% of body = ~81px mobile, ~99px desktop
+  // H1 (page headers): 450% of body = ~81px mobile, ~99px desktop
   --heading-scale-1: clamp(5.0625rem, 4.1667rem + 2.8125vw, 6.1875rem);
 
-  // H2 (medium): 200% of body = ~36px mobile, ~44px desktop
+  // H1 (list titles): 200% of body = ~36px mobile, ~44px desktop
   --heading-scale-2: clamp(2.25rem, 1.8333rem + 1.0417vw, 2.75rem);
 
-  // H3 (small): 150% of body = ~27px mobile, ~33px desktop
+  // H2 (section headers): 150% of body = ~27px mobile, ~33px desktop
   --heading-scale-3: clamp(1.6875rem, 1.375rem + 0.7813vw, 2.0625rem);
 
   --font-features: "halt", "cv01", "cv02", "cv03";
