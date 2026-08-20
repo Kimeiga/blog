@@ -8,11 +8,9 @@ for (const post of posts) {
   years.set(year, [...(years.get(year) ?? []), post]);
 }
 ---
-<BaseLayout title="Archive" description="Every essay and technical note published by Hakan Alpay, ordered by date.">
+<BaseLayout title="Archive" description="Writing by Hakan Alpay, ordered by date.">
   <div class="shell shell--article page-header">
-    <p class="eyebrow">Everything, kept</p>
     <h1>Archive</h1>
-    <p>{posts.length} essays and notes across {years.size} years. Older posts are preserved with their original dates and provenance.</p>
   </div>
   <div class="shell shell--wide archive">
     {[...years.entries()].map(([year, yearPosts]) => (
