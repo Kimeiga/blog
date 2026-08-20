@@ -4,7 +4,7 @@ import { withBase } from '../lib/paths';
 import ThemeToggle from './ThemeToggle.astro';
 
 const nav = [
-  { href: withBase('/'), label: 'Essays' },
+  { href: withBase('/'), label: 'Home' },
   { href: withBase('/archive/'), label: 'Archive' },
   { href: withBase('/tags/'), label: 'Tags' },
   { href: withBase('/search/'), label: 'Search' },
@@ -20,7 +20,7 @@ const currentPath = Astro.url.pathname;
       </span>
       <span class="brand__type">
         <strong>Hakan Alpay</strong>
-        <span>Notes & essays</span>
+        <span>Blog</span>
       </span>
     </a>
 
