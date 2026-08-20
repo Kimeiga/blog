@@ -5,13 +5,26 @@ Public URL: `https://hakanalpay.com/blog/`
 
 ## Defaults
 
-1. Posts live in `src/content/posts/<slug>.md`.
+1. New posts live in `src/content/posts/<slug>.md`.
 2. Preserve Hakan’s actual position and uncertainty. Never invent experience, quotes, reactions, tests, or memories.
 3. Use current primary sources for changing factual claims.
 4. Prefer real licensed photographs. Store them locally under `public/images/<slug>/` with credits.
 5. Dark mode is default; light mode must work. Accent color is golden yellow.
 6. Keep the site static-first.
 7. Run the production build before publication.
+
+## Historical archives
+
+Hakan’s older public writing is part of this blog, not source material to rewrite.
+
+- `src/content/posts/legacy/` contains earlier GitHub/Jekyll writing.
+- `src/content/posts/imported/wordpress/` mirrors the public `kimeiga.wordpress.com` archive, including the standalone `Lonely-CLA` page.
+- `src/content/posts/imported/substack/` mirrors the public `deltastar.substack.com` archive.
+- Imported media lives under `public/images/imported/`.
+
+For imported work, preserve the original article text, headings, emphasis, links, blockquotes, captions, image order, and media. Do **not** run the humanize/rewrite workflow over historical prose. The original public URL belongs in `legacySource`. If an upstream image is copied locally, rewrite the article HTML to the local `/blog/images/imported/...` URL rather than hotlinking it.
+
+Use `scripts/import-public-archives.mjs`, `scripts/import-substack-by-id.mjs`, and `docs/PUBLIC_ARCHIVE_IMPORT.md` when auditing or deliberately re-running the migration. Do not routinely resync old archives after Hakan starts editing a migrated copy on the new blog.
 
 ## Writing
 
