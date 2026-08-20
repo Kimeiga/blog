@@ -1,55 +1,76 @@
-# Agent operating guide for Hakan’s blog
+# Agent guide for Hakan’s blog
 
-This repository is the canonical source for `https://hakanalpay.com/blog`.
+Canonical source: `https://github.com/Kimeiga/blog`
+Public URL: `https://hakanalpay.com/blog/`
 
-## Non-negotiable defaults
+## Defaults
 
-1. Write posts in `src/content/posts/<slug>.md`.
-2. Preserve Hakan’s actual position, uncertainty, and personal details. Never invent lived experience or quotes.
-3. Use primary sources for technical claims and current authoritative sources for changing facts.
-4. Download editorial photographs into `public/images/<slug>/`; do not hotlink. Use WebP, 1600×900 for heroes, and record photographer, source, and license.
-5. Dark is the default theme; light must remain fully supported. Do not introduce gradients, webfont blocking, ad scripts, or global client frameworks.
-6. Features must remain static-first. Search and comments may use JavaScript only after intent.
-7. Run `npm run build` before proposing a merge.
+1. Posts live in `src/content/posts/<slug>.md`.
+2. Preserve Hakan’s actual position and uncertainty. Never invent experience, quotes, reactions, tests, or memories.
+3. Use current primary sources for changing factual claims.
+4. Prefer real licensed photographs. Store them locally under `public/images/<slug>/` with credits.
+5. Dark mode is default; light mode must work. Accent color is golden yellow.
+6. Keep the site static-first.
+7. Run the production build before publication.
+
+## Writing
+
+Read `docs/EDITORIAL_STYLE.md` before drafting.
+
+The most important rule is **complement, do not describe**. Do not explain what the reader can already see, what the previous paragraph already established, or what the page already demonstrates.
+
+Before prose, collect a small source of truth:
+
+- claim/question
+- trigger or concrete example
+- Hakan’s opinion/uncertainty
+- relevant project material
+- facts to research
+
+Then work in smaller passes. Prefer continuation from real notes, section-sized drafting, targeted Rewrite, and a Shorter pass over one-shot article generation.
+
+Do not use “Expand” logic by default. If a paragraph can be removed without losing information, remove it.
+
+Public copy should be terse. Do not put editorial philosophy in the UI. A page called Blog can say `Blog`.
+
+AI disclosure, when useful, should normally be one short line such as `AI-assisted.`
 
 ## Publishing from ChatGPT
 
-When Hakan says “publish this to my blog”:
+When Hakan asks to publish:
 
-1. Turn the request into a brief: claim, tension, audience, useful outcome, required personal context, and source questions.
-2. Research current facts. Build a claim ledger before drafting.
-3. Read `docs/EDITORIAL_STYLE.md` and relevant examples in Hakan’s archive.
-4. Source and locally optimize photographs under `docs/IMAGE_POLICY.md`.
-5. Draft the article in Markdown with complete frontmatter.
-6. Run the editorial checklist and `npm run build`.
-7. Create one feature branch and one PR. Include the live path and validation results.
-8. After checks pass, merge and verify both the GitHub Pages deployment and the canonical `hakanalpay.com/blog` URL.
+1. Recover the relevant context and source material.
+2. Research current facts.
+3. Draft in Markdown.
+4. Run truth, redundancy, compression, and voice passes.
+5. Add and credit useful images.
+6. Build the site.
+7. Publish from a feature branch and verify the deployed URL.
 
-## Article frontmatter
+## Frontmatter
 
 ```yaml
 ---
 title: "Concrete title"
-description: "A useful, specific one-sentence dek."
-published: "2026-08-20T22:00:00-04:00"
-updated: "2026-08-21T10:00:00-04:00" # only when materially revised
+description: "One specific sentence."
+published: "2026-08-20"
 tags: [Software, Design]
 draft: false
 featured: false
 hero:
   src: "/images/article-slug/hero.webp"
-  alt: "Literal, useful alt text"
+  alt: "Literal alt text"
   width: 1600
   height: 900
   credit:
     name: "Photographer"
-    url: "https://..."
-    source: "Unsplash"
+    source: "Wikimedia Commons"
     sourceUrl: "https://..."
-    license: "Unsplash License"
-    licenseUrl: "https://unsplash.com/license"
+    license: "CC BY-SA 4.0"
+    licenseUrl: "https://..."
 commentsIssue: 123
+disclosure: "AI-assisted."
 ---
 ```
 
-See `docs/PUBLISHING.md` for the full workflow.
+See `docs/PUBLISHING.md` for deployment details.
