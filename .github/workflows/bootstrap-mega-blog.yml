@@ -59,10 +59,19 @@ jobs:
       - name: Install the image optimizer
         run: sudo apt-get update && sudo apt-get install -y imagemagick
 
-      - name: Import authored archives and launch photography
+      - name: Import authored archives
+        run: node scripts/import-legacy.mjs --force
+
+      - name: Fetch optional launch photography
+        shell: bash
         run: |
-          node scripts/import-legacy.mjs --force
+          set +e
           node scripts/fetch-editorial-images.mjs
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            echo "::warning::Editorial image acquisition failed with exit code $status. Continuing without optional remote photography so a third-party host cannot block publication."
+          fi
+          exit 0
 
       - name: Validate the production build before publishing source
         run: |
