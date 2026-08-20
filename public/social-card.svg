@@ -1,8 +1,7 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
   <rect width="1200" height="630" fill="#0b0c0d"/>
-  <path d="M0 505h1200v125H0z" fill="#f05a3c"/>
-  <text x="80" y="175" fill="#f4f0e6" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="700">Hakan Alpay</text>
-  <text x="80" y="260" fill="#a8a59e" font-family="Arial, Helvetica, sans-serif" font-size="38">Notes on software, cities, economies,</text>
-  <text x="80" y="310" fill="#a8a59e" font-family="Arial, Helvetica, sans-serif" font-size="38">games, design, and language.</text>
-  <text x="80" y="570" fill="#0b0c0d" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">hakanalpay.com/blog</text>
+  <path d="M0 505h1200v125H0z" fill="#e3bd12"/>
+  <text x="80" y="200" fill="#f4f0e6" font-family="Arial, Helvetica, sans-serif" font-size="78" font-weight="700">Hakan Alpay</text>
+  <text x="80" y="290" fill="#a8a59e" font-family="Arial, Helvetica, sans-serif" font-size="42">Blog</text>
+  <text x="80" y="570" fill="#161307" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="700">hakanalpay.com/blog</text>
 </svg>
