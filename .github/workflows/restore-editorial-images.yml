@@ -1,0 +1,47 @@
+name: Restore editorial images
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/fetch-editorial-images.mjs'
+      - '.github/workflows/restore-editorial-images.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install ImageMagick
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Fetch and optimize editorial photos
+        run: node scripts/fetch-editorial-images.mjs
+
+      - name: Commit restored images
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add public/images/building-blog public/images/writing-workflow
+          if git diff --cached --quiet; then
+            echo 'Images already up to date.'
+            exit 0
+          fi
+          git commit -m 'fix: restore editorial image assets'
+          git push
