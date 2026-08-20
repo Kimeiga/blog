@@ -44,8 +44,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          cp package-lock.json /tmp/package-lock.json
           find . -mindepth 1 -maxdepth 1 ! -name .git ! -name .bootstrap -exec rm -rf {} +
           tar -xzf /tmp/project.tar.gz -C .
+          cp /tmp/package-lock.json package-lock.json
           rm -rf .bootstrap
 
       - name: Set up Node
