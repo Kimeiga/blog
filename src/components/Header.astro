@@ -1,0 +1,50 @@
+---
+import { SITE } from '../config';
+import { withBase } from '../lib/paths';
+import ThemeToggle from './ThemeToggle.astro';
+
+const nav = [
+  { href: withBase('/'), label: 'Essays' },
+  { href: withBase('/archive/'), label: 'Archive' },
+  { href: withBase('/tags/'), label: 'Tags' },
+  { href: withBase('/search/'), label: 'Search' },
+];
+const currentPath = Astro.url.pathname;
+---
+<header class="site-header">
+  <div class="site-header__inner shell">
+    <a class="brand" href={withBase('/')} aria-label={`${SITE.name} blog home`}>
+      <span class="brand__mark" aria-hidden="true">
+        <img class="logo logo--dark" src={withBase('/kimeiga-white.svg')} width="30" height="30" alt="" />
+        <img class="logo logo--light" src={withBase('/kimeiga-black.svg')} width="30" height="30" alt="" />
+      </span>
+      <span class="brand__type">
+        <strong>Hakan Alpay</strong>
+        <span>Notes & essays</span>
+      </span>
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {nav.map((item) => (
+        <a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>
+      ))}
+      <a href={withBase('/rss.xml')} aria-label="RSS feed">RSS</a>
+    </nav>
+
+    <div class="site-header__actions">
+      <ThemeToggle />
+      <details class="mobile-menu">
+        <summary class="icon-button" aria-label="Open menu">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="19" height="19">
+            <path d="M4 7h16M4 12h16M4 17h16"></path>
+          </svg>
+        </summary>
+        <nav aria-label="Mobile navigation">
+          {nav.map((item) => <a href={item.href}>{item.label}</a>)}
+          <a href={withBase('/rss.xml')}>RSS</a>
+          <a href={SITE.portfolioUrl}>Portfolio ↗</a>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

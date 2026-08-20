@@ -1,153 +1,101 @@
 ---
+import type { Post } from '../lib/posts';
 import BaseLayout from './BaseLayout.astro';
+import Photo from '../components/Photo.astro';
+import Comments from '../components/Comments.astro';
+import { absolute } from '../lib/paths';
+import { formatDate, postSlug, postUrl, readingTime, tagUrl } from '../lib/posts';
 
 interface Props {
-  frontmatter?: {
-    title: string;
-    description?: string;
-    subtitle?: string;
-    date?: Date | string;
-    author?: string;
-    lang?: string;
-    translations?: Record<string, string>;
-  };
-  title?: string;
-  description?: string;
-  subtitle?: string;
-  date?: Date | string;
-  author?: string;
-  lang?: string;
-  translations?: Record<string, string>;
+  post: Post;
+  headings: Array<{ depth: number; slug: string; text: string }>;
+  previous?: Post;
+  next?: Post;
 }
-
-// Support both direct props and frontmatter (for markdown files)
-const props = Astro.props.frontmatter || Astro.props;
-const { title, description, subtitle, date, author, lang = 'en', translations = {} } = props;
-
-// Language flag emojis
-const languageFlags: Record<string, string> = {
-  'en': '🇺🇸',
-  'ja': '🇯🇵',
-  'es': '🇪🇸',
-  'fr': '🇫🇷',
-  'de': '🇩🇪',
-  'zh': '🇨🇳',
-  'ko': '🇰🇷',
-};
-
-// Translations for "by" (author attribution)
-const byTranslations: Record<string, string> = {
-  'en': 'by',
-  'ja': '著者:',
-  'es': 'por',
-  'fr': 'par',
-  'de': 'von',
-  'zh': '作者:',
-  'ko': '저자:',
-};
-
-// Convert date to Date object if it's a string
-let dateObj: Date | undefined;
-let formattedDate: string | undefined;
-
-// Map language codes to locale codes for date formatting
-const localeMap: Record<string, string> = {
-  'en': 'en-US',
-  'ja': 'ja-JP',
-  'es': 'es-ES',
-  'fr': 'fr-FR',
-  'de': 'de-DE',
-  'zh': 'zh-CN',
-  'ko': 'ko-KR',
-};
-
-if (date) {
-  dateObj = typeof date === 'string' ? new Date(date) : date;
-  const locale = localeMap[lang] || 'en-US';
-  formattedDate = new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric'
-  }).format(dateObj);
-}
+const { post, headings, previous, next } = Astro.props;
+const { data } = post;
+const minutes = readingTime(post.body ?? '');
+const toc = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 ---
-
-<BaseLayout title={title} description={description}>
-  <main class="content">
-    <article>
-      <header>
-        <h1>{title}</h1>
-        {subtitle && <small>{subtitle}</small>}
-
-        {/* Timestamp metadata */}
-        {date && dateObj && (
-          <div class="post-meta">
-            <time datetime={dateObj.toISOString()}>{formattedDate}</time>
-            {author && <span> {byTranslations[lang] || 'by'} {author}</span>}
-          </div>
-        )}
-
-        {/* Language switcher */}
-        {Object.keys(translations).length > 0 && (
-          <div class="language-switcher">
-            {Object.entries(translations).map(([langCode, url]) => (
-              <a href={url} class="language-link" title={`Switch to ${langCode.toUpperCase()}`}>
-                {languageFlags[langCode] || langCode.toUpperCase()}
-              </a>
-            ))}
-          </div>
-        )}
-      </header>
-
-      <div class="page-content">
-        <slot />
+<BaseLayout
+  title={data.title}
+  description={data.description}
+  image={data.hero?.src}
+  canonicalPath={postUrl(post)}
+  article
+  published={data.published}
+  updated={data.updated}
+  tags={data.tags}
+>
+  <article class="post">
+    <header class="post-header shell shell--article">
+      <p class="eyebrow">Essay</p>
+      <h1>{data.title}</h1>
+      <p class="post-dek">{data.description}</p>
+      <div class="post-byline">
+        <span>By Hakan Alpay</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={data.published.toISOString()}>{formatDate(data.published)}</time>
+        <span aria-hidden="true">·</span>
+        <span>{minutes} min read</span>
+        {data.updated && <><span aria-hidden="true">·</span><span>Updated {formatDate(data.updated, { month: 'short' })}</span></>}
       </div>
-    </article>
-  </main>
+      <ul class="tag-list" aria-label="Tags">
+        {data.tags.map((tag) => <li><a href={tagUrl(tag)}>{tag}</a></li>)}
+      </ul>
+    </header>
+
+    {data.hero && (
+      <div class="shell shell--wide post-hero">
+        <Photo {...data.hero} eager />
+      </div>
+    )}
+
+    <div class="post-grid shell shell--wide">
+      {toc.length > 1 && (
+        <aside class="toc" aria-label="Table of contents">
+          <p>In this essay</p>
+          <ol>
+            {toc.map((heading) => (
+              <li class:list={[heading.depth === 3 && 'toc__nested']}><a href={`#${heading.slug}`}>{heading.text}</a></li>
+            ))}
+          </ol>
+        </aside>
+      )}
+      <div class="prose" data-pagefind-body>
+        {data.disclosure && <p class="editorial-note"><strong>Editorial note.</strong> {data.disclosure}</p>}
+        <slot />
+        {data.legacySource && (
+          <p class="legacy-note">Originally published elsewhere in Hakan’s archive. <a href={data.legacySource}>View the source version ↗</a></p>
+        )}
+      </div>
+    </div>
+
+    <div class="shell shell--article post-tail">
+      <div class="share-row">
+        <span>Share</span>
+        <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(absolute(`/posts/${postSlug(post)}/`))}`}>LinkedIn ↗</a>
+        <a href={`mailto:?subject=${encodeURIComponent(data.title)}&body=${encodeURIComponent(absolute(`/posts/${postSlug(post)}/`))}`}>Email ↗</a>
+        <button type="button" class="copy-link" data-copy-link>Copy link</button>
+      </div>
+      <nav class="post-pagination" aria-label="Adjacent essays">
+        {previous ? <a class="post-pagination__item" href={postUrl(previous)}><span>Older</span><strong>{previous.data.title}</strong></a> : <span />}
+        {next ? <a class="post-pagination__item post-pagination__item--next" href={postUrl(next)}><span>Newer</span><strong>{next.data.title}</strong></a> : <span />}
+      </nav>
+      <Comments issue={data.commentsIssue} title={data.title} slug={postSlug(post)} />
+    </div>
+  </article>
+  <script is:inline>
+    document.querySelector('[data-copy-link]')?.addEventListener('click', async (event) => {
+      const button = event.currentTarget;
+      if (!(button instanceof HTMLButtonElement)) return;
+      try {
+        await navigator.clipboard.writeText(location.href);
+        button.textContent = 'Copied';
+      } catch {
+        button.textContent = 'Copy failed';
+      }
+      window.setTimeout(() => { button.textContent = 'Copy link'; }, 1800);
+    });
+  </script>
 </BaseLayout>
-
-<style>
-  .post-meta {
-    font-size: 0.85em;
-    opacity: 0.5;
-    margin-top: 2vmin;
-    margin-bottom: 0;
-    font-weight: normal;
-    text-transform: lowercase;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .post-meta {
-      opacity: 0.6;
-    }
-  }
-
-  .language-switcher {
-    display: flex;
-    gap: 0.5em;
-    font-size: 1.5em;
-    margin-top: 2vmin;
-    margin-bottom: 4vmin;
-  }
-
-  .language-link {
-    text-decoration: none;
-    opacity: 0.6;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    display: inline-block;
-  }
-
-  .language-link:hover,
-  .language-link:focus {
-    opacity: 1;
-    transform: scale(1.2);
-    text-decoration: none;
-  }
-
-  .language-link:focus-visible {
-    outline: 2px solid var(--link-color);
-    outline-offset: 4px;
-    border-radius: 4px;
-  }
-</style>
-

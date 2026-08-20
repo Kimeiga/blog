@@ -1,11 +1,21 @@
 ---
-import { SITE_CONFIG } from '../config';
+import { SITE } from '../config';
+import { withBase } from '../lib/paths';
+const year = new Date().getFullYear();
 ---
-
-<footer class="footer">
-  <p>
-    &copy; {new Date().getFullYear()} {SITE_CONFIG.name}. 
-    Built with <a href="https://astro.build">Astro</a>.
-  </p>
+<footer class="site-footer">
+  <div class="shell site-footer__inner">
+    <div>
+      <p class="site-footer__title">Hakan Alpay</p>
+      <p>Software, cities, economies, games, language, and whatever connects them.</p>
+    </div>
+    <nav aria-label="Footer navigation">
+      <a href={withBase('/about/')}>About</a>
+      <a href={withBase('/rss.xml')}>RSS</a>
+      <a href={withBase('/feed.json')}>JSON Feed</a>
+      <a href={SITE.repositoryUrl}>Source ↗</a>
+      <a href={SITE.portfolioUrl}>Portfolio ↗</a>
+    </nav>
+    <p class="site-footer__fine">© {year} Hakan Alpay. Text is Hakan’s unless otherwise noted. Photographs retain their stated licenses.</p>
+  </div>
 </footer>
-

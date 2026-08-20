@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getPublishedPosts, postUrl } from '../lib/posts';
+const posts = await getPublishedPosts();
+const years = new Map<number, typeof posts>();
+for (const post of posts) {
+  const year = post.data.published.getFullYear();
+  years.set(year, [...(years.get(year) ?? []), post]);
+}
+---
+<BaseLayout title="Archive" description="Every essay and technical note published by Hakan Alpay, ordered by date.">
+  <div class="shell shell--article page-header">
+    <p class="eyebrow">Everything, kept</p>
+    <h1>Archive</h1>
+    <p>{posts.length} essays and notes across {years.size} years. Older posts are preserved with their original dates and provenance.</p>
+  </div>
+  <div class="shell shell--wide archive">
+    {[...years.entries()].map(([year, yearPosts]) => (
+      <section class="archive-year" aria-labelledby={`year-${year}`}>
+        <h2 id={`year-${year}`}>{year}</h2>
+        <ol>
+          {yearPosts.map((post) => (
+            <li>
+              <time datetime={post.data.published.toISOString()}>{new Intl.DateTimeFormat('en-US', { month: 'short', day: 'numeric' }).format(post.data.published)}</time>
+              <a href={postUrl(post)}>{post.data.title}</a>
+              <span>{post.data.tags[0] ?? 'Essay'}</span>
+            </li>
+          ))}
+        </ol>
+      </section>
+    ))}
+  </div>
+</BaseLayout>

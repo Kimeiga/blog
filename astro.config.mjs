@@ -1,19 +1,22 @@
 import { defineConfig } from 'astro/config';
 
-// https://astro.build/config
 export default defineConfig({
-  site: 'https://kimeiga.github.io',
+  site: 'https://hakanalpay.com',
   base: '/blog',
+  output: 'static',
+  trailingSlash: 'always',
   markdown: {
     shikiConfig: {
-      // Use GitHub's polished themes for light/dark mode
       themes: {
         light: 'github-light',
         dark: 'github-dark',
       },
-      // Wrap code blocks in a div for better styling control
-      wrap: false,
+      wrap: true,
+    },
+  },
+  vite: {
+    build: {
+      cssMinify: 'lightningcss',
     },
   },
 });
-

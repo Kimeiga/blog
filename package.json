@@ -1,12 +1,17 @@
 {
-  "name": "developer-blog",
+  "name": "hakan-alpay-blog",
   "type": "module",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "private": true,
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
+    "prebuild": "node scripts/import-legacy.mjs --if-missing && node scripts/validate-content.mjs",
     "build": "astro check && astro build",
     "preview": "astro preview",
+    "new": "node scripts/new-post.mjs",
+    "lint:content": "node scripts/validate-content.mjs",
+    "sync:legacy": "node scripts/import-legacy.mjs --force",
     "astro": "astro"
   },
   "dependencies": {
@@ -15,6 +20,7 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.0",
     "@astrojs/node": "^9.5.0",
+    "lightningcss": "^1.33.0",
     "sass": "^1.80.0",
     "typescript": "^5.6.0"
   }

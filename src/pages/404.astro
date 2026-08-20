@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/paths';
+Astro.response.status = 404;
+---
+<BaseLayout title="Page not found" description="This page does not exist." noIndex>
+  <div class="shell shell--article not-found">
+    <p class="eyebrow">404</p>
+    <h1>This path went somewhere else.</h1>
+    <p>The archive may have moved during a migration. Search the whole site or return to the essays.</p>
+    <div>
+      <a class="button" href={withBase('/search/')}>Search</a>
+      <a class="button button--secondary" href={withBase('/')}>Blog home</a>
+    </div>
+  </div>
+</BaseLayout>

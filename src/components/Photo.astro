@@ -1,0 +1,41 @@
+---
+import { withBase } from '../lib/paths';
+interface Credit {
+  name: string;
+  url?: string;
+  source?: string;
+  sourceUrl?: string;
+  license?: string;
+  licenseUrl?: string;
+}
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  credit?: Credit;
+  eager?: boolean;
+  objectPosition?: string;
+  class?: string;
+}
+const { src, alt, width, height, credit, eager = false, objectPosition = 'center', class: className } = Astro.props;
+---
+<figure class:list={['photo', className]}>
+  <img
+    src={withBase(src)}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={eager ? 'eager' : 'lazy'}
+    fetchpriority={eager ? 'high' : 'auto'}
+    decoding="async"
+    style={`object-position:${objectPosition}`}
+  />
+  {credit && (
+    <figcaption>
+      Photo by {credit.url ? <a href={credit.url}>{credit.name}</a> : credit.name}
+      {credit.source && <> on {credit.sourceUrl ? <a href={credit.sourceUrl}>{credit.source}</a> : credit.source}</>}
+      {credit.license && <> · {credit.licenseUrl ? <a href={credit.licenseUrl}>{credit.license}</a> : credit.license}</>}
+    </figcaption>
+  )}
+</figure>

@@ -1,0 +1,27 @@
+name: Blog post request
+about: Capture a post idea from a phone or browser
+labels: [post-idea]
+body:
+  - type: input
+    id: working-title
+    attributes:
+      label: Working title
+      placeholder: The question or tension, not a clickbait headline
+    validations:
+      required: true
+  - type: textarea
+    id: claim
+    attributes:
+      label: What do I actually think?
+      description: State the provisional claim, disagreement, or thing worth figuring out.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Sources, examples, and personal context
+      description: Links, projects, conversations, screenshots, data, or details the article must preserve.
+  - type: textarea
+    id: reader
+    attributes:
+      label: What should the reader leave with?

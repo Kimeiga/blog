@@ -1,23 +1,17 @@
-export const SITE_CONFIG = {
-  name: 'Dev Blog',
-  description: 'A developer blog showcasing projects and technical writing',
-  url: 'https://example.com',
-  author: 'Jane Developer',
-  
-  // Navigation items with customizable colors
-  navigation: [
-    { title: 'Home', url: '/', color: '#ff00b4' },
-    { title: 'Blog', url: '/blog/', color: '#00b4ff' },
-    { title: 'Work', url: '/work/', color: '#b4ff00' },
-    { title: 'About', url: '/about/', color: '#ff6b00' },
-  ],
-  
-  // Theme colors
-  colors: {
-    theme: '#ff00b4',
-    background: '#fff',
-    text: '#000',
-    link: '#ff00b4',
+export const SITE = {
+  name: 'Hakan Alpay',
+  shortName: 'Hakan',
+  title: 'Hakan Alpay — Notes on software, cities, economies, games, and language',
+  description:
+    'Essays and working notes by Hakan Alpay about software, cities, economies, games, design, language, and the systems behind them.',
+  origin: 'https://hakanalpay.com',
+  basePath: '/blog',
+  repository: 'Kimeiga/blog',
+  repositoryUrl: 'https://github.com/Kimeiga/blog',
+  profileUrl: 'https://github.com/Kimeiga',
+  portfolioUrl: 'https://hakanalpay.com',
+  author: {
+    name: 'Hakan Alpay',
+    url: 'https://hakanalpay.com',
   },
-};
-
+} as const;

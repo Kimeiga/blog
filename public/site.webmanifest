@@ -1,0 +1,12 @@
+{
+  "name": "Hakan Alpay — Notes & Essays",
+  "short_name": "Hakan",
+  "start_url": "/blog/",
+  "scope": "/blog/",
+  "display": "standalone",
+  "background_color": "#0b0c0d",
+  "theme_color": "#0b0c0d",
+  "icons": [
+    { "src": "/blog/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ]
+}
