@@ -30,6 +30,10 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          for file in .bootstrap/chunk-*; do
+            printf '%s ' "$(wc -c < "$file")"
+            sha256sum "$file"
+          done
           cat .bootstrap/chunk-* > /tmp/project.tar.gz.b64
           echo '6758f9fcd21b8d4af9ac38b5a421e350800b50a2ceabb1147d6c45cc1bab6865  /tmp/project.tar.gz.b64' | sha256sum -c -
           base64 --decode /tmp/project.tar.gz.b64 > /tmp/project.tar.gz
