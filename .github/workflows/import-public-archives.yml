@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'scripts/import-public-archives.mjs'
+      - 'scripts/import-substack-by-id.mjs'
       - '.github/workflows/import-public-archives.yml'
 
 permissions:
@@ -14,7 +15,7 @@ permissions:
 jobs:
   import:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,8 +31,29 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Import WordPress and Substack
-        run: node scripts/import-public-archives.mjs
+      - name: Import WordPress archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The original combined importer also has an RSS-based Substack path,
+          # but the publication subdomain blocks GitHub Actions. For this run,
+          # stop the script after the WordPress import, then use the verified
+          # bare-host Substack ID importer in the next step.
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('scripts/import-public-archives.mjs')
+          text = path.read_text()
+          old = 'const substackCount = await importSubstack();'
+          new = 'const substackCount = 0;'
+          if old not in text:
+              raise SystemExit('expected Substack call not found')
+          path.write_text(text.replace(old, new, 1))
+          PY
+          node scripts/import-public-archives.mjs
+          git checkout -- scripts/import-public-archives.mjs
+
+      - name: Import Substack archive
+        run: node scripts/import-substack-by-id.mjs
 
       - name: Validate full site
         run: npm run build
