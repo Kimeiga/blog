@@ -2,18 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { withBase } from '../lib/paths';
 ---
-<BaseLayout title="Search" description="Search every essay and technical note on Hakan Alpay’s blog.">
+<BaseLayout title="Search" description="Search Hakan Alpay’s blog.">
   <div class="shell shell--article page-header page-header--search">
-    <p class="eyebrow">Local, private, static</p>
     <h1>Search</h1>
-    <p>The index downloads only on this page. Queries stay in your browser.</p>
     <form class="search-form" role="search" data-search data-index={withBase('/search-index.json')}>
-      <label for="search-input">Search every post</label>
+      <label for="search-input">Search posts</label>
       <div class="search-form__control">
-        <input id="search-input" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Try “Japan”, “CSS”, or “perfectionism”" />
+        <input id="search-input" name="q" type="search" autocomplete="off" spellcheck="false" placeholder="Japan, CSS, perfectionism…" />
         <button class="button" type="submit">Search</button>
       </div>
-      <p id="search-help">Titles, descriptions, tags, and article text are indexed.</p>
     </form>
   </div>
   <section class="shell shell--article search-results" aria-labelledby="search-results-title">
@@ -72,7 +69,7 @@ import { withBase } from '../lib/paths';
           status.textContent = `${ranked.length} result${ranked.length === 1 ? '' : 's'} for “${clean}”.`;
           if (push) history.replaceState(null, '', `${location.pathname}?q=${encodeURIComponent(clean)}`);
         } catch {
-          status.textContent = 'The search index could not be loaded.';
+          status.textContent = 'Search failed.';
         }
       };
       form.addEventListener('submit', (event) => { event.preventDefault(); run(input.value); });
