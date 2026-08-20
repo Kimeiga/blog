@@ -2,23 +2,15 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE } from '../config';
 ---
-<BaseLayout title="About" description="About Hakan Alpay and the editorial principles behind this blog.">
+<BaseLayout title="About" description="About Hakan Alpay.">
   <div class="shell shell--article page-header">
-    <p class="eyebrow">About the author and the machinery</p>
-    <h1>A personal research notebook with production values.</h1>
+    <h1>About</h1>
   </div>
   <article class="shell shell--article prose standalone-prose">
-    <p class="lede">I’m Hakan Alpay, a software engineer in New York. I build web products and games, study Japanese and Chinese, and spend a probably unreasonable amount of time thinking about cities, trains, institutions, interfaces, and why some systems feel better than others.</p>
+    <p class="lede">I’m Hakan Alpay, a software engineer in New York. I build software and games and write about software, cities, economies, design, language, and whatever I’m working on.</p>
 
-    <h2>What belongs here</h2>
-    <p>The blog is intentionally broad. A post may be a technical walkthrough, an economic argument, a design experiment, a travel observation, or a progress report from a project such as Kiokun. The common thread is curiosity with enough implementation detail that the idea can be checked, reused, or argued with.</p>
+    <p>Some posts are technical notes, some are research, and some are just things I wanted to think through. A few are AI-assisted.</p>
 
-    <h2>How the work is made</h2>
-    <p>Some articles are written directly by me. Others are researched, drafted, or edited with an AI agent under my direction. The standard is not whether a machine touched the text; it is whether the claims are sourced, the synthesis is original, the uncertainty is honest, and the final piece says something I actually mean.</p>
-
-    <h2>What the site refuses</h2>
-    <p>No display ads, surveillance analytics, autoplay, newsletter ambush, or manufactured “engagement.” Comments live in GitHub. Photographs are local, licensed, and credited. The full source and editorial workflow are public.</p>
-
-    <p><a href={SITE.repositoryUrl}>Read the source and editorial documentation on GitHub ↗</a></p>
+    <p><a href={SITE.repositoryUrl}>GitHub ↗</a></p>
   </article>
 </BaseLayout>
