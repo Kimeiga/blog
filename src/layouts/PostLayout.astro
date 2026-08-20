@@ -29,7 +29,6 @@ const toc = headings.filter((heading) => heading.depth === 2 || heading.depth ==
 >
   <article class="post">
     <header class="post-header shell shell--article">
-      <p class="eyebrow">Essay</p>
       <h1>{data.title}</h1>
       <p class="post-dek">{data.description}</p>
       <div class="post-byline">
@@ -54,7 +53,7 @@ const toc = headings.filter((heading) => heading.depth === 2 || heading.depth ==
     <div class="post-grid shell shell--wide">
       {toc.length > 1 && (
         <aside class="toc" aria-label="Table of contents">
-          <p>In this essay</p>
+          <p>Contents</p>
           <ol>
             {toc.map((heading) => (
               <li class:list={[heading.depth === 3 && 'toc__nested']}><a href={`#${heading.slug}`}>{heading.text}</a></li>
@@ -63,7 +62,7 @@ const toc = headings.filter((heading) => heading.depth === 2 || heading.depth ==
         </aside>
       )}
       <div class="prose" data-pagefind-body>
-        {data.disclosure && <p class="editorial-note"><strong>Editorial note.</strong> {data.disclosure}</p>}
+        {data.disclosure && <p class="editorial-note">{data.disclosure}</p>}
         <slot />
         {data.legacySource && (
           <p class="legacy-note">Originally published elsewhere in Hakan’s archive. <a href={data.legacySource}>View the source version ↗</a></p>
