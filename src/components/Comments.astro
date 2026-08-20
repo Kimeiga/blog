@@ -11,23 +11,16 @@ const newIssueUrl = `${SITE.repositoryUrl}/issues/new?title=${encodeURIComponent
 ---
 <section class="comments" id="comments" aria-labelledby="comments-title" data-comments data-issue={issue ?? ''} data-repo={SITE.repository}>
   <div class="section-heading section-heading--compact">
-    <div>
-      <p class="eyebrow">Conversation</p>
-      <h2 id="comments-title">Comments</h2>
-    </div>
-    {issueUrl && <a class="text-link" href={issueUrl}>Open on GitHub ↗</a>}
+    <h2 id="comments-title">Comments</h2>
+    {issueUrl && <a class="text-link" href={issueUrl}>GitHub ↗</a>}
   </div>
-  <p class="comments__intro">
-    Comments are stored in a public GitHub issue: no ads, no cross-site profile, and no separate database.
-    Reading is public; posting requires a GitHub account.
-  </p>
   {issue ? (
     <div class="comments__controls">
-      <button class="button button--secondary" type="button" data-load-comments>Load comments</button>
-      <a class="button" href={issueUrl}>Leave a comment ↗</a>
+      <button class="button button--secondary" type="button" data-load-comments>Load</button>
+      <a class="button" href={issueUrl}>Comment ↗</a>
     </div>
   ) : (
-    <a class="button" href={newIssueUrl}>Start the discussion ↗</a>
+    <a class="button" href={newIssueUrl}>Start discussion ↗</a>
   )}
   <p class="comments__status" role="status" aria-live="polite" data-comments-status></p>
   <ol class="comment-list" data-comment-list hidden></ol>
@@ -47,7 +40,7 @@ const newIssueUrl = `${SITE.repositoryUrl}/issues/new?title=${encodeURIComponent
     const repo = section.dataset.repo;
     button.addEventListener('click', async () => {
       button.disabled = true;
-      status.textContent = 'Loading comments…';
+      status.textContent = 'Loading…';
       try {
         const response = await fetch(`https://api.github.com/repos/${repo}/issues/${issue}/comments?per_page=100`, {
           headers: { Accept: 'application/vnd.github+json' },
@@ -89,7 +82,7 @@ const newIssueUrl = `${SITE.repositoryUrl}/issues/new?title=${encodeURIComponent
         status.textContent = `${comments.length} comment${comments.length === 1 ? '' : 's'}.`;
         button.hidden = true;
       } catch (error) {
-        status.textContent = 'Comments could not be loaded here. Use “Open on GitHub” instead.';
+        status.textContent = 'Could not load comments.';
         button.disabled = false;
       }
     }, { once: true });
