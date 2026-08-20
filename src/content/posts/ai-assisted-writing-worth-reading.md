@@ -1,7 +1,7 @@
 ---
-title: "How I’m trying to make AI-assisted writing worth reading"
-description: "A practical editorial system for using AI without publishing the smooth, repetitive, source-thin prose that has made so much of the web feel disposable."
-published: "2026-08-20T22:10:00-04:00"
+title: "My AI writing workflow"
+description: "Give the model real context, generate less, and delete anything that explains what the reader can already see."
+published: "2026-08-20"
 tags: [Writing, AI, Research, Blogging]
 draft: false
 featured: true
@@ -18,191 +18,96 @@ hero:
     sourceUrl: "https://unsplash.com/photos/n9AaeihA9HI?utm_source=hakanalpay_blog&utm_medium=referral"
     license: "Unsplash License"
     licenseUrl: "https://unsplash.com/license"
-disclosure: "The method described here was developed from Hakan’s writing archive, his humanize-prose project, current research on AI-text detection, and an editorial pass over this article itself. The piece is AI-assisted and published under Hakan’s direction."
+disclosure: "AI-assisted."
 ---
 
-The fastest way to ruin this blog would be to make publishing frictionless.
+The sentence that made me want to rewrite the first version of this blog was:
 
-That sounds strange after I built an entire system to make publishing easier. But there are two kinds of friction. One is mechanical: finding the repo, remembering the frontmatter, resizing a photograph, fixing a broken deployment. Removing that friction is good. The other is editorial: deciding whether an idea is true, whether it is mine, whether the evidence is strong enough, and whether the reader will get anything beyond a competent rearrangement of familiar sentences.
+> The site is intentionally quiet. The ideas do the moving.
 
-AI removes both unless you deliberately put the second kind back.
+The page was already quiet. The sentence added nothing. Worse, it sounded exactly like an AI explaining a design choice that the reader had already understood by looking at the page.
 
-The result is the texture people now call **AI slop**: prose that is grammatical, comprehensive, and strangely unnecessary. It announces significance before earning it. It divides an obvious point into six headings. It treats every tradeoff as a “delicate balance.” It ends by restating the opening with a warmer adjective.
+So I deleted it.
 
-I do not want to disguise that an AI helped with an article. I want the help to produce something that survives the more important question:
+That is now one of the main rules for this blog: **do not narrate what the reader can already see or infer.**
 
-> Would this be worth reading if nobody cared how it was written?
+## Redundancy is a useful tell
 
-## “Can a detector catch it?” is the wrong acceptance test
+A 2026 ACL paper called [UMPIRE](https://aclanthology.org/2026.acl-long.1427/) studied human and LLM-generated social posts paired with images. The authors found a useful semantic difference: human posts were more likely to add information beyond the image, while LLM posts were more likely to describe information already present.
 
-OpenAI retired its own AI-text classifier because of its low accuracy. In the evaluation OpenAI published at the time, the classifier caught only 26 percent of AI-written text as “likely AI-written” and incorrectly labeled human text 9 percent of the time. A Stanford-led study found a much uglier failure: several detectors misclassified more than half of a sample of essays by non-native English writers as AI-generated.
+That paper is about multimodal social posts, not blog essays, so I would not turn it into a universal detector. But the idea of **redundant versus complementary information** maps well to the AI prose I dislike.
 
-That does not mean machine-generated prose has no patterns. Stylometry research finds measurable differences in vocabulary, syntax, punctuation, discourse structure, and the distribution of common words. It means authorship detection is probabilistic, gameable, domain-dependent, and capable of punishing people whose natural style happens to be predictable to a language model.
+Bad AI writing keeps telling you what just happened:
 
-Optimizing this blog to pass a detector would therefore be both flimsy and unfair. A detector can be one diagnostic signal. It cannot tell me whether the Japanese debt article made the right distinction between gross and net liabilities, whether the Kiokun post explains the actual product constraint, or whether a personal essay says anything I believe.
+- a quiet design announces that it is quiet
+- a section ends by summarizing itself
+- a conclusion restates the introduction
+- a paragraph explains why the previous paragraph matters
+- every tradeoff gets a sentence saying that it is a tradeoff
 
-The acceptance test has to be editorial.
+The fix is usually deletion, not a more human synonym.
 
-## My old writing is more useful than a generic “human voice” prompt
+Another [ACL 2026 study](https://aclanthology.org/2026.acl-long.2030/) found that people could post-edit LLM drafts to make them closer to their own style, but the edited text still stayed stylistically closer to LLM output than to their unassisted writing and showed less stylistic diversity. That makes me less interested in the workflow where an AI writes a polished 2,000-word article and I “humanize” it afterward.
 
-I have a repository called `humanize`. Its prose skill catalogs surface habits—promotional vocabulary, fake significance, `-ing` tails, em-dash clusters, rule-of-three lists—and deeper narrative habits such as over-explaining the theme and resolving everything too neatly. That research is useful, especially for fiction.
+I would rather give the model better material and ask it to generate less.
 
-But the best reference for this blog is still the writing I did before generative AI could draft it.
+## What I like about Sudowrite
 
-In “Frankly, I think too much,” I move from a hot house to sleeping positions to mentally staging a future TV interview where I have solved a world problem and become famous for it. It is not efficient. It is specific, a little embarrassing, and unresolved. The post ends by asking readers whether they think too much too.
+[Sudowrite](https://www.sudowrite.com/) is built for fiction, but its workflow is more interesting to me than the usual blank chat box.
 
-In the Bahunya post, the framework’s name comes from the Hong Kong orchid tree, its Turkish name, a six-petal logo, and the practical annoyance of memorizing classes for semantic HTML. That cluster of details is a fingerprint no generic request for “more personality” would produce.
+Its [Story Bible](https://docs.sudowrite.com/using-sudowrite/1ow1qkGqof9rtcyGnrWUBS/what-is-story-bible/jmWepHcQdJetNrE991fjJC) is a persistent source of truth for the project. Style, characters, worldbuilding, outline, POV, and other context stay available while the writer moves between documents.
 
-The lesson is not to add random digressions or typos. It is to preserve the source of the article: the actual irritation, project, conversation, place, opinion, or mixed feeling that made me want to write it.
+Its [Write](https://docs.sudowrite.com/using-sudowrite/1ow1qkGqof9rtcyGnrWUBS/write/pvxUvbQqYybfEosqx1sXjY) tool is basically contextual autocomplete. It can read up to 20,000 words before the cursor and also use Story Bible context. [Rewrite](https://docs.sudowrite.com/using-sudowrite/1ow1qkGqof9rtcyGnrWUBS/rewrite/9hkeezeUsCiUCG4dRdEqjS) is a separate tool with options such as **Shorter**. [Feedback](https://docs.sudowrite.com/using-sudowrite/1ow1qkGqof9rtcyGnrWUBS/feedback/7Ew1KgpEwabQSgvijq8QNr) can run custom editorial checks across a draft while seeing the Story Bible.
 
-<figure class="article-photo">
-  <img src="/blog/images/writing-workflow/notes.webp" width="1600" height="900" loading="lazy" decoding="async" alt="An open planner beside pens, a ruler, and a small plant" />
-  <figcaption>Photo by <a href="https://unsplash.com/@kellysikkema?utm_source=hakanalpay_blog&utm_medium=referral">Kelly Sikkema</a> on <a href="https://unsplash.com/photos/hBdaqrr5Z3k?utm_source=hakanalpay_blog&utm_medium=referral">Unsplash</a> · <a href="https://unsplash.com/license">Unsplash License</a></figcaption>
-</figure>
+The part I want to copy is the separation of jobs. Planning, continuation, rewriting, expansion, and critique do not have to be one giant prompt.
 
-## The workflow starts before the draft
+Also: Sudowrite has an **Expand** button. For a blog, I want the psychological opposite. Expansion should be opt-in. Compression should be the default.
 
-A model is very good at turning a vague subject into answer-shaped text. That is exactly why the first artifact should not be an outline.
+## My version for this blog
 
-It should be a brief with five uncomfortable blanks:
+Before drafting, the agent gets a small source of truth:
 
-1. **What do I currently think?** Not “the topic,” but the provisional claim.
-2. **What creates tension?** A contradiction, cost, uncertainty, or tempting opposing answer.
-3. **What do I know firsthand?** Code I wrote, a city I walked, a product decision, a mistake, a conversation, a photograph.
-4. **What would change my mind?** The evidence the research must seek rather than avoid.
-5. **What should the reader be able to do or see afterward?**
+- what I actually think
+- the concrete thing that triggered the post
+- relevant code, data, screenshots, or prior writing
+- facts that need current sources
+- anything I am unsure about
 
-For the EASI country-equality index, “compare equality across countries” would be a weak brief. The real tension is that the Nordic model may achieve extraordinary equality at small population scale, while Japan may be doing something comparably difficult across a much larger, more industrial, more urban society. That question produces an index worth debating. The generic topic produces a listicle.
+That plays the role of a Story Bible. The point is to keep the model anchored to material that came from somewhere other than its own next-token instincts.
 
-## Research becomes a claim ledger, not a link pile
+Then I prefer drafting section by section. If I already wrote a paragraph I like, continue from it instead of replacing it with a fresh “professional” version. If a section is weak, rewrite that section. If it is bloated, make it shorter. If the argument has a hole, use a feedback pass instead of padding the hole with transitions.
 
-AI-assisted research often fails in a polite way. The draft contains citations, but the citations sit near a paragraph rather than supporting its precise claims. A source that proves a number is treated as if it also proves the explanation for the number.
+My older posts are useful style context because they contain details I would never put in a generic voice prompt: a hot apartment, the Turkish name for a Hong Kong orchid tree, the annoyance of memorizing CSS classes, half-finished thoughts. I do not want the model to imitate old typos. I want it to preserve the habit of writing from an actual thing.
 
-Before drafting, I now want a claim ledger:
+## What I cut now
 
-| Claim | What kind of statement is it? | Evidence needed | How the article should phrase it |
-|---|---|---|---|
-| Japan’s gross debt is unusually high | measurable fact | current primary or institutional data | direct, dated statement |
-| Its asset position changes the comparison | accounting interpretation | balance-sheet data and methodology | explain the definition |
-| The strategy was “genius” | judgment | outcomes, counterfactuals, tradeoffs | attributed or argued, never smuggled in as fact |
-| Another country could copy it | inference | institutional differences | explicitly conditional |
+The updated editorial guide has a harsher compression rule.
 
-This prevents the smoothest failure mode: a paragraph whose first sentence is sourced and whose next four sentences are the model’s plausible continuation.
+I cut sentences that:
 
-For current technical work, primary sources come first: framework documentation, specifications, repositories, papers, issue trackers, and actual deployment output. For economics and policy, the article should distinguish official data, reported events, expert interpretation, and my own inference. The citation belongs at the smallest unit that it supports.
+- explain an obvious design choice
+- tell the reader that a point is important instead of making the point
+- defend a decision against objections nobody raised
+- recap a section that was already clear
+- turn a simple preference into a philosophy
+- use a heading for two paragraphs that did not need a heading
+- describe the writing process when the subject is something else
 
-## Outline around pressure, not symmetry
+Disclosures are one line. UI copy is a few words. A page called Blog can say **Blog**.
 
-The default AI outline is beautifully balanced. That is a problem.
+The agent also gets a custom “redundancy” pass: for each paragraph, ask what new information it contributes. If the answer is “it restates the previous paragraph more smoothly,” delete it.
 
-It tends to generate a definition, three benefits, three challenges, best practices, future trends, and a conclusion. The structure feels complete before the research has discovered anything. Every subject gets the same skeleton.
+Facts still get a separate verification pass. Names, dates, prices, releases, laws, statistics, and causal claims are checked against current sources. Style editing cannot rescue a false sentence.
 
-A better outline follows the pressure in the material. The first post on this site moves from the iPhone constraint to archive provenance, framework choice, reading geometry, runtime cost, comments, image licensing, and finally the limits of the Lighthouse claim. The sections are not equally sized because the decisions were not equally difficult.
+I still want to use AI heavily. I just do not want the model’s instinct to be helpful, comprehensive, and self-explanatory to become the voice of the site.
 
-A useful analytical shape is often:
+That is enough of a rule.
 
-- the concrete observation
-- the simple explanation that first looked right
-- the evidence that breaks it
-- the model that explains more
-- the cost or case that still does not fit
-- what changes in practice
+## Sources
 
-Even that should not become a template. The point is to let the argument choose the architecture.
-
-## Draft with named things and honest verbs
-
-AI prose becomes abstract because abstraction is safe. “Organizations can leverage innovative solutions to enhance efficiency” is difficult to falsify and impossible to remember.
-
-The repair is not a thesaurus. It is a noun.
-
-Name the repository. Name the street. Name the train line. Name the exact API, price, model, date, CSS property, dataset, or person whose argument is being summarized. Replace “research suggests” with the paper and the result. Replace “I explored” when the agent did the browsing with “I asked the agent to compare” or simply describe the comparison.
-
-This matters especially for first-person writing. An AI can write an elegant account of “my experience” without possessing one. The workflow forbids invented lived experience, quotes, reactions, and tests. It can help articulate details I supplied or recover details from the actual project history. It cannot manufacture a childhood memory because the paragraph wants warmth.
-
-## The slop pass is structural before it is lexical
-
-Removing `delve`, `tapestry`, and “in today’s rapidly evolving landscape” is easy. A draft can avoid every notorious phrase and still feel generated.
-
-The deeper questions are:
-
-- Does each section discover something, or merely announce and summarize it?
-- Does the draft explain the theme after the evidence already made it clear?
-- Are all tradeoffs resolved into a reassuring middle position?
-- Did every paragraph arrive in the order a textbook would choose?
-- Is the conclusion a duplicate introduction with “ultimately” added?
-- Are sentence lengths and paragraph shapes unnaturally uniform?
-- Did the draft remove every uncertainty, tangent, joke, and sharp opinion in the name of polish?
-
-This is where my `humanize-prose` work is most valuable. Surface cleanup prevents immediate irritation; discourse editing prevents the piece from feeling like a completed form.
-
-The warning goes both ways. Mechanical “anti-AI” editing produces its own style: tiny fragments. Constant reversals. “Not X. Y.” A refusal to use an em dash even when it is the right punctuation. Human writing is not a bag of irregularities. The goal is not random burstiness. It is meaningful variation caused by thought.
-
-## Then perform an adversarial fact pass
-
-The editor should temporarily stop caring whether the prose is beautiful.
-
-Every proper noun, number, date, quotation, product behavior, legal rule, and current role gets checked. Every causal statement gets labeled as source, interpretation, or inference. Unsupported precision is removed. Conflicting reputable sources are represented rather than silently averaged. A source that changed after the model’s knowledge cutoff is reopened at publication time.
-
-For a technical article, the code should run. For an index, the data pipeline should reproduce the displayed numbers. For a site-build retrospective, the repository, workflow logs, and deployed URL should agree with the article. If I say a page scored 100, the audit output needs to exist.
-
-This pass is deliberately separate from style because beautiful prose creates attachment. It is easier to delete a lovely false sentence when the task is explicitly “try to prove this paragraph wrong.”
-
-## Score usefulness, not humanness
-
-The internal rubric has six dimensions, each scored from one to five:
-
-- **Specificity:** named evidence and irreducible context
-- **Original synthesis:** a connection or model not copied from one source
-- **Tension:** serious alternatives and unresolved costs
-- **Usefulness:** a decision, method, implementation, or new way to notice
-- **Voice:** judgments and rhythms that fit me rather than “a smart blogger”
-- **Evidence:** support proportional to the strength and freshness of the claim
-
-A seventh dimension—**compression**—is subtractive. Repetition, ceremonial transitions, and paragraphs that exist only to make a section feel complete lower the score.
-
-An article does not need a perfect score in every dimension. A personal essay may rely more on specificity and voice than external evidence. A build log may be maximally useful and only lightly argumentative. The rubric forces an intentional reason for the piece to exist.
-
-## Photographs have to pass the same test
-
-A generic image of a robot hand holding a glowing pen would make this article look more automated, not less.
-
-The photographs here are ordinary work surfaces: a blank notebook, pens, tools, an unfinished page. They provide material texture and pacing without pretending to visualize “artificial intelligence.” They are downloaded into the repository, compressed, and credited in place. The quiet attribution is part of the editorial record, not an SEO caption.
-
-A post about Tokyo should prefer a real, licensed photograph of the exact station, street, housing type, or public space under discussion. A Kiokun post should lead with the product and its cards. An economic index should show the chart or data-generating idea before a stock photograph of a skyline.
-
-This sounds obvious. A lot of AI-era publishing fails precisely because the obvious step was automated away.
-
-## The final disclosure is specific, not ritualistic
-
-“AI was used in the creation of this content” tells the reader almost nothing. Used how? For transcription? Research? A first draft? Every factual claim? Was the author involved beyond pressing publish?
-
-This blog can attach a short editorial note to a post. The note should describe the actual division of labor. For this article, I supplied the goal, the writing archive, the `humanize` project, the standard, and the approval; the agent researched current literature, proposed the workflow, drafted, checked the repository, and revised against the system it describes.
-
-Disclosure does not rescue bad work. It gives good work an honest provenance.
-
-## What happens when I ask for the next post
-
-The saved workflow is now concrete enough to be repeated:
-
-1. Read the repository’s agent guide and editorial style.
-2. Recover the relevant project and conversation history.
-3. Produce the five-part brief before an outline.
-4. Research a claim ledger with current sources.
-5. Draft around the material’s real pressure points.
-6. Run fact, voice, slop, readability, title, and image passes.
-7. Validate the site and open a reviewable pull request.
-8. Verify the deployed result before claiming success.
-
-The agent is allowed to make the mechanical path nearly effortless. It is not allowed to make the article effortless.
-
-That distinction is the whole system.
-
-## Sources and further reading
-
-- [OpenAI’s retired AI-text classifier and its documented limitations](https://openai.com/index/new-ai-classifier-for-indicating-ai-written-text/)
-- [Liang et al., “GPT detectors are biased against non-native English writers”](https://doi.org/10.1016/j.patter.2023.100779)
-- [Fredrick and Craven on lexical diversity, syntactic complexity, and readability in ChatGPT and student essays](https://doi.org/10.3389/feduc.2025.1616935)
-- [O’Sullivan, “Stylometric comparisons of human versus AI-generated creative writing”](https://www.nature.com/articles/s41599-025-05986-3)
-- [The `humanize-prose` skill used as one input to this workflow](https://github.com/Kimeiga/humanize/blob/main/skills/humanize-prose/SKILL.md)
-- [The complete editorial style guide for this blog](https://github.com/Kimeiga/blog/blob/main/docs/EDITORIAL_STYLE.md)
+- [Yi et al., “UMPIRE: Unveiling LLM-generated Posts via Redundant Expressions”](https://aclanthology.org/2026.acl-long.1427/)
+- [Baumler et al., “Can You Make It Sound Like You? Post-Editing LLM-Generated Text for Personal Style”](https://aclanthology.org/2026.acl-long.2030/)
+- [Sudowrite: Story Bible](https://docs.sudowrite.com/using-sudowrite/1ow1qkGqof9rtcyGnrWUBS/what-is-story-bible/jmWepHcQdJetNrE991fjJC)
+- [Sudowrite: Write](https://docs.sudowrite.com/using-sudowrite/1ow1qkGqof9rtcyGnrWUBS/write/pvxUvbQqYybfEosqx1sXjY)
+- [Sudowrite: Rewrite](https://docs.sudowrite.com/using-sudowrite/1ow1qkGqof9rtcyGnrWUBS/rewrite/9hkeezeUsCiUCG4dRdEqjS)
+- [Sudowrite: Feedback](https://docs.sudowrite.com/using-sudowrite/1ow1qkGqof9rtcyGnrWUBS/feedback/7Ew1KgpEwabQSgvijq8QNr)
