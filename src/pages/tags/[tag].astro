@@ -15,11 +15,9 @@ export async function getStaticPaths() {
 }
 const { tag, posts } = Astro.props;
 ---
-<BaseLayout title={`Tagged “${tag.label}”`} description={`${posts.length} essays and notes by Hakan Alpay tagged ${tag.label}.`}>
+<BaseLayout title={tag.label} description={`Writing by Hakan Alpay tagged ${tag.label}.`}>
   <div class="shell shell--article page-header">
-    <p class="eyebrow">Subject archive</p>
     <h1>{tag.label}</h1>
-    <p>{posts.length} {posts.length === 1 ? 'piece' : 'pieces'} in this thread.</p>
   </div>
   <div class="shell shell--wide post-grid-list section-block section-block--tight">
     {posts.map((post) => <PostCard {post} />)}
