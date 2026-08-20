@@ -1,0 +1,51 @@
+name: Import public writing archives
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/import-public-archives.mjs'
+      - '.github/workflows/import-public-archives.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Import WordPress and Substack
+        run: node scripts/import-public-archives.mjs
+
+      - name: Validate full site
+        run: npm run build
+
+      - name: Commit imported archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add src/content/posts/imported public/images/imported docs/PUBLIC_ARCHIVE_IMPORT.md
+          if git diff --cached --quiet; then
+            echo 'Archive already up to date.'
+            exit 0
+          fi
+          git commit -m 'content: import Substack and WordPress archives'
+          git push
