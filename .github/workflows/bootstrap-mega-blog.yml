@@ -94,6 +94,22 @@ jobs:
           print(f'Normalized {fixed} migrated publication date(s).')
           PY
 
+      - name: Apply source compatibility fixes
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          for filename in ['src/pages/index.astro', 'src/pages/tags/index.astro']:
+              path = Path(filename)
+              text = path.read_text(encoding='utf-8')
+              updated = text.replace('tagUrl(tag)', 'tagUrl(tag.slug)')
+              if updated == text:
+                  raise SystemExit(f'Expected tagUrl(tag) call not found in {filename}')
+              path.write_text(updated, encoding='utf-8')
+              print(f'Fixed typed tag URL in {filename}')
+          PY
+
       - name: Fetch optional launch photography
         shell: bash
         run: |
