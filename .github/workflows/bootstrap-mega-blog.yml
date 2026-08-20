@@ -1,0 +1,74 @@
+name: Bootstrap agentic mega blog
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [build/agentic-mega-blog]
+    paths:
+      - '.bootstrap/**'
+      - '.github/workflows/bootstrap-mega-blog.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: bootstrap-mega-blog-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout the feature branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref_name }}
+          fetch-depth: 0
+
+      - name: Reassemble and verify the project archive
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat .bootstrap/chunk-* > /tmp/project.tar.gz.b64
+          echo '6758f9fcd21b8d4af9ac38b5a421e350800b50a2ceabb1147d6c45cc1bab6865  /tmp/project.tar.gz.b64' | sha256sum -c -
+          base64 --decode /tmp/project.tar.gz.b64 > /tmp/project.tar.gz
+          echo 'a92fdcc1fb3f7ffa3ee177a66d1a7cdb6d86857472f269c8acd4524ba0164f77  /tmp/project.tar.gz' | sha256sum -c -
+          tar -tzf /tmp/project.tar.gz > /dev/null
+
+      - name: Replace the old theme atomically
+        shell: bash
+        run: |
+          set -euo pipefail
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name .bootstrap -exec rm -rf {} +
+          tar -xzf /tmp/project.tar.gz -C .
+          rm -rf .bootstrap
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install the image optimizer
+        run: sudo apt-get update && sudo apt-get install -y imagemagick
+
+      - name: Import authored archives and launch photography
+        run: |
+          node scripts/import-legacy.mjs --force
+          node scripts/fetch-editorial-images.mjs
+
+      - name: Validate the production build before publishing source
+        run: |
+          npm ci
+          npm run build
+
+      - name: Commit the canonical blog source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat: launch agentic mega blog'
+          git push
