@@ -1,11 +1,11 @@
 ---
 name: hakan-blog
-description: Write, edit, and publish Hakan Alpay's blog without AI-slop, using the Kimeiga/blog repository as source of truth.
+description: Write, edit, migrate, and publish Hakan Alpay's blog without AI-slop, using the Kimeiga/blog repository as source of truth.
 ---
 
 # Hakan blog
 
-Use this skill whenever Hakan asks to write, edit, or publish a blog post.
+Use this skill whenever Hakan asks to write, edit, migrate, or publish blog material.
 
 ## Read first
 
@@ -13,9 +13,19 @@ Use this skill whenever Hakan asks to write, edit, or publish a blog post.
 - `docs/EDITORIAL_STYLE.md`
 - relevant older posts when voice matters
 
+## Historical writing is archival
+
+Older public work imported from GitHub/Jekyll, WordPress, or Substack is Hakan's authored archive. Preserve it rather than rewriting it into the current house style.
+
+- Keep original text, paragraph order, headings, emphasis, links, blockquotes, captions, and image order.
+- Store recoverable source images locally and rewrite the copied HTML to local URLs.
+- Preserve the original publication date and URL (`legacySource`).
+- Do not run humanization, compression, or current editorial rewrites over an archival import unless Hakan explicitly asks to revise that old piece.
+- Imported WordPress/Substack source lives under `src/content/posts/imported/`; media lives under `public/images/imported/`.
+
 ## Source-bible first
 
-Before drafting, capture only what matters:
+For a new article, capture only what matters:
 
 - claim or question
 - concrete trigger
@@ -80,8 +90,8 @@ Use current primary/authoritative sources. Separate fact, interpretation, infere
 
 ## Images
 
-Prefer real reusable photographs or original project imagery over generated images. Store files locally and keep attribution quiet but visible.
+Prefer real reusable photographs or original project imagery over generated images. Store files locally and keep attribution quiet but visible. A referenced local image missing from `public/` is a build failure, not a cosmetic warning.
 
 ## Publish
 
-Write Markdown under `src/content/posts/`, build, review the diff, publish from a feature branch, then verify the live canonical URL.
+Write new Markdown under `src/content/posts/`, build, review the diff, publish from a feature branch, then verify the live canonical URL.
