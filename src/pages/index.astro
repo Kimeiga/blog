@@ -10,15 +10,11 @@ const tags = allTags(posts).slice(0, 8);
 <BaseLayout>
   <section class="home-hero shell shell--wide">
     <div class="home-hero__intro">
-      <p class="eyebrow">Notes from Hakan Alpay</p>
-      <h1>Trying to understand how things work—and how they might work better.</h1>
-      <p>
-        Software, cities, economies, games, language, and the hidden systems connecting them.
-        Written in public, revised when the evidence changes.
-      </p>
+      <h1>Blog</h1>
+      <p>Software, cities, economies, games, design, and language.</p>
       <div class="home-hero__actions">
-        <a class="button" href={withBase('/archive/')}>Browse every essay</a>
-        <a class="button button--secondary" href={withBase('/about/')}>About this blog</a>
+        <a class="button" href={withBase('/archive/')}>Archive</a>
+        <a class="button button--secondary" href={withBase('/search/')}>Search</a>
       </div>
     </div>
     {latest && <PostCard post={latest} prominent />}
@@ -26,7 +22,7 @@ const tags = allTags(posts).slice(0, 8);
 
   <section class="topic-strip" aria-labelledby="topics-heading">
     <div class="shell shell--wide topic-strip__inner">
-      <p id="topics-heading">Frequent subjects</p>
+      <p id="topics-heading">Tags</p>
       <div>
         {tags.map((tag) => <a href={tagUrl(tag.slug)}>{tag.label}<sup>{tag.count}</sup></a>)}
       </div>
@@ -35,25 +31,11 @@ const tags = allTags(posts).slice(0, 8);
 
   <section class="shell shell--wide section-block" aria-labelledby="recent-heading">
     <div class="section-heading">
-      <div>
-        <p class="eyebrow">The archive, in reverse</p>
-        <h2 id="recent-heading">Recent writing</h2>
-      </div>
-      <a class="text-link" href={withBase('/archive/')}>Full archive →</a>
+      <h2 id="recent-heading">Recent</h2>
+      <a class="text-link" href={withBase('/archive/')}>All →</a>
     </div>
     <div class="post-grid-list">
       {rest.slice(0, 8).map((post) => <PostCard {post} />)}
-    </div>
-  </section>
-
-  <section class="shell shell--wide manifesto">
-    <p class="eyebrow">Publishing principles</p>
-    <div class="manifesto__grid">
-      <h2>The site is intentionally quiet. The ideas do the moving.</h2>
-      <div>
-        <p>No ad network, no autoplay, no pop-over asking for an email before you have read a sentence.</p>
-        <p>Pages are static HTML. Search and comments wake up only when requested. Sources and photo credits stay attached to the work.</p>
-      </div>
     </div>
   </section>
 </BaseLayout>
