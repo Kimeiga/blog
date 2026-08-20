@@ -39,9 +39,14 @@ for (const file of await walk(postsRoot)) {
   if (description.length > 180) warnings.push(`${rel}: description is ${description.length} characters`);
   if (disclosure.length > 160) warnings.push(`${rel}: disclosure is ${disclosure.length} characters; keep it to one line`);
 
-  const localImages = [...text.matchAll(/(?:src:\s*|src=["'])(\/images\/[^"'\s]+)/g)].map((m) => m[1]);
+  // Match both YAML image fields (`src: "/images/..."`) and HTML images
+  // (`src="/blog/images/..."`). Normalize the deployed /blog prefix back to
+  // the file's path under public/ before checking it exists.
+  const localImages = [...text.matchAll(/(?:src:\s*["']?|src=["'])(\/(?:blog\/)?images\/[^"'\s]+)/g)]
+    .map((m) => m[1]);
   for (const image of localImages) {
-    try { await access(join(publicRoot, image)); }
+    const publicPath = image.replace(/^\/blog/, '').replace(/^\//, '');
+    try { await access(join(publicRoot, publicPath)); }
     catch { errors.push(`${rel}: local image does not exist: ${image}`); }
   }
 
