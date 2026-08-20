@@ -1,9 +1,8 @@
 export const SITE = {
   name: 'Hakan Alpay',
   shortName: 'Hakan',
-  title: 'Hakan Alpay — Notes on software, cities, economies, games, and language',
-  description:
-    'Essays and working notes by Hakan Alpay about software, cities, economies, games, design, language, and the systems behind them.',
+  title: 'Hakan Alpay — Blog',
+  description: 'Writing by Hakan Alpay on software, cities, economies, games, design, and language.',
   origin: 'https://hakanalpay.com',
   basePath: '/blog',
   repository: 'Kimeiga/blog',
