@@ -14,7 +14,9 @@ export async function getPublishedPosts(): Promise<Post[]> {
 }
 
 export function postSlug(post: Pick<Post, 'id'>): string {
-  return post.id.replace(/^legacy\//, '');
+  return post.id
+    .replace(/^legacy\//, '')
+    .replace(/^imported\/(?:wordpress|substack)\//, '');
 }
 
 export function postUrl(post: Pick<Post, 'id'>): string {
