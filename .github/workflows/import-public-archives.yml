@@ -50,6 +50,36 @@ jobs:
           node scripts/import-public-archives.mjs
           git checkout -- scripts/import-public-archives.mjs
 
+      - name: Normalize imported metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          import json, re
+
+          root = Path('src/content/posts/imported/wordpress')
+          fallback = 'Imported from Hakan Alpay’s earlier WordPress archive.'
+          fixed = 0
+          for path in root.glob('*.md'):
+              text = path.read_text(encoding='utf-8')
+              match = re.search(r'(?m)^description:\s*(.+)$', text)
+              if not match:
+                  continue
+              try:
+                  value = json.loads(match.group(1))
+              except Exception:
+                  value = match.group(1).strip(' "\'')
+              if len(value.strip()) >= 20:
+                  continue
+              replacement = 'description: ' + json.dumps(fallback, ensure_ascii=False)
+              text = text[:match.start()] + replacement + text[match.end():]
+              path.write_text(text, encoding='utf-8')
+              fixed += 1
+              print(f'Normalized short description: {path}')
+          print(f'Normalized {fixed} short description(s).')
+          PY
+
       - name: Validate full site
         run: npm run build
 
