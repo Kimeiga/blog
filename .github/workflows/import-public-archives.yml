@@ -80,10 +80,7 @@ jobs:
           print(f'Normalized {fixed} short description(s).')
           PY
 
-      - name: Validate full site
-        run: npm run build
-
-      - name: Commit WordPress archive
+      - name: Commit recovered WordPress archive
         shell: bash
         run: |
           set -euo pipefail
@@ -92,7 +89,10 @@ jobs:
           git add src/content/posts/imported/wordpress public/images/imported/wordpress docs/PUBLIC_ARCHIVE_IMPORT.md
           if git diff --cached --quiet; then
             echo 'WordPress archive already up to date.'
-            exit 0
+          else
+            git commit -m 'content: import WordPress archive and Lonely-CLA'
+            git push
           fi
-          git commit -m 'content: import WordPress archive and Lonely-CLA'
-          git push
+
+      - name: Validate full site after preserving archive
+        run: npm run build
