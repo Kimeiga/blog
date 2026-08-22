@@ -13,7 +13,7 @@ legacySource: "https://kimeiga.wordpress.com/2020/02/20/my-tech-setup/"
 <table align="center" cellpadding="0" cellspacing="0" class="tr-caption-container" style="margin-left:auto;margin-right:auto;text-align:center;">
 <tbody>
 <tr>
-<td style="text-align:center;"><a href="/blog/images/imported/wordpress/my-tech-setup/b778b-d34_0147.jpg" style="margin-left:auto;margin-right:auto;"><img loading="lazy" alt="aero 14" border="0" height="427" src="/blog/images/imported/wordpress/my-tech-setup/8a080-d34_0147.jpg" title="aero 14" width="640" /></a></td>
+<td style="text-align:center;"><a href="/blog/images/imported/wordpress/my-tech-setup/b778b-d34_0147.jpg" style="margin-left:auto;margin-right:auto;"><img loading="lazy" alt="aero 14" border="0" height="427" src="/blog/images/imported/wordpress/my-tech-setup/8a080-d34_0147.live.webp" title="aero 14" width="640" /></a></td>
 </tr>
 <tr>
 <td class="tr-caption" style="text-align:center;">my aero 14 gaming pc</td>

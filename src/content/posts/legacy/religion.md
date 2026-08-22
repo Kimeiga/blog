@@ -12,8 +12,12 @@ hero:
   width: 1600
   height: 900
   credit:
-    name: "Hakan Alpay"
-    source: "Original blog archive"
+    name: "Greg Rakozy"
+    url: "https://unsplash.com/@grakozy"
+    source: "Unsplash"
+    sourceUrl: "https://unsplash.com/photos/silhouette-photography-of-person-oMpAz-DN-9I"
+    license: "Unsplash License"
+    licenseUrl: "https://unsplash.com/license"
 ---
 
 ### hi uh

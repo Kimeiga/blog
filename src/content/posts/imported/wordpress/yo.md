@@ -15,7 +15,7 @@ legacySource: "https://kimeiga.wordpress.com/2021/03/01/yo/"
 					<a class="wp-story-container" href="https://kimeiga.wordpress.com/2021/03/01/yo/?wp-story-load-in-fullscreen=true&amp;wp-story-play-on-load=true" title="Play story in new tab">
 						<div class="wp-story-meta">
 							<div class="wp-story-icon">
-								<img loading="lazy" alt="Site icon" src="/blog/images/imported/wordpress/yo/cropped-frame-7-3.png" width="40" height="40">
+								<img loading="lazy" alt="Site icon" src="/blog/images/imported/wordpress/yo/cropped-frame-7-3.live.webp" width="40" height="40">
 							</div>
 							<div>
 								<div class="wp-story-title">
@@ -25,11 +25,11 @@ legacySource: "https://kimeiga.wordpress.com/2021/03/01/yo/"
 						</div>
 						<div class="wp-story-wrapper">
 							<div class="wp-story-slide" style="display: block;">
-			<figure><img
+			<figure><img loading="lazy" height="1600" width="900"
 				title=""
 				alt="Yo"
 				class="wp-block-jetpack-story_image wp-story-image "
-				src="/blog/images/imported/wordpress/yo/wp_story1614645205848_09018817338964103519.jpg"
+				src="/blog/images/imported/wordpress/yo/wp_story1614645205848_09018817338964103519.live.webp"
 			/></figure>
 		</div>
 						</div>

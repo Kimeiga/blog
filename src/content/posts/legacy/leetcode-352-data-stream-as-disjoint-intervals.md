@@ -5,6 +5,18 @@ published: "2023-09-13T12:00:00-04:00"
 tags: ["Software", "Algorithms", "Python"]
 draft: false
 featured: false
+hero:
+  src: "/images/editorial/leetcode-352-data-stream-as-disjoint-intervals/hero.webp"
+  alt: "Clock and split-flap departure board at Łódź Kaliska railway station."
+  width: 1600
+  height: 900
+  credit:
+    name: "Jarosław Góralczyk"
+    url: "https://commons.wikimedia.org/wiki/User:Triskaidekafil"
+    source: "Wikimedia Commons"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Łódź_Kaliska_railway_clock_train_departure_board.jpg"
+    license: "CC BY-SA 3.0"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
 legacySource: "https://github.com/Kimeiga/leetcode/blob/main/_posts/2023-09-13-352-data-stream-as-disjoint-intervals.md"
 ---
 

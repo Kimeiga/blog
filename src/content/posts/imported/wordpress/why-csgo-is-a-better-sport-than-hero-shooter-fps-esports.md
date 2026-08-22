@@ -5,6 +5,17 @@ published: "2020-06-28T11:25:15-07:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/editorial/why-csgo-is-a-better-sport-than-hero-shooter-fps-esports/hero.webp"
+  alt: "Counter-Strike players competing together at the 2023 Finnish esports championship."
+  width: 1600
+  height: 900
+  credit:
+    name: "Richard Häyrinen"
+    source: "Wikimedia Commons"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:HAVU_eSM_2023.jpg"
+    license: "CC BY 4.0"
+    licenseUrl: "https://creativecommons.org/licenses/by/4.0/"
 legacySource: "https://kimeiga.wordpress.com/2020/06/28/why-csgo-is-a-better-sport-than-hero-shooter-fps-esports/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2020/06/28/why-csgo-is-a-better-sport-than-hero-shooter-fps-esports/. Original article HTML is retained below. -->

@@ -18,21 +18,21 @@ legacySource: "https://github.com/Kimeiga/leetcode/blob/main/_posts/2023-09-12-3
 
 <p>&nbsp;</p>
 <p><strong class="example">Example 1:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/03/27/perectrec1-plane.jpg" style="width: 300px; height: 294px;">
+<img alt="Five rectangles fitting together into one rectangle." src="/blog/images/legacy/leetcode-391-perfect-rectangle/example-valid.svg" width="510" height="500" loading="lazy" style="width: 300px; height: 294px;">
 <pre><strong>Input:</strong> rectangles = [[1,1,3,3],[3,1,4,2],[3,2,4,4],[1,3,2,4],[2,3,3,4]]
 <strong>Output:</strong> true
 <strong>Explanation:</strong> All 5 rectangles together form an exact cover of a rectangular region.
 </pre>
 
 <p><strong class="example">Example 2:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/03/27/perfectrec2-plane.jpg" style="width: 300px; height: 294px;">
+<img alt="Four rectangles leaving a gap inside their bounding rectangle." src="/blog/images/legacy/leetcode-391-perfect-rectangle/example-gap.svg" width="510" height="500" loading="lazy" style="width: 300px; height: 294px;">
 <pre><strong>Input:</strong> rectangles = [[1,1,2,3],[1,3,2,4],[3,1,4,2],[3,2,4,4]]
 <strong>Output:</strong> false
 <strong>Explanation:</strong> Because there is a gap between the two rectangular regions.
 </pre>
 
 <p><strong class="example">Example 3:</strong></p>
-<img alt="" src="https://assets.leetcode.com/uploads/2021/03/27/perfecrrec4-plane.jpg" style="width: 300px; height: 294px;">
+<img alt="Four rectangles overlapping inside their bounding rectangle." src="/blog/images/legacy/leetcode-391-perfect-rectangle/example-overlap.svg" width="510" height="500" loading="lazy" style="width: 300px; height: 294px;">
 <pre><strong>Input:</strong> rectangles = [[1,1,3,3],[3,1,4,2],[1,3,2,4],[2,2,4,4]]
 <strong>Output:</strong> false
 <strong>Explanation:</strong> Because two of the rectangles overlap with each other.

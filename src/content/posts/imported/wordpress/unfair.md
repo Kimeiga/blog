@@ -5,6 +5,18 @@ published: "2021-03-01T16:26:22-08:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/editorial/unfair/hero.webp"
+  alt: "A copy of the United States Constitution displayed beside its protective case."
+  width: 1600
+  height: 900
+  credit:
+    name: "U.S. National Archives"
+    url: "https://www.archives.gov/"
+    source: "Wikimedia Commons"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:The_Constitution_of_the_United_States_-_DPLA_-_dd872eac3769e46b78b056b8eb5ab9ec.jpeg"
+    license: "Public domain (US)"
+    licenseUrl: "https://creativecommons.org/publicdomain/mark/1.0/"
 legacySource: "https://kimeiga.wordpress.com/2021/03/01/unfair/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2021/03/01/unfair/. Original article HTML is retained below. -->

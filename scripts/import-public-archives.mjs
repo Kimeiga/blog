@@ -1,7 +1,8 @@
-import { access, mkdir, readdir, rm, writeFile } from 'node:fs/promises';
-import { basename, dirname, extname, join, resolve } from 'node:path';
+import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { basename, dirname, extname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = resolve(import.meta.dirname, '..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const postsRoot = resolve(root, 'src/content/posts/imported');
 const imagesRoot = resolve(root, 'public/images/imported');
 
@@ -214,7 +215,8 @@ async function importWordPress() {
 
   for (const post of posts) {
     if (post.status && post.status !== 'publish') continue;
-    const slug = post.slug || new URL(post.URL).pathname.split('/').filter(Boolean).at(-1) || slugify(post.title);
+    const rawSlug = post.slug || new URL(post.URL).pathname.split('/').filter(Boolean).at(-1) || slugify(post.title);
+    const slug = decodeURIComponent(rawSlug);
     const title = stripHtml(post.title) || slug;
     await writeImportedPost('wordpress', slug, {
       title,
@@ -304,7 +306,8 @@ async function importSubstack() {
   }
 
   for (const item of items) {
-    const slug = new URL(item.link).pathname.split('/').filter(Boolean).at(-1) || slugify(item.title);
+    const rawSlug = new URL(item.link).pathname.split('/').filter(Boolean).at(-1) || slugify(item.title);
+    const slug = decodeURIComponent(rawSlug);
     await writeImportedPost('substack', slug, {
       title: stripHtml(item.title) || slug,
       description: descriptionFrom(item.content),

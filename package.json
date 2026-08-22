@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "new": "node scripts/new-post.mjs",
     "lint:content": "node scripts/validate-content.mjs",
+    "verify:media": "node scripts/verify-deployed-media.mjs",
     "sync:legacy": "node scripts/import-legacy.mjs --force",
     "astro": "astro"
   },

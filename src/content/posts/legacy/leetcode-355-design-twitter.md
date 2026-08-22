@@ -5,6 +5,18 @@ published: "2023-09-12T12:00:00-04:00"
 tags: ["Software", "Algorithms", "Python"]
 draft: false
 featured: false
+hero:
+  src: "/images/editorial/leetcode-355-design-twitter/hero.webp"
+  alt: "The former Twitter headquarters in San Francisco."
+  width: 1600
+  height: 900
+  credit:
+    name: "Tobias Kleinlercher"
+    url: "https://commons.wikimedia.org/wiki/User:TheTokl"
+    source: "Wikimedia Commons"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Twitter_headquarters_in_San_Francisco_(TK2).JPG"
+    license: "CC BY-SA 3.0"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
 legacySource: "https://github.com/Kimeiga/leetcode/blob/main/_posts/2023-09-12-355-design-twitter.md"
 ---
 

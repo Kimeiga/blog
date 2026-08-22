@@ -5,6 +5,18 @@ published: "2020-05-31T12:52:21-07:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/editorial/when-people-ask-you-to-do-stuff/hero.webp"
+  alt: "People talking together on a sidewalk in Owen Sound, Ontario."
+  width: 1600
+  height: 900
+  credit:
+    name: "Alectrevelyan006"
+    url: "https://commons.wikimedia.org/wiki/User:Alectrevelyan006"
+    source: "Wikimedia Commons"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:People_engaging_in_conversation.jpg"
+    license: "CC BY-SA 3.0"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/"
 legacySource: "https://kimeiga.wordpress.com/2020/05/31/when-people-ask-you-to-do-stuff/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2020/05/31/when-people-ask-you-to-do-stuff/. Original article HTML is retained below. -->

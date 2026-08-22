@@ -2,11 +2,6 @@ name: Import WordPress writing archive
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'scripts/import-public-archives.mjs'
-      - '.github/workflows/import-public-archives.yml'
 
 permissions:
   contents: write

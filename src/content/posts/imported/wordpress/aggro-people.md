@@ -9,7 +9,7 @@ legacySource: "https://kimeiga.wordpress.com/2019/12/27/aggro-people/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2019/12/27/aggro-people/. Original article HTML is retained below. -->
 
-<div class="separator" style="clear:both;text-align:center;"><a href="/blog/images/imported/wordpress/aggro-people/92c93-dsc_0441.jpg" style="margin-left:1em;margin-right:1em;"><img loading="lazy" border="0" height="426" src="/blog/images/imported/wordpress/aggro-people/09b01-dsc_0441.jpg" width="640" /></a></div>
+<div class="separator" style="clear:both;text-align:center;"><a href="/blog/images/imported/wordpress/aggro-people/92c93-dsc_0441.jpg" style="margin-left:1em;margin-right:1em;"><img loading="lazy" border="0" height="426" src="/blog/images/imported/wordpress/aggro-people/09b01-dsc_0441.live.webp" width="640" /></a></div>
 <p>Music for this post:</p>
 <div><a href="https://open.spotify.com/track/7wPpsqnBtlAKZOlbPAb4eK?si=ZGfi7WU4Qq6ZnmzXBd7ljg" target="_blank">superstar by bignic</a></div>
 <div></div>

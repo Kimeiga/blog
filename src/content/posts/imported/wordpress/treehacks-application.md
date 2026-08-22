@@ -5,6 +5,18 @@ published: "2020-12-12T12:49:41-08:00"
 tags: ["Interview"]
 draft: false
 featured: false
+hero:
+  src: "/images/editorial/treehacks-application/hero.webp"
+  alt: "Arcades and tiled roofs on the Stanford University campus."
+  width: 1600
+  height: 900
+  credit:
+    name: "GualdimG"
+    url: "https://commons.wikimedia.org/wiki/User:GualdimG"
+    source: "Wikimedia Commons"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Stanford_University_campus,_Palo_Alto,_California_03.jpg"
+    license: "CC BY-SA 4.0"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/4.0/"
 legacySource: "https://kimeiga.wordpress.com/2020/12/12/treehacks-application/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2020/12/12/treehacks-application/. Original article HTML is retained below. -->

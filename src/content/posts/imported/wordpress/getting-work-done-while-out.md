@@ -9,7 +9,7 @@ legacySource: "https://kimeiga.wordpress.com/2019/12/29/getting-work-done-while-
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2019/12/29/getting-work-done-while-out/. Original article HTML is retained below. -->
 
-<div class="separator" style="clear:both;text-align:center;"><a href="/blog/images/imported/wordpress/getting-work-done-while-out/8957c-dsc_0479.jpg" style="margin-left:1em;margin-right:1em;"><img loading="lazy" border="0" height="426" src="/blog/images/imported/wordpress/getting-work-done-while-out/96f9b-dsc_0479.jpg" width="640" /></a></div>
+<div class="separator" style="clear:both;text-align:center;"><a href="/blog/images/imported/wordpress/getting-work-done-while-out/8957c-dsc_0479.jpg" style="margin-left:1em;margin-right:1em;"><img loading="lazy" border="0" height="426" src="/blog/images/imported/wordpress/getting-work-done-while-out/96f9b-dsc_0479.live.webp" width="640" /></a></div>
 <p>I&#8217;m out a lot with family these last days of winter break. What can I get done while out?</p>
 <div></div>
 <div>My current class schedule is fixed for now (I think)</div>

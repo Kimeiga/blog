@@ -1,11 +1,13 @@
 import { readdir, readFile, access } from 'node:fs/promises';
-import { join, relative } from 'node:path';
+import { dirname, join, relative, sep } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = new URL('..', import.meta.url).pathname;
+const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const postsRoot = join(root, 'src/content/posts');
 const publicRoot = join(root, 'public');
 const errors = [];
 const warnings = [];
+const canonicalSlugs = new Map();
 
 async function walk(dir) {
   const entries = await readdir(dir, { withFileTypes: true });
@@ -28,6 +30,14 @@ for (const file of await walk(postsRoot)) {
   if (!match) { errors.push(`${rel}: missing YAML frontmatter`); continue; }
   const [_, yaml, body] = match;
 
+  const contentId = relative(postsRoot, file).split(sep).join('/').replace(/\.mdx?$/, '');
+  const canonicalSlug = contentId
+    .replace(/^legacy\//, '')
+    .replace(/^imported\/(?:wordpress|substack)\//, '');
+  const prior = canonicalSlugs.get(canonicalSlug);
+  if (prior) errors.push(`${rel}: canonical slug “${canonicalSlug}” collides with ${prior}`);
+  else canonicalSlugs.set(canonicalSlug, rel);
+
   for (const required of ['title', 'description', 'published', 'tags']) {
     if (!field(yaml, required)) errors.push(`${rel}: missing ${required}`);
   }
@@ -39,15 +49,38 @@ for (const file of await walk(postsRoot)) {
   if (description.length > 180) warnings.push(`${rel}: description is ${description.length} characters`);
   if (disclosure.length > 160) warnings.push(`${rel}: disclosure is ${disclosure.length} characters; keep it to one line`);
 
-  // Match both YAML image fields (`src: "/images/..."`) and HTML images
-  // (`src="/blog/images/..."`). Normalize the deployed /blog prefix back to
-  // the file's path under public/ before checking it exists.
-  const localImages = [...text.matchAll(/(?:src:\s*["']?|src=["'])(\/(?:blog\/)?images\/[^"'\s]+)/g)]
-    .map((m) => m[1]);
+  // Catch local assets wherever content can reference them: hero frontmatter,
+  // Markdown images, raw HTML, linked full-size images, data attributes,
+  // picture/source elements, and every srcset candidate. Requiring a known
+  // image extension avoids treating prose examples as files.
+  const localImages = [...new Set(
+    [...text.matchAll(/(?<![a-z0-9_-])\/(?:blog\/)?images\/[^\s"'<>()[\]{}]+?\.(?:avif|gif|jpe?g|png|svg|webp)(?:\?[^\s"'<>()[\]{}]*)?(?:#[^\s"'<>()[\]{}]*)?/gi)]
+      .map((match) => match[0]),
+  )];
   for (const image of localImages) {
-    const publicPath = image.replace(/^\/blog/, '').replace(/^\//, '');
+    const publicPath = image.split(/[?#]/)[0].replace(/^\/blog/, '').replace(/^\//, '');
+    if (publicPath.includes('..')) {
+      errors.push(`${rel}: local image path may not traverse directories: ${image}`);
+      continue;
+    }
     try { await access(join(publicRoot, publicPath)); }
     catch { errors.push(`${rel}: local image does not exist: ${image}`); }
+  }
+
+  for (const img of text.matchAll(/<img\b[^>]*>/gi)) {
+    const tag = img[0];
+    const src = tag.match(/\bsrc\s*=\s*["']([^"']+)["']/i)?.[1] || '';
+    if (/^\/(?:blog\/)?images\//.test(src)) {
+      if (!/\bwidth\s*=\s*["']?\d+/i.test(tag)) errors.push(`${rel}: local <img> lacks width: ${src}`);
+      if (!/\bheight\s*=\s*["']?\d+/i.test(tag)) errors.push(`${rel}: local <img> lacks height: ${src}`);
+    }
+  }
+
+  for (const source of text.matchAll(/<source\b[^>]*>/gi)) {
+    const tag = source[0];
+    if (/type\s*=\s*["']image\//i.test(tag) && !/\bsrcset\s*=\s*["'][^"']+/i.test(tag)) {
+      errors.push(`${rel}: image <source> has no srcset`);
+    }
   }
 
   if (!rel.includes('/legacy/')) {

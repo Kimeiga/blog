@@ -9,7 +9,7 @@ legacySource: "https://kimeiga.wordpress.com/2020/02/20/meta-for-easy-full-stack
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2020/02/20/meta-for-easy-full-stack-web-app/. Original article HTML is retained below. -->
 
-<div class="separator" style="clear:both;text-align:center;"><a href="/blog/images/imported/wordpress/meta-for-easy-full-stack-web-app/462f2-img_20200213_174855.jpg" style="margin-left:1em;margin-right:1em;"><img loading="lazy" border="0" height="480" src="/blog/images/imported/wordpress/meta-for-easy-full-stack-web-app/15f95-img_20200213_174855.jpg" width="640" /></a></div>
+<div class="separator" style="clear:both;text-align:center;"><a href="/blog/images/imported/wordpress/meta-for-easy-full-stack-web-app/462f2-img_20200213_174855.jpg" style="margin-left:1em;margin-right:1em;"><img loading="lazy" border="0" height="480" src="/blog/images/imported/wordpress/meta-for-easy-full-stack-web-app/15f95-img_20200213_174855.live.webp" width="640" /></a></div>
 <p>I learned about react hooks today, about a year late I know, and I got really excited. Especially about useReducer()! See this video:</p>
 <div></p>
 <div><a href="https://youtu.be/o-nCM1857AQ" target="_blank">why I love use reducer</a></div>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 510 500" role="img" aria-labelledby="title desc">
+  <title id="title">Rectangle cover with an overlap</title>
+  <desc id="desc">Four rectangles overlap in the center of the bounding area.</desc>
+  <defs><pattern id="hatch" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="12" stroke="#222" stroke-width="3"/></pattern></defs>
+  <rect width="510" height="500" fill="#fff"/>
+  <g stroke="#222" stroke-width="3" fill="#e9e1ef">
+    <rect x="120" y="148" width="80" height="80"/>
+    <rect x="120" y="228" width="160" height="160"/>
+    <rect x="200" y="148" width="160" height="160"/>
+    <rect x="280" y="308" width="80" height="80"/>
+  </g>
+  <rect x="200" y="228" width="80" height="80" fill="url(#hatch)" stroke="#222" stroke-width="3"/>
+  <g stroke="#111" stroke-width="2.5" fill="none"><path d="M40 470V12M30 22l10-12 10 12M30 470h468M488 460l12 10-12 10"/></g>
+</svg>

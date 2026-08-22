@@ -103,6 +103,8 @@ button { color: inherit; }
 .site-footer p { max-width: 42rem; margin: 0; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: .65rem 1.2rem; }
 .site-footer nav a { font-size: .88rem; font-weight: 650; }
+.site-footer__previous { display: grid; gap: .55rem; }
+.site-footer__previous > p { color: var(--text); font-size: .78rem; font-weight: 750; text-transform: uppercase; letter-spacing: .08em; }
 .site-footer__fine { font-size: .75rem; line-height: 1.6; }
 
 .eyebrow { margin: 0 0 .75rem; color: var(--accent); font-size: .74rem; line-height: 1.2; font-weight: 800; letter-spacing: .13em; text-transform: uppercase; }
@@ -133,10 +135,10 @@ button { color: inherit; }
 .post-card__image { aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface); }
 .post-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
 .post-card:hover .post-card__image img { transform: scale(1.018); }
-.post-card__body { padding: 1.35rem; }
+.post-card__body { min-width: 0; padding: 1.35rem; }
 .post-card h2 { margin: .65rem 0 .7rem; font-size: clamp(1.25rem, 2vw, 1.65rem); line-height: 1.08; letter-spacing: -.035em; text-wrap: balance; }
 .post-card h2 a { text-decoration: none; }
-.post-card p { margin: 0; color: var(--muted); line-height: 1.55; }
+.post-card p { margin: 0; color: var(--muted); line-height: 1.55; overflow-wrap: anywhere; }
 .post-card--prominent { border: 1px solid var(--line); box-shadow: var(--shadow); }
 .post-card--prominent .post-card__body { padding: clamp(1.3rem, 3vw, 2rem); }
 .post-card--prominent h2 { font-size: clamp(1.8rem, 4vw, 3.2rem); }
@@ -176,6 +178,8 @@ button { color: inherit; }
 .photo img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; background: var(--surface); }
 .photo figcaption, .article-photo figcaption { margin-top: .55rem; color: var(--faint); font-size: .68rem; line-height: 1.5; }
 .photo figcaption a, .article-photo figcaption a { color: inherit; }
+.prose figure figcaption, .prose .image-credit { margin-top: .55rem; color: var(--faint); font-size: .72rem; line-height: 1.5; }
+.prose figure figcaption a { color: inherit; }
 .post-grid { display: grid; grid-template-columns: minmax(0, 45rem); justify-content: center; }
 .toc { display: none; }
 .prose { min-width: 0; color: var(--text-soft); font-family: var(--serif); font-size: clamp(1.08rem, 1rem + .25vw, 1.2rem); line-height: 1.72; }
@@ -255,6 +259,7 @@ button { color: inherit; }
   .tag-directory { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .post-pagination { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .site-footer__inner { grid-template-columns: minmax(0, 1fr) auto; }
+  .site-footer__previous { grid-column: 1 / -1; }
   .site-footer__fine { grid-column: 1 / -1; }
 }
 

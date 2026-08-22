@@ -12,4 +12,4 @@ legacySource: "https://kimeiga.wordpress.com/2018/01/16/the-journey-begins/"
 
 <p>Thanks for joining me! </p>
 <blockquote><p>Good company in a journey makes the way seem shorter. — Izaak Walton</p></blockquote>
-<p><img loading="lazy" class="wp-image-7 size-full" src="https://twentysixteendemo.files.wordpress.com/2015/11/post.png" alt="post" width="1000" height="563" /></p>
+<figure class="replacement-image"><img loading="lazy" src="/blog/images/editorial/the-journey-begins/hero.webp" alt="A narrow hiking trail winding through green hills in California." width="1600" height="900" /><figcaption>Photo by <a href="https://commons.wikimedia.org/wiki/User:Zuoyuewang">Zuoyue Wang</a> on <a href="https://commons.wikimedia.org/wiki/File:2017_03_Antonovich_Trail_H.jpg">Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></figcaption></figure>

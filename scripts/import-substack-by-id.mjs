@@ -1,13 +1,14 @@
 import { mkdir, readdir, rm, writeFile } from 'node:fs/promises';
-import { extname, resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const root = resolve(import.meta.dirname, '..');
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const postsDir = resolve(root, 'src/content/posts/imported/substack');
 const imagesRoot = resolve(root, 'public/images/imported/substack');
 const wordpressDir = resolve(root, 'src/content/posts/imported/wordpress');
 
-// Verified against https://deltastar.substack.com/archive?sort=new on 2026-08-20.
-// The publication has 12 public archive entries. Numeric IDs let CI use
+// Verified against https://deltastar.substack.com/archive?sort=new on 2026-08-22.
+// The publication has 14 public archive entries. Numeric IDs let this importer use
 // Substack's bare-host public read endpoint, which is accessible even when the
 // publication subdomain rejects GitHub Actions' datacenter IPs.
 const POSTS = [
@@ -23,7 +24,54 @@ const POSTS = [
   [43085243, 'how-much-will-we-let-identity-matter'],
   [43084478, 'the-catharsis-of-comms'],
   [43083743, 'the-mandate-of-my-existence'],
+  [43082302, 'the-love-of-language-and-the-language'],
+  [43080730, 'the-supreme-lack-of-meaning-in-life'],
 ];
+
+const HEROES = {
+  'in-life-there-is-rain': {
+    src: '/images/editorial/in-life-there-is-rain/hero.webp',
+    alt: 'Pedestrians and cars on a rain-soaked Manhattan street at dusk.',
+    name: 'Tony Hisgett',
+    url: 'https://www.flickr.com/people/hisgett/',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:New_York_Rain_3_(4669030741).jpg',
+    license: 'CC BY 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by/2.0/',
+    objectPosition: 'center 58%',
+  },
+  'yerkes-dodson-law': {
+    src: '/images/editorial/yerkes-dodson-law/hero.webp',
+    alt: 'Psychologist Robert Yerkes seated at his desk at Harvard University.',
+    name: 'Unknown photographer',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Robert-Yerkes.jpg',
+    license: 'Public domain (US)',
+    licenseUrl: 'https://creativecommons.org/publicdomain/mark/1.0/',
+    objectPosition: 'center 35%',
+  },
+  'on-the-benign-unprovability-of-our': {
+    src: '/images/editorial/on-the-benign-unprovability-of-our/hero.webp',
+    alt: 'Close photograph of a human eye and iris.',
+    name: 'Kookaaa',
+    url: 'https://commons.wikimedia.org/wiki/User:Kookaaa',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Close_up_shot_of_the_human_eye,_9_August_2024.jpg',
+    license: 'CC0 1.0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+  },
+  'on-the-unprovability-of-our-perception': {
+    src: '/images/editorial/on-the-unprovability-of-our-perception/hero.webp',
+    alt: 'William Henry Fox Talbot’s early photograph of a camera obscura.',
+    name: 'William Henry Fox Talbot',
+    url: 'https://www.metmuseum.org/art/collection/search/289224',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Camera_Obscura_MET_DP202274.jpg',
+    license: 'CC0 1.0',
+    licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
+  },
+};
+
+const INLINE_REPLACEMENTS = {
+  'how-do-you-stay-focused-when-your': '<figure class="replacement-image"><img src="/blog/images/editorial/how-do-you-stay-focused-when-your/hero.webp" width="1600" height="900" alt="A long-haired ginger cat perched on a balcony wall." loading="eager" fetchpriority="high"><figcaption>Replacement for an archived source image. Photo by <a href="https://www.flickr.com/people/34707874@N03">Filippo Salamone</a> on <a href="https://commons.wikimedia.org/wiki/File:Cat_on_balcony.jpg">Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></figcaption></figure>',
+  'american-urbanism-focuses-too-much': '<figure class="replacement-image"><img src="/blog/images/editorial/american-urbanism-focuses-too-much/hero.webp" width="1600" height="900" alt="The green bicycle lane on Eighth Avenue at West 56th Street in Manhattan." loading="eager" fetchpriority="high"><figcaption>lovely bollard-separated two way bikelane on a street in NYC that doesn’t have enough traffic to need a bus lane I guess<br>Photo by <a href="https://commons.wikimedia.org/wiki/User:Tdorante10">Tdorante10</a> on <a href="https://commons.wikimedia.org/wiki/File:W_56th_St_8th_Av_03.jpg">Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></figcaption></figure>',
+};
 
 const sleep = (ms) => new Promise((resolveDelay) => setTimeout(resolveDelay, ms));
 
@@ -139,9 +187,47 @@ function frontmatter(post, slug) {
   lines.push(`tags: [${tags.map(yaml).join(', ')}]`);
   lines.push('draft: false');
   lines.push('featured: false');
+  const hero = HEROES[slug];
+  if (hero) {
+    lines.push('hero:');
+    lines.push(`  src: ${yaml(hero.src)}`);
+    lines.push(`  alt: ${yaml(hero.alt)}`);
+    lines.push('  width: 1600');
+    lines.push('  height: 900');
+    lines.push('  credit:');
+    lines.push(`    name: ${yaml(hero.name)}`);
+    if (hero.url) lines.push(`    url: ${yaml(hero.url)}`);
+    lines.push('    source: "Wikimedia Commons"');
+    lines.push(`    sourceUrl: ${yaml(hero.sourceUrl)}`);
+    lines.push(`    license: ${yaml(hero.license)}`);
+    lines.push(`    licenseUrl: ${yaml(hero.licenseUrl)}`);
+    if (hero.objectPosition) lines.push(`  objectPosition: ${yaml(hero.objectPosition)}`);
+  }
   lines.push(`legacySource: ${yaml(canonical)}`);
   lines.push('---', '');
   return lines.join('\n');
+}
+
+const archivePosts = [];
+for (let offset = 0; ; offset += 12) {
+  const page = await fetchJson(`https://deltastar.substack.com/api/v1/archive?sort=new&search=&offset=${offset}&limit=12`);
+  if (!Array.isArray(page)) throw new Error('Substack archive API returned an unexpected response.');
+  archivePosts.push(...page);
+  if (page.length < 12) break;
+}
+
+const expectedBySlug = new Map(POSTS.map(([id, slug]) => [slug, id]));
+const archiveBySlug = new Map(archivePosts.map((post) => [post.slug, post.id]));
+const absentFromImporter = [...archiveBySlug.keys()].filter((slug) => !expectedBySlug.has(slug));
+const absentFromArchive = [...expectedBySlug.keys()].filter((slug) => !archiveBySlug.has(slug));
+const mismatchedIds = [...archiveBySlug].filter(([slug, id]) => expectedBySlug.has(slug) && expectedBySlug.get(slug) !== id);
+if (archivePosts.length !== POSTS.length || absentFromImporter.length || absentFromArchive.length || mismatchedIds.length) {
+  throw new Error([
+    `Substack archive/importer mismatch: archive=${archivePosts.length}, importer=${POSTS.length}.`,
+    absentFromImporter.length ? `Missing from importer: ${absentFromImporter.join(', ')}.` : '',
+    absentFromArchive.length ? `Missing from archive: ${absentFromArchive.join(', ')}.` : '',
+    mismatchedIds.length ? `ID mismatch: ${mismatchedIds.map(([slug, id]) => `${slug}=${id}`).join(', ')}.` : '',
+  ].filter(Boolean).join(' '));
 }
 
 await rm(postsDir, { recursive: true, force: true });
@@ -158,10 +244,13 @@ for (const [id, expectedSlug] of POSTS) {
   if (!post.body_html) throw new Error(`Substack post ${slug} has no body_html.`);
 
   const localized = await localizeImages(post.body_html, slug);
-  const body = localized
+  let body = localized
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
     .trim();
+  if (INLINE_REPLACEMENTS[slug]) {
+    body = body.replace(/<div class="captioned-image-container"><figure>[\s\S]*?<\/figure><\/div>/i, INLINE_REPLACEMENTS[slug]);
+  }
   await writeFile(resolve(postsDir, `${slug}.md`), `${frontmatter(post, slug)}<!-- Imported verbatim from ${post.canonical_url || `https://deltastar.substack.com/p/${slug}`}. -->\n\n${body}\n`);
   imported.push(post);
   console.log(`Imported substack: ${post.title}`);
@@ -175,27 +264,5 @@ try {
 } catch {
   throw new Error('WordPress import directory is missing; WordPress import must run first.');
 }
-
-const report = [
-  '# Public archive import',
-  '',
-  `Generated: ${new Date().toISOString()}`,
-  '',
-  `- WordPress posts/pages: ${wordpressCount}`,
-  `- Substack posts: ${imported.length}`,
-  `- Total imported: ${wordpressCount + imported.length}`,
-  '',
-  'The Substack archive was independently enumerated at 12 public posts before migration. WordPress exposes 19 public posts; Lonely-CLA is imported as a separate page.',
-  '',
-  '## Substack items',
-  '',
-  ...imported
-    .sort((a, b) => new Date(b.post_date) - new Date(a.post_date))
-    .map((post) => `- ${post.post_date.slice(0, 10)} — **${stripHtml(post.title)}** — ${post.canonical_url}`),
-  '',
-  'Rendered source HTML is retained. Article images are downloaded into `public/images/imported/` and the HTML is rewritten to local `/blog/images/imported/...` URLs. Remote responsive `srcset` variants are removed so browsers cannot silently bypass the local copy.',
-  '',
-].join('\n');
-await writeFile(resolve(root, 'docs/PUBLIC_ARCHIVE_IMPORT.md'), report);
 
 console.log(`Imported ${wordpressCount} WordPress items + ${imported.length} Substack posts.`);

@@ -10,7 +10,7 @@ legacySource: "https://kimeiga.wordpress.com/2019/12/27/why-make-a-blog-and-why-
 <!-- Imported from https://kimeiga.wordpress.com/2019/12/27/why-make-a-blog-and-why-blogger/. Original article HTML is retained below. -->
 
 <div>
-<div class="separator" style="clear:both;text-align:center;"><a href="/blog/images/imported/wordpress/why-make-a-blog-and-why-blogger/327f0-dsc_0437.jpg" style="margin-left:1em;margin-right:1em;"><img loading="lazy" border="0" height="426" src="/blog/images/imported/wordpress/why-make-a-blog-and-why-blogger/11eb5-dsc_0437.jpg" width="640" /></a></div>
+<div class="separator" style="clear:both;text-align:center;"><a href="/blog/images/imported/wordpress/why-make-a-blog-and-why-blogger/327f0-dsc_0437.jpg" style="margin-left:1em;margin-right:1em;"><img loading="lazy" border="0" height="426" src="/blog/images/imported/wordpress/why-make-a-blog-and-why-blogger/11eb5-dsc_0437.live.webp" width="640" /></a></div>
 <p><b><u><br /></u></b><b><u><br /></u></b><b><u>First why blog at all?</u></b></div>
 <div><b><u><br /></u></b></div>
 <p>You should make a blog if you already enjoy writing because you have a lot of thoughts and you would like to share then with the world.</p>
