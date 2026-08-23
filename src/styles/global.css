@@ -281,9 +281,9 @@ button { color: inherit; }
   .prose { line-height: 1.72; }
 }
 
-@media (min-width: 80rem) {
-  .post-grid { grid-template-columns: 13rem minmax(0, 45rem) 13rem; gap: 3rem; }
-  .toc { display: block; grid-column: 1; align-self: start; position: sticky; top: 2rem; color: var(--faint); font-size: .72rem; line-height: 1.45; }
+@media (min-width: 90rem) {
+  .post-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 45rem) minmax(0, 1fr); }
+  .toc { display: block; grid-column: 1; width: calc(100% - 10rem); align-self: start; position: sticky; top: 2rem; color: var(--faint); font-size: .72rem; line-height: 1.45; }
   .toc > p { margin: 0 0 .7rem; color: var(--text-soft); font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
   .toc ol { list-style: none; margin: 0; padding: 0; border-left: 1px solid var(--line); }
   .toc li { margin: 0; padding: .32rem 0 .32rem .75rem; }
