@@ -14,6 +14,7 @@ const creditSchema = z.object({
 const imageSchema = z.object({
   src: z.string(),
   alt: z.string(),
+  caption: z.string().optional(),
   width: z.number().int().positive(),
   height: z.number().int().positive(),
   credit: creditSchema.optional(),

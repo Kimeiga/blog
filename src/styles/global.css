@@ -56,6 +56,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 img, svg { display: block; max-width: 100%; }
+img { height: auto; }
 a { color: inherit; text-underline-offset: 0.16em; text-decoration-thickness: 0.07em; }
 a:hover { color: var(--accent-hover); }
 button, input { font: inherit; }

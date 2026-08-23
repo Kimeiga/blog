@@ -5,6 +5,18 @@ published: "2020-05-31T11:41:56-07:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/editorial/i-wish-i-could-go-back-to-coding-for-fun/hero.webp"
+  alt: "Grace Hopper and colleagues at a UNIVAC computer in 1957."
+  width: 1600
+  height: 900
+  credit:
+    name: "Smithsonian Institution"
+    url: "https://www.si.edu/"
+    source: "Wikimedia Commons"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Grace_Hopper_and_UNIVAC.jpg"
+    license: "No known copyright restrictions"
+    licenseUrl: "https://www.si.edu/termsofuse"
 legacySource: "https://kimeiga.wordpress.com/2020/05/31/i-wish-i-could-go-back-to-coding-for-fun/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2020/05/31/i-wish-i-could-go-back-to-coding-for-fun/. Original article HTML is retained below. -->
@@ -62,7 +74,3 @@ legacySource: "https://kimeiga.wordpress.com/2020/05/31/i-wish-i-could-go-back-t
 
 
 <p class="wp-block-paragraph">Thank you for coming to my ted talk. Thwack</p>
-
-
-
-<figure class="replacement-image"><img loading="lazy" src="/blog/images/editorial/i-wish-i-could-go-back-to-coding-for-fun/hero.webp" alt="Grace Hopper and colleagues at a UNIVAC computer in 1957." width="1600" height="900" /><figcaption>Photo from the <a href="https://commons.wikimedia.org/wiki/File:Grace_Hopper_and_UNIVAC.jpg">Smithsonian Institution collection</a> · no known copyright restrictions</figcaption></figure>

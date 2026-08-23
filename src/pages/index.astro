@@ -31,11 +31,10 @@ const tags = allTags(posts).slice(0, 8);
 
   <section class="shell shell--wide section-block" aria-labelledby="recent-heading">
     <div class="section-heading">
-      <h2 id="recent-heading">Recent</h2>
-      <a class="text-link" href={withBase('/archive/')}>All →</a>
+      <h2 id="recent-heading">Posts</h2>
     </div>
     <div class="post-grid-list">
-      {rest.slice(0, 8).map((post) => <PostCard {post} />)}
+      {rest.map((post) => <PostCard {post} />)}
     </div>
   </section>
 </BaseLayout>

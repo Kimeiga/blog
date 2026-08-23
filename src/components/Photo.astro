@@ -11,6 +11,7 @@ interface Credit {
 interface Props {
   src: string;
   alt: string;
+  caption?: string;
   width: number;
   height: number;
   credit?: Credit;
@@ -18,7 +19,7 @@ interface Props {
   objectPosition?: string;
   class?: string;
 }
-const { src, alt, width, height, credit, eager = false, objectPosition = 'center', class: className } = Astro.props;
+const { src, alt, caption, width, height, credit, eager = false, objectPosition = 'center', class: className } = Astro.props;
 ---
 <figure class:list={['photo', className]}>
   <img
@@ -31,11 +32,14 @@ const { src, alt, width, height, credit, eager = false, objectPosition = 'center
     decoding="async"
     style={`object-position:${objectPosition}`}
   />
-  {credit && (
+  {(caption || credit) && (
     <figcaption>
-      Photo by {credit.url ? <a href={credit.url}>{credit.name}</a> : credit.name}
-      {credit.source && <> on {credit.sourceUrl ? <a href={credit.sourceUrl}>{credit.source}</a> : credit.source}</>}
-      {credit.license && <> · {credit.licenseUrl ? <a href={credit.licenseUrl}>{credit.license}</a> : credit.license}</>}
+      {caption && <>{caption}{credit && <br />}</>}
+      {credit && <>
+        Photo by {credit.url ? <a href={credit.url}>{credit.name}</a> : credit.name}
+        {credit.source && <> on {credit.sourceUrl ? <a href={credit.sourceUrl}>{credit.source}</a> : credit.source}</>}
+        {credit.license && <> · {credit.licenseUrl ? <a href={credit.licenseUrl}>{credit.license}</a> : credit.license}</>}
+      </>}
     </figcaption>
   )}
 </figure>

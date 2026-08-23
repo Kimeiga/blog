@@ -66,12 +66,31 @@ const HEROES = {
     license: 'CC0 1.0',
     licenseUrl: 'https://creativecommons.org/publicdomain/zero/1.0/',
   },
+  'american-urbanism-focuses-too-much': {
+    src: '/images/editorial/american-urbanism-focuses-too-much/hero.webp',
+    alt: 'The green bicycle lane on Eighth Avenue at West 56th Street in Manhattan.',
+    caption: 'lovely bollard-separated two way bikelane on a street in NYC that doesn’t have enough traffic to need a bus lane I guess',
+    name: 'Tdorante10',
+    url: 'https://commons.wikimedia.org/wiki/User:Tdorante10',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:W_56th_St_8th_Av_03.jpg',
+    license: 'CC BY-SA 4.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/',
+  },
+  'how-do-you-stay-focused-when-your': {
+    src: '/images/editorial/how-do-you-stay-focused-when-your/hero.webp',
+    alt: 'A long-haired ginger cat perched on a balcony wall.',
+    name: 'Filippo Salamone',
+    url: 'https://www.flickr.com/people/34707874@N03',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:Cat_on_balcony.jpg',
+    license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/',
+  },
 };
 
-const INLINE_REPLACEMENTS = {
-  'how-do-you-stay-focused-when-your': '<figure class="replacement-image"><img src="/blog/images/editorial/how-do-you-stay-focused-when-your/hero.webp" width="1600" height="900" alt="A long-haired ginger cat perched on a balcony wall." loading="eager" fetchpriority="high"><figcaption>Replacement for an archived source image. Photo by <a href="https://www.flickr.com/people/34707874@N03">Filippo Salamone</a> on <a href="https://commons.wikimedia.org/wiki/File:Cat_on_balcony.jpg">Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a></figcaption></figure>',
-  'american-urbanism-focuses-too-much': '<figure class="replacement-image"><img src="/blog/images/editorial/american-urbanism-focuses-too-much/hero.webp" width="1600" height="900" alt="The green bicycle lane on Eighth Avenue at West 56th Street in Manhattan." loading="eager" fetchpriority="high"><figcaption>lovely bollard-separated two way bikelane on a street in NYC that doesn’t have enough traffic to need a bus lane I guess<br>Photo by <a href="https://commons.wikimedia.org/wiki/User:Tdorante10">Tdorante10</a> on <a href="https://commons.wikimedia.org/wiki/File:W_56th_St_8th_Av_03.jpg">Wikimedia Commons</a> · <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a></figcaption></figure>',
-};
+const PROMOTED_SOURCE_IMAGES = new Set([
+  'american-urbanism-focuses-too-much',
+  'how-do-you-stay-focused-when-your',
+]);
 
 const sleep = (ms) => new Promise((resolveDelay) => setTimeout(resolveDelay, ms));
 
@@ -192,6 +211,7 @@ function frontmatter(post, slug) {
     lines.push('hero:');
     lines.push(`  src: ${yaml(hero.src)}`);
     lines.push(`  alt: ${yaml(hero.alt)}`);
+    if (hero.caption) lines.push(`  caption: ${yaml(hero.caption)}`);
     lines.push('  width: 1600');
     lines.push('  height: 900');
     lines.push('  credit:');
@@ -248,8 +268,8 @@ for (const [id, expectedSlug] of POSTS) {
     .replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '')
     .replace(/<style\b[^>]*>[\s\S]*?<\/style>/gi, '')
     .trim();
-  if (INLINE_REPLACEMENTS[slug]) {
-    body = body.replace(/<div class="captioned-image-container"><figure>[\s\S]*?<\/figure><\/div>/i, INLINE_REPLACEMENTS[slug]);
+  if (PROMOTED_SOURCE_IMAGES.has(slug)) {
+    body = body.replace(/<div class="captioned-image-container"><figure>[\s\S]*?<\/figure><\/div>/i, '');
   }
   await writeFile(resolve(postsDir, `${slug}.md`), `${frontmatter(post, slug)}<!-- Imported verbatim from ${post.canonical_url || `https://deltastar.substack.com/p/${slug}`}. -->\n\n${body}\n`);
   imported.push(post);
