@@ -26,6 +26,10 @@ function cleanBase(name) {
   return name.replace(/\.live\.webp$/i, '').replace(/^source-/, '').replace(/^\w{5}-/, '').replace(extname(name), '').toLowerCase();
 }
 
+function imageKey(slug) {
+  return slug.replace(/[^a-z0-9_-]/gi, (character) => `-${character.codePointAt(0).toString(16)}-`);
+}
+
 function markdown(value) {
   return String(value || '—').replaceAll('|', '\\|').replace(/\s+/g, ' ').trim();
 }
@@ -77,6 +81,7 @@ const current = {
 };
 
 const rows = [];
+const responsiveRows = [];
 const imageFiles = (await filesUnder(publicImages)).filter((path) => imagePattern.test(path)).sort();
 for (const path of imageFiles) {
   const local = relative(root, path);
@@ -160,6 +165,37 @@ for (const path of imageFiles) {
       evidence: svg ? 'New SVG redraw from the numeric example geometry; no LeetCode pixels reused.' : 'Exact asset URL was embedded in the archived LeetCode problem statement.',
       confidence: 'verified', action: svg ? 'Used in live article.' : 'Original preserved for archive evidence but removed from live HTML.',
     };
+  } else if (parts[0] === 'equality-at-scale') {
+    const meta = JSON.parse(await readFile(resolve(publicImages, 'equality-at-scale', 'source.json'), 'utf8'));
+    const filename = parts.at(-1);
+    const image = meta.images.find((entry) => entry.files.includes(filename));
+    if (image) {
+      row = {
+        ...row,
+        post: '/posts/equality-at-scale/',
+        originalImageUrl: image.originalImageUrl,
+        originalPageUrl: meta.originalPageUrl,
+        creator: image.creator,
+        source: 'Unsplash',
+        sourceUrl: image.sourceUrl,
+        license: meta.license,
+        licenseUrl: meta.licenseUrl,
+        evidence: 'The original portfolio article names the photographer and exact Unsplash page; Unsplash confirms the creator and license.',
+        confidence: 'verified',
+        action: filename.startsWith('source-') ? 'Original licensed download retained.' : 'Optimized live derivative with visible credit.',
+      };
+    }
+  } else if (parts[0] === 'responsive') {
+    const key = parts.at(-1).replace(/-\d+\.webp$/i, '');
+    const match = [...posts.entries()].find(([slug]) => imageKey(slug) === key);
+    const heroSrc = match?.[1].text.match(/^ {2}src:\s*["']([^"']+)["']/m)?.[1];
+    if (match && heroSrc) {
+      const [slug] = match;
+      row.post = `/posts/${slug}/`;
+      row.action = 'Generated responsive derivative of the audited hero image.';
+      row.sourceHero = `public/${heroSrc.replace(/^\/blog/, '').replace(/^\//, '')}`;
+      responsiveRows.push(row);
+    }
   } else if (current[rel]) {
     const [slug, creator, source, sourceUrl, license, licenseUrl] = current[rel];
     row = {
@@ -168,6 +204,21 @@ for (const path of imageFiles) {
     };
   }
   rows.push(row);
+}
+
+for (const row of responsiveRows) {
+  const source = rows.find((candidate) => candidate.local === row.sourceHero);
+  delete row.sourceHero;
+  if (!source) continue;
+  row.originalImageUrl = source.originalImageUrl;
+  row.originalPageUrl = source.originalPageUrl;
+  row.creator = source.creator;
+  row.source = source.source;
+  row.sourceUrl = source.sourceUrl;
+  row.license = source.license;
+  row.licenseUrl = source.licenseUrl;
+  row.evidence = `${source.evidence} This file is a generated responsive derivative of that audited hero.`;
+  row.confidence = source.confidence;
 }
 
 const counts = rows.reduce((result, row) => ({ ...result, [row.confidence]: (result[row.confidence] || 0) + 1 }), {});

@@ -1,0 +1,35 @@
+{
+  "originalPageUrl": "https://hakanalpay.com/blog/equality-at-scale/",
+  "license": "Unsplash License",
+  "licenseUrl": "https://unsplash.com/license",
+  "images": [
+    {
+      "files": ["tokyo-rail-lines.webp", "source-tokyo-rail-lines.jpg"],
+      "creator": "Manish Tulaskar",
+      "creatorUrl": "https://unsplash.com/@manish_tulaskar",
+      "sourceUrl": "https://unsplash.com/photos/aerial-view-of-city-buildings-during-daytime-SAx2VzJ_1rM",
+      "originalImageUrl": "https://images.unsplash.com/photo-1618592483597-d7f85a3b1f50?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=84&w=2400"
+    },
+    {
+      "files": ["copenhagen-street.webp", "source-copenhagen-street.jpg"],
+      "creator": "Alain Rouiller",
+      "creatorUrl": "https://unsplash.com/@alainr",
+      "sourceUrl": "https://unsplash.com/photos/red-building-on-a-city-street-with-people-and-bicycles-RfIjwLCx7uM",
+      "originalImageUrl": "https://images.unsplash.com/photo-1764756719784-7e46c361e0ba?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=84&w=2400"
+    },
+    {
+      "files": ["tokyo-alley.webp", "source-tokyo-alley.jpg"],
+      "creator": "Tsuyoshi Kozu",
+      "creatorUrl": "https://unsplash.com/@tsuyoshikozu",
+      "sourceUrl": "https://unsplash.com/photos/pedestrians-walk-through-an-alley-with-shops-NJQrxYz940U",
+      "originalImageUrl": "https://images.unsplash.com/photo-1742002805314-a0f5145f8569?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=84&w=2400"
+    },
+    {
+      "files": ["tokyo-station.webp", "source-tokyo-station.jpg"],
+      "creator": "Muhammad Irfan",
+      "creatorUrl": "https://unsplash.com/@matamatairfan",
+      "sourceUrl": "https://unsplash.com/photos/two-trains-at-a-station-platform-in-black-and-white-K0CQPXtRYqA",
+      "originalImageUrl": "https://images.unsplash.com/photo-1759658236378-a244f89abd00?auto=format&fit=crop&fm=jpg&ixlib=rb-4.1.0&q=84&w=2400"
+    }
+  ]
+}

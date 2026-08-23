@@ -11,10 +11,10 @@ Verified: 2026-08-22
 | Lonely-CLA page | 1 | 1 | 1 | 0 | 0 | 0 | 0 |
 | delta galaxy Substack | 14 | 14 | 14 | 0 | 0 | 0 | 0 |
 | LeetCode archive | 3 | 3 | 3 | 0 | 0 | 0 | 0 |
-| Current original blog posts | 2 | 2 | 2 | — | 0 | 0 | 0 |
-| **Canonical total** | **48** | **48** | **48** | **0** | **0** | **0** | **1** |
+| Current original blog posts | 3 | 3 | 3 | — | 0 | 0 | 0 |
+| **Canonical total** | **49** | **49** | **49** | **0** | **0** | **0** | **1** |
 
-The canonical collection contains 48 posts. Canonical slug validation reports no collisions among the 48 generated article routes.
+The canonical collection contains 49 posts. Canonical slug validation reports no collisions among the 49 generated article routes. The EASI research essay was moved from the portfolio's one-off `/blog/equality-at-scale/` route into the canonical Astro post collection; the former URL redirects to `/blog/posts/equality-at-scale/`.
 
 ## Source notes
 
@@ -46,7 +46,7 @@ Three historical solution posts are present. The three external Perfect Rectangl
 ## Media state
 
 - Historical pre-derivative checksum entries: 335
-- Image files audited after derivatives and replacements: 683
+- Image files audited after derivatives and replacements: 824
 - Licensed replacement photographs added: 17
 - Broken local media references: 0
 - Remote article image loads: 0
