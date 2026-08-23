@@ -7,7 +7,7 @@ tags: [Projects, AI, Trading, Research]
 draft: false
 featured: false
 hero:
-  src: "/images/aitrader-mercury-arima/metrics.webp"
+  src: "/images/aitrader-mercury-arima/llms-vs-analytical-models.webp"
   alt: "Bar chart comparing average return, Sharpe ratio, and drawdown for ARIMA, buy and hold, and a Mercury 2 LLM strategy"
   width: 1600
   height: 900
