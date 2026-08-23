@@ -50,6 +50,7 @@ const legacy = data.legacySource ? legacyPublication(data.legacySource) : undefi
       </div>
       <ul class="tag-list" aria-label="Tags">
         {data.tags.map((tag) => <li><a href={tagUrl(tag)}>{tag}</a></li>)}
+        {data.disclosure && <li><span class="tag-badge">{data.disclosure}</span></li>}
       </ul>
     </header>
 
@@ -71,7 +72,6 @@ const legacy = data.legacySource ? legacyPublication(data.legacySource) : undefi
         </aside>
       )}
       <div class="prose" data-pagefind-body>
-        {data.disclosure && <p class="editorial-note">{data.disclosure}</p>}
         <slot />
         {data.legacySource && legacy && (
           <p class="legacy-note">Originally published {legacy.preposition} {legacy.name}. <a href={data.legacySource}>View the source version ↗</a></p>

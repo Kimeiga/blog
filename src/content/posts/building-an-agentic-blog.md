@@ -17,7 +17,7 @@ hero:
     sourceUrl: "https://unsplash.com/photos/-7oi_5uJPC4?utm_source=hakanalpay_blog&utm_medium=referral"
     license: "Unsplash License"
     licenseUrl: "https://unsplash.com/license"
-disclosure: "AI-assisted."
+disclosure: "AI-Assisted"
 ---
 
 I wanted to be able to say “turn this into a post” in ChatGPT on my phone and have it land on my actual blog.

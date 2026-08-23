@@ -17,7 +17,7 @@ hero:
     sourceUrl: "https://unsplash.com/photos/n9AaeihA9HI?utm_source=hakanalpay_blog&utm_medium=referral"
     license: "Unsplash License"
     licenseUrl: "https://unsplash.com/license"
-disclosure: "AI-assisted."
+disclosure: "AI-Assisted"
 ---
 
 The sentence that made me want to rewrite the first version of this blog was:

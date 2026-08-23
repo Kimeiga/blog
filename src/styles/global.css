@@ -145,7 +145,7 @@ button { color: inherit; }
 .post-card--prominent h2 { font-size: clamp(1.8rem, 4vw, 3.2rem); }
 .post-meta { display: flex; align-items: center; gap: .45rem; color: var(--faint); font-size: .71rem; font-weight: 700; letter-spacing: .03em; text-transform: uppercase; }
 .tag-list { display: flex; flex-wrap: wrap; gap: .42rem; list-style: none; padding: 0; margin: 1.1rem 0 0; }
-.tag-list a { display: inline-flex; padding: .3rem .52rem; border: 1px solid var(--line); color: var(--muted); font-size: .69rem; line-height: 1; font-weight: 700; text-decoration: none; }
+.tag-list a, .tag-badge { display: inline-flex; padding: .3rem .52rem; border: 1px solid var(--line); color: var(--muted); font-size: .69rem; line-height: 1; font-weight: 700; text-decoration: none; }
 .tag-list a:hover { border-color: var(--accent); color: var(--text); }
 
 .manifesto { padding-block: 7rem 1rem; }
@@ -204,7 +204,7 @@ button { color: inherit; }
 .prose .lede { color: var(--text); font-size: 1.22em; line-height: 1.58; }
 .article-photo { width: min(100vw - 2rem, 64rem); margin-left: 50%; transform: translateX(-50%); }
 .article-photo img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
-.editorial-note, .legacy-note { padding: 1rem 1.1rem; border: 1px solid var(--line); background: var(--surface); font-family: var(--sans); font-size: .82rem; line-height: 1.6; }
+.legacy-note { padding: 1rem 1.1rem; border: 1px solid var(--line); background: var(--surface); font-family: var(--sans); font-size: .82rem; line-height: 1.6; }
 .legacy-note { margin-top: 3rem !important; }
 .standalone-prose { padding-bottom: 3rem; }
 .post-tail { margin-top: 4rem; }
