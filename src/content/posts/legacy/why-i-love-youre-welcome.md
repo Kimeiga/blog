@@ -1,5 +1,5 @@
 ---
-title: "Why I Love \\\"You're Welcome\\\""
+title: 'Why I Love "You''re Welcome"'
 description: "I'm usually pretty critical of English. I despise the lack of regularity, the constant exceptions, the strange spelling, the complicated tenses, the way loan words are incorporated without modifying their spelling, etc.…"
 published: "2018-08-01T19:49:51-04:00"
 tags: ["Music", "Personal"]
@@ -8,7 +8,7 @@ featured: false
 legacySource: "https://github.com/Kimeiga/blog-old/blob/master/_posts/2018-08-01-why-i-love-youre-welcome.md"
 hero:
   src: "/images/legacy/why-i-love-youre-welcome.webp"
-  alt: "Original image published with “Why I Love \\\"You're Welcome\\\"”"
+  alt: 'Original image published with “Why I Love "You''re Welcome"”'
   width: 1600
   height: 900
   credit:
