@@ -220,7 +220,7 @@ async function importWordPress() {
     const title = stripHtml(post.title) || slug;
     await writeImportedPost('wordpress', slug, {
       title,
-      description: descriptionFrom(post.excerpt || post.content),
+      description: descriptionFrom(post.content || post.excerpt),
       published: post.date,
       updated: post.modified,
       tags: originalTaxonomy(post),
@@ -240,7 +240,7 @@ async function importWordPress() {
   if (lonely) {
     await writeImportedPost('wordpress', 'lonely-cla', {
       title: stripHtml(lonely.title) || 'Lonely-CLA',
-      description: descriptionFrom(lonely.excerpt || lonely.content),
+      description: descriptionFrom(lonely.content || lonely.excerpt),
       published: lonely.date || '2020-09-29',
       updated: lonely.modified,
       tags: originalTaxonomy(lonely),

@@ -47,6 +47,9 @@ for (const file of await walk(postsRoot)) {
   const disclosure = unquote(field(yaml, 'disclosure'));
   if (title.length > 90) warnings.push(`${rel}: title is ${title.length} characters`);
   if (description.length > 180) warnings.push(`${rel}: description is ${description.length} characters`);
+  if (/(?:[a-z’”]|[.!?])[A-Z]:/.test(description)) {
+    errors.push(`${rel}: description appears to have lost whitespace before a dialogue label`);
+  }
   if (disclosure.length > 160) warnings.push(`${rel}: disclosure is ${disclosure.length} characters; keep it to one line`);
 
   // Catch local assets wherever content can reference them: hero frontmatter,

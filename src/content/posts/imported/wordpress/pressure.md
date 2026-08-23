@@ -1,6 +1,6 @@
 ---
 title: "Pressure"
-description: "A: I have pressure in my temples.B: Well why don’t you tell the Jews to chill out?"
+description: "A two-line joke about pressure in the temples."
 published: "2021-05-05T23:15:35-07:00"
 tags: ["Uncategorized"]
 draft: false

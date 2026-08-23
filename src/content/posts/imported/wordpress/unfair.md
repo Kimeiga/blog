@@ -1,6 +1,6 @@
 ---
 title: "Unfair"
-description: "M: that’s unfairH: life’s unfairM: you’re life’s unfair, my life is very fairH: that’s life inequality, violation of our constitution where it declares that all men are created equalM: well I’m a woman I’m exempt*lol* H: why did they…"
+description: "A conversation about fairness, equality, and the wording of the Constitution."
 published: "2021-03-01T16:26:22-08:00"
 tags: ["Uncategorized"]
 draft: false
