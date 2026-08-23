@@ -7,6 +7,16 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 export const photographs = [
   {
+    slug: 'japanese-tweet-ex1',
+    fileName: 'ThinkPad X1 Carbon Japanese Keyboard.jpg',
+    alt: 'Close view of a Japanese-layout ThinkPad keyboard.',
+    creator: 'TAKA@P.P.R.S',
+    creatorUrl: 'https://www.flickr.com/photos/26414679@N05/',
+    sourceUrl: 'https://commons.wikimedia.org/wiki/File:ThinkPad_X1_Carbon_Japanese_Keyboard.jpg',
+    license: 'CC BY-SA 2.0',
+    licenseUrl: 'https://creativecommons.org/licenses/by-sa/2.0/',
+  },
+  {
     slug: 'in-life-there-is-rain',
     fileName: 'New York Rain 3 (4669030741).jpg',
     alt: 'Pedestrians and cars on a rain-soaked Manhattan street at dusk.',
@@ -192,7 +202,10 @@ async function download(photo, destination) {
   return response.url;
 }
 
+const selected = new Set(process.argv.slice(2));
+
 for (const photo of photographs) {
+  if (selected.size > 0 && !selected.has(photo.slug)) continue;
   const outputDir = join(root, 'public', 'images', 'editorial', photo.slug);
   const sourceName = safeFileName(photo.fileName);
   const sourcePath = join(outputDir, sourceName);

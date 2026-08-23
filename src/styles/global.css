@@ -218,16 +218,9 @@ button { color: inherit; }
 .post-pagination__item--next { text-align: right; }
 
 .comments { margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--line); }
-.comments__intro { max-width: 39rem; color: var(--muted); font-size: .85rem; line-height: 1.6; }
-.comments__controls { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1rem; }
-.comments__status { min-height: 1.5rem; color: var(--muted); font-size: .8rem; }
-.comment-list { list-style: none; margin: 1rem 0 0; padding: 0; border-top: 1px solid var(--line); }
-.comment { padding: 1.2rem 0; border-bottom: 1px solid var(--line); }
-.comment__header { display: flex; justify-content: space-between; gap: 1rem; color: var(--faint); font-size: .72rem; }
-.comment__header a { color: var(--text); font-weight: 750; }
-.comment__body { margin-top: .8rem; color: var(--text-soft); font-family: var(--serif); line-height: 1.6; }
-.comment__body p { white-space: pre-wrap; }
-.comment__permalink { color: var(--faint); font-size: .7rem; }
+.giscus { min-height: 8rem; }
+.giscus-frame { width: 100%; }
+.comments__fallback { color: var(--muted); font-size: .85rem; }
 
 .search-form { margin-top: 2rem; }
 .search-form label { display: block; margin-bottom: .55rem; color: var(--text); font-size: .8rem; font-weight: 750; }

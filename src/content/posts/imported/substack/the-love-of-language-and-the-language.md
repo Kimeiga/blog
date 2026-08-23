@@ -6,6 +6,11 @@ updated: "2023-02-09T15:45:56.860Z"
 tags: []
 draft: false
 featured: false
+hero:
+  src: "/images/imported/substack/the-love-of-language-and-the-language/image-002.live.webp"
+  alt: "A pale pink dahlia blooming in a garden."
+  width: 1200
+  height: 1600
 legacySource: "https://deltastar.substack.com/p/the-love-of-language-and-the-language"
 ---
 <!-- Imported verbatim from https://deltastar.substack.com/p/the-love-of-language-and-the-language. -->

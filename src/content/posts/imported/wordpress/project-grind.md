@@ -5,6 +5,11 @@ published: "2019-12-27T06:58:00+00:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/imported/wordpress/project-grind/392c0-img_20200218_170035_584.live.webp"
+  alt: "The UCLA marching band rehearsing inside Pauley Pavilion."
+  width: 640
+  height: 640
 legacySource: "https://kimeiga.wordpress.com/2019/12/27/project-grind/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2019/12/27/project-grind/. Original article HTML is retained below. -->

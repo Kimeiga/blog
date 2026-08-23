@@ -6,6 +6,11 @@ updated: "2023-02-09T15:46:11.619Z"
 tags: []
 draft: false
 featured: false
+hero:
+  src: "/images/imported/substack/the-mandate-of-my-existence/image-002.live.webp"
+  alt: "High-rise buildings and city streets at night."
+  width: 1456
+  height: 1092
 legacySource: "https://deltastar.substack.com/p/the-mandate-of-my-existence"
 ---
 <!-- Imported verbatim from https://deltastar.substack.com/p/the-mandate-of-my-existence. -->

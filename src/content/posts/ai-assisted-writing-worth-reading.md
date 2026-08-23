@@ -5,7 +5,6 @@ published: "2026-08-20"
 tags: [Writing, AI, Research, Blogging]
 draft: false
 featured: true
-commentsIssue: 2
 hero:
   src: "/images/writing-workflow/hero.webp"
   alt: "An open notebook, pen, and pencils on a wooden desk"

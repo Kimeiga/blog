@@ -5,6 +5,11 @@ published: "2019-12-27T16:52:00+00:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/imported/wordpress/aggro-people/09b01-dsc_0441.live.webp"
+  alt: "A geometric glass-and-steel skylight ceiling."
+  width: 640
+  height: 427
 legacySource: "https://kimeiga.wordpress.com/2019/12/27/aggro-people/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2019/12/27/aggro-people/. Original article HTML is retained below. -->

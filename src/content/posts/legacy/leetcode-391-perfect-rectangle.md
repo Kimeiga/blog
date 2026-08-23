@@ -5,6 +5,11 @@ published: "2023-09-12T13:00:00-04:00"
 tags: ["Software", "Algorithms", "Python"]
 draft: false
 featured: false
+hero:
+  src: "/images/legacy/leetcode-391-perfect-rectangle/example-valid.svg"
+  alt: "Five colored rectangles fitting together into one rectangle."
+  width: 510
+  height: 500
 legacySource: "https://github.com/Kimeiga/leetcode/blob/main/_posts/2023-09-12-391-perfect-rectangle.md"
 ---
 

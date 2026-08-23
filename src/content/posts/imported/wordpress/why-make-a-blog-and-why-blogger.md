@@ -5,6 +5,11 @@ published: "2019-12-27T07:33:00+00:00"
 tags: ["Uncategorized", "Blogger", "meta"]
 draft: false
 featured: false
+hero:
+  src: "/images/imported/wordpress/why-make-a-blog-and-why-blogger/11eb5-dsc_0437.live.webp"
+  alt: "A museum display case holding a miniature architectural model."
+  width: 640
+  height: 427
 legacySource: "https://kimeiga.wordpress.com/2019/12/27/why-make-a-blog-and-why-blogger/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2019/12/27/why-make-a-blog-and-why-blogger/. Original article HTML is retained below. -->

@@ -6,6 +6,11 @@ updated: "2023-02-10T12:41:08.281Z"
 tags: []
 draft: false
 featured: false
+hero:
+  src: "/images/imported/substack/stuck-on-repeat/image-002.live.webp"
+  alt: "A rocky shoreline and pier beneath a blue sky."
+  width: 1456
+  height: 1092
 legacySource: "https://deltastar.substack.com/p/stuck-on-repeat"
 ---
 <!-- Imported verbatim from https://deltastar.substack.com/p/stuck-on-repeat. -->

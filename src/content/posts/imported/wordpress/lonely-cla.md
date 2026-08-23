@@ -6,6 +6,16 @@ updated: "2020-09-28T23:30:23-07:00"
 tags: []
 draft: false
 featured: false
+hero:
+  src: "/images/imported/wordpress/lonely-cla/img_20200928_130317.live.webp"
+  alt: "Royce Hall and its brick plaza under a clear blue sky."
+  width: 1600
+  height: 1200
+  credit:
+    name: "Hakan Alpay"
+    source: "WordPress archive"
+    sourceUrl: "https://kimeiga.wordpress.com/lonely-cla/"
+    license: "Copyright Hakan Alpay"
 legacySource: "https://kimeiga.wordpress.com/lonely-cla/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/lonely-cla/. Original article HTML is retained below. -->

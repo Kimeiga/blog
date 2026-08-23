@@ -6,6 +6,11 @@ updated: "2023-02-09T15:45:40.086Z"
 tags: []
 draft: false
 featured: false
+hero:
+  src: "/images/imported/substack/the-supreme-lack-of-meaning-in-life/image-002.live.webp"
+  alt: "Orange flowers climbing across green leaves."
+  width: 1200
+  height: 1600
 legacySource: "https://deltastar.substack.com/p/the-supreme-lack-of-meaning-in-life"
 ---
 <!-- Imported verbatim from https://deltastar.substack.com/p/the-supreme-lack-of-meaning-in-life. -->

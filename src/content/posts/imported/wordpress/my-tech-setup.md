@@ -5,6 +5,17 @@ published: "2020-02-20T22:01:00+00:00"
 tags: ["Uncategorized", "tech"]
 draft: false
 featured: false
+hero:
+  src: "/images/imported/wordpress/my-tech-setup/8a080-d34_0147.live.webp"
+  alt: "A Gigabyte Aero 14 laptop on a desk."
+  caption: "my aero 14 gaming pc"
+  width: 640
+  height: 427
+  credit:
+    name: "Hakan Alpay"
+    source: "WordPress archive"
+    sourceUrl: "https://kimeiga.wordpress.com/2020/02/20/my-tech-setup/"
+    license: "Copyright Hakan Alpay"
 legacySource: "https://kimeiga.wordpress.com/2020/02/20/my-tech-setup/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2020/02/20/my-tech-setup/. Original article HTML is retained below. -->

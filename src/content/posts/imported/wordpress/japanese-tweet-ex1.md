@@ -5,6 +5,18 @@ published: "2022-10-13T21:30:51-07:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/editorial/japanese-tweet-ex1/hero.webp"
+  alt: "Close view of a Japanese-layout ThinkPad keyboard."
+  width: 1600
+  height: 900
+  credit:
+    name: "TAKA@P.P.R.S"
+    url: "https://www.flickr.com/photos/26414679@N05/"
+    source: "Wikimedia Commons"
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:ThinkPad_X1_Carbon_Japanese_Keyboard.jpg"
+    license: "CC BY-SA 2.0"
+    licenseUrl: "https://creativecommons.org/licenses/by-sa/2.0/"
 legacySource: "https://kimeiga.wordpress.com/2022/10/13/japanese-tweet-ex1/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2022/10/13/japanese-tweet-ex1/. Original article HTML is retained below. -->

@@ -1,10 +1,16 @@
 ---
 title: "Yo"
-description: "Imported from Hakan Alpay’s earlier WordPress archive."
+description: "A sleepy cat says yo."
 published: "2021-03-01T16:33:26-08:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/imported/wordpress/yo/wp_story1614645205848_09018817338964103519.live.webp"
+  alt: "A tabby cat resting between blankets."
+  width: 900
+  height: 1600
+  objectPosition: "center 70%"
 legacySource: "https://kimeiga.wordpress.com/2021/03/01/yo/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2021/03/01/yo/. Original article HTML is retained below. -->

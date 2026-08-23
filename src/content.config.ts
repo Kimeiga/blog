@@ -34,7 +34,6 @@ const posts = defineCollection({
     language: z.string().default('en'),
     hero: imageSchema.optional(),
     legacySource: z.string().url().optional(),
-    commentsIssue: z.number().int().positive().optional(),
     disclosure: z.string().optional(),
   }),
 });

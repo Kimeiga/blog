@@ -5,6 +5,11 @@ published: "2020-02-20T06:34:00+00:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/imported/wordpress/meta-for-easy-full-stack-web-app/15f95-img_20200213_174855.live.webp"
+  alt: "UCLA campus buildings under a pink sunset."
+  width: 640
+  height: 480
 legacySource: "https://kimeiga.wordpress.com/2020/02/20/meta-for-easy-full-stack-web-app/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2020/02/20/meta-for-easy-full-stack-web-app/. Original article HTML is retained below. -->

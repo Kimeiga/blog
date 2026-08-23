@@ -6,6 +6,11 @@ updated: "2023-02-09T15:46:44.143Z"
 tags: []
 draft: false
 featured: false
+hero:
+  src: "/images/imported/substack/thoughts-and-the-loneliness-that/image-002.live.webp"
+  alt: "Distant mountains and evening clouds seen from a moving car."
+  width: 1456
+  height: 1092
 legacySource: "https://deltastar.substack.com/p/thoughts-and-the-loneliness-that"
 ---
 <!-- Imported verbatim from https://deltastar.substack.com/p/thoughts-and-the-loneliness-that. -->

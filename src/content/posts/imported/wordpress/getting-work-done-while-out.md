@@ -5,6 +5,11 @@ published: "2019-12-29T19:02:00+00:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/imported/wordpress/getting-work-done-while-out/96f9b-dsc_0479.live.webp"
+  alt: "The New York Public Library steps along Fifth Avenue."
+  width: 640
+  height: 427
 legacySource: "https://kimeiga.wordpress.com/2019/12/29/getting-work-done-while-out/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2019/12/29/getting-work-done-while-out/. Original article HTML is retained below. -->

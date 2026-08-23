@@ -1,10 +1,15 @@
 ---
 title: "midterms"
-description: "Imported from Hakan Alpay’s earlier WordPress archive."
+description: "Campus at dusk during midterms."
 published: "2020-02-10T07:08:00+00:00"
 tags: ["Uncategorized"]
 draft: false
 featured: false
+hero:
+  src: "/images/imported/wordpress/midterms/98466-20181115_170605.live.webp"
+  alt: "A UCLA campus walkway at dusk beneath a blue and pink sky."
+  width: 640
+  height: 480
 legacySource: "https://kimeiga.wordpress.com/2020/02/10/midterms/"
 ---
 <!-- Imported from https://kimeiga.wordpress.com/2020/02/10/midterms/. Original article HTML is retained below. -->

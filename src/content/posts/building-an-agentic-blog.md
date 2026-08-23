@@ -5,7 +5,6 @@ published: "2026-08-20"
 tags: [Software, Design, Blogging, AI]
 draft: false
 featured: true
-commentsIssue: 1
 hero:
   src: "/images/building-blog/hero.webp"
   alt: "A designer editing a logo system on a laptop in a workshop"

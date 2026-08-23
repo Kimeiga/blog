@@ -6,6 +6,11 @@ updated: "2023-02-09T15:46:27.256Z"
 tags: []
 draft: false
 featured: false
+hero:
+  src: "/images/imported/substack/how-much-will-we-let-identity-matter/image-002.live.webp"
+  alt: "A glass stairway and elevated walkway seen from below."
+  width: 1456
+  height: 1092
 legacySource: "https://deltastar.substack.com/p/how-much-will-we-let-identity-matter"
 ---
 <!-- Imported verbatim from https://deltastar.substack.com/p/how-much-will-we-let-identity-matter. -->

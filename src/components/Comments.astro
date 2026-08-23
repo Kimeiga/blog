@@ -1,91 +1,44 @@
----
-import { SITE } from '../config';
-interface Props {
-  issue?: number;
-  title: string;
-  slug: string;
-}
-const { issue, title, slug } = Astro.props;
-const issueUrl = issue ? `${SITE.repositoryUrl}/issues/${issue}` : undefined;
-const newIssueUrl = `${SITE.repositoryUrl}/issues/new?title=${encodeURIComponent(`Comments: ${title}`)}&body=${encodeURIComponent(`Comments for https://hakanalpay.com/blog/posts/${slug}/\n\n`)}`;
----
-<section class="comments" id="comments" aria-labelledby="comments-title" data-comments data-issue={issue ?? ''} data-repo={SITE.repository}>
+<section class="comments" id="comments" aria-labelledby="comments-title">
   <div class="section-heading section-heading--compact">
     <h2 id="comments-title">Comments</h2>
-    {issueUrl && <a class="text-link" href={issueUrl}>GitHub ↗</a>}
   </div>
-  {issue ? (
-    <div class="comments__controls">
-      <button class="button button--secondary" type="button" data-load-comments>Load</button>
-      <a class="button" href={issueUrl}>Comment ↗</a>
-    </div>
-  ) : (
-    <a class="button" href={newIssueUrl}>Start discussion ↗</a>
-  )}
-  <p class="comments__status" role="status" aria-live="polite" data-comments-status></p>
-  <ol class="comment-list" data-comment-list hidden></ol>
+  <div class="giscus"></div>
+  <noscript><p class="comments__fallback">Comments require JavaScript.</p></noscript>
 </section>
 
-{issue && (
 <script is:inline>
   (() => {
     const section = document.currentScript?.previousElementSibling;
-    if (!(section instanceof HTMLElement) || !section.matches('[data-comments]')) return;
-    const button = section.querySelector('[data-load-comments]');
-    const list = section.querySelector('[data-comment-list]');
-    const status = section.querySelector('[data-comments-status]');
-    if (!(button instanceof HTMLButtonElement) || !(list instanceof HTMLOListElement) || !(status instanceof HTMLElement)) return;
+    if (!(section instanceof HTMLElement) || !section.matches('.comments')) return;
 
-    const issue = section.dataset.issue;
-    const repo = section.dataset.repo;
-    button.addEventListener('click', async () => {
-      button.disabled = true;
-      status.textContent = 'Loading…';
-      try {
-        const response = await fetch(`https://api.github.com/repos/${repo}/issues/${issue}/comments?per_page=100`, {
-          headers: { Accept: 'application/vnd.github+json' },
-        });
-        if (!response.ok) throw new Error(`GitHub returned ${response.status}`);
-        const comments = await response.json();
-        list.replaceChildren();
-        if (!Array.isArray(comments) || comments.length === 0) {
-          status.textContent = 'No comments yet.';
-          return;
-        }
-        for (const comment of comments) {
-          const item = document.createElement('li');
-          item.className = 'comment';
-          const header = document.createElement('div');
-          header.className = 'comment__header';
-          const author = document.createElement('a');
-          author.href = comment.user?.html_url ?? comment.html_url;
-          author.textContent = comment.user?.login ?? 'GitHub user';
-          const time = document.createElement('time');
-          time.dateTime = comment.created_at;
-          time.textContent = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(comment.created_at));
-          header.append(author, time);
-          const body = document.createElement('div');
-          body.className = 'comment__body';
-          for (const paragraph of String(comment.body ?? '').split(/\n{2,}/)) {
-            const p = document.createElement('p');
-            p.textContent = paragraph;
-            body.append(p);
-          }
-          const permalink = document.createElement('a');
-          permalink.className = 'comment__permalink';
-          permalink.href = comment.html_url;
-          permalink.textContent = 'Permalink ↗';
-          item.append(header, body, permalink);
-          list.append(item);
-        }
-        list.hidden = false;
-        status.textContent = `${comments.length} comment${comments.length === 1 ? '' : 's'}.`;
-        button.hidden = true;
-      } catch (error) {
-        status.textContent = 'Could not load comments.';
-        button.disabled = false;
-      }
-    }, { once: true });
+    const root = document.documentElement;
+    const theme = () => root.dataset.theme === 'light' ? 'light' : 'transparent_dark';
+    const container = section.querySelector('.giscus');
+    if (!(container instanceof HTMLElement)) return;
+
+    const script = document.createElement('script');
+    script.src = 'https://giscus.app/client.js';
+    script.async = true;
+    script.crossOrigin = 'anonymous';
+    script.dataset.repo = 'Kimeiga/blog';
+    script.dataset.repoId = 'R_kgDOQT_OPw';
+    script.dataset.category = 'Announcements';
+    script.dataset.categoryId = 'DIC_kwDOQT_OP84DD-9g';
+    script.dataset.mapping = 'pathname';
+    script.dataset.strict = '1';
+    script.dataset.reactionsEnabled = '1';
+    script.dataset.emitMetadata = '0';
+    script.dataset.inputPosition = 'top';
+    script.dataset.theme = theme();
+    script.dataset.lang = 'en';
+    script.dataset.loading = 'lazy';
+    container.append(script);
+
+    const syncTheme = () => {
+      const frame = section.querySelector('iframe.giscus-frame');
+      if (!(frame instanceof HTMLIFrameElement) || !frame.contentWindow) return;
+      frame.contentWindow.postMessage({ giscus: { setConfig: { theme: theme() } } }, 'https://giscus.app');
+    };
+    new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
   })();
 </script>
-)}
