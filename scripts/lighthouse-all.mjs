@@ -43,7 +43,7 @@ function run(command, args) {
 
 async function ensurePreview() {
   try {
-    const response = await fetch(new URL(base, origin));
+    const response = await fetch(new URL(`${base}/`, origin));
     if (response.ok) return;
   } catch {
     // Start the production preview below.
@@ -58,7 +58,7 @@ async function ensurePreview() {
     if (preview.exitCode !== null) throw new Error(`Astro preview exited with code ${preview.exitCode}`);
     await new Promise((resolve) => setTimeout(resolve, 250));
     try {
-      const response = await fetch(new URL(base, origin));
+      const response = await fetch(new URL(`${base}/`, origin));
       if (response.ok) return;
     } catch {
       // Keep waiting until the preview is accepting requests.
