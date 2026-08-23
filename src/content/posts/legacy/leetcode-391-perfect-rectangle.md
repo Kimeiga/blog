@@ -61,12 +61,12 @@ legacySource: "https://github.com/Kimeiga/leetcode/blob/main/_posts/2023-09-12-3
 
 1. The combined area of all small rectangles should equal the area of the large rectangle.
 
-![Group 8.jpg](https://assets.leetcode.com/users/images/c89c1ba0-dcba-4787-a40a-cc936e3a9c47_1694551363.5751398.jpeg)
+<img src="/blog/images/legacy/leetcode-391-perfect-rectangle/group-8.webp" alt="Group 8.jpg" width="478" height="480" loading="lazy">
 
 
 2. The corners of the large rectangle should appear only once, while all other points where rectangles meet should appear an even number of times.
 
-![Group 7.jpg](https://assets.leetcode.com/users/images/f93f7ed9-a3a5-4795-b0dc-944c4eca0ca8_1694551348.6423934.jpeg)
+<img src="/blog/images/legacy/leetcode-391-perfect-rectangle/group-7.webp" alt="Group 7.jpg" width="480" height="423" loading="lazy">
 
 
 ### Solution Breakdown:

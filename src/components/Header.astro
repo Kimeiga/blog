@@ -2,6 +2,7 @@
 import { SITE } from '../config';
 import { withBase } from '../lib/paths';
 import ThemeToggle from './ThemeToggle.astro';
+import Logo from './Logo.astro';
 
 const nav = [
   { href: withBase('/'), label: 'Home' },
@@ -15,8 +16,7 @@ const currentPath = Astro.url.pathname;
   <div class="site-header__inner shell">
     <a class="brand" href={withBase('/')} aria-label={`${SITE.name} blog home`}>
       <span class="brand__mark" aria-hidden="true">
-        <img class="logo logo--dark" src={withBase('/kimeiga-white.svg')} width="30" height="30" alt="" />
-        <img class="logo logo--light" src={withBase('/kimeiga-black.svg')} width="30" height="30" alt="" />
+        <Logo />
       </span>
       <span class="brand__type">
         <strong>Hakan Alpay</strong>

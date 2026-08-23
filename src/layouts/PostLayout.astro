@@ -5,6 +5,7 @@ import Photo from '../components/Photo.astro';
 import Comments from '../components/Comments.astro';
 import { absolute } from '../lib/paths';
 import { formatDate, postSlug, postUrl, readingTime, tagUrl } from '../lib/posts';
+import { responsivePostImage } from '../lib/responsive-images';
 
 interface Props {
   post: Post;
@@ -26,11 +27,16 @@ function legacyPublication(source: string) {
   return { preposition: 'at', name: url.hostname.replace(/^www\./, '') };
 }
 const legacy = data.legacySource ? legacyPublication(data.legacySource) : undefined;
+const responsiveHero = responsivePostImage(post);
 ---
 <BaseLayout
   title={data.title}
   description={data.description}
   image={data.hero?.src}
+  imageAlt={data.hero?.alt}
+  imageWidth={data.hero?.width}
+  imageHeight={data.hero?.height}
+  language={data.language}
   canonicalPath={postUrl(post)}
   article
   published={data.published}
@@ -57,7 +63,14 @@ const legacy = data.legacySource ? legacyPublication(data.legacySource) : undefi
 
     {data.hero && (
       <div class="shell shell--wide post-hero">
-        <Photo {...data.hero} captionHtml={data.hero.caption ? undefined : heroCaptionHtml} eager />
+        <Photo
+          {...data.hero}
+          src={responsiveHero?.src ?? data.hero.src}
+          srcset={responsiveHero?.srcset}
+          sizes="(min-width: 92rem) 90rem, calc(100vw - 2rem)"
+          captionHtml={data.hero.caption ? undefined : heroCaptionHtml}
+          eager
+        />
       </div>
     )}
 

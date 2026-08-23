@@ -1,6 +1,7 @@
 ---
 import type { Post } from '../lib/posts';
 import { formatDate, postUrl, readingTime, tagUrl } from '../lib/posts';
+import { responsivePostImage } from '../lib/responsive-images';
 import { withBase } from '../lib/paths';
 
 interface Props {
@@ -9,12 +10,15 @@ interface Props {
 }
 const { post, prominent = false } = Astro.props;
 const hero = post.data.hero;
+const responsiveHero = responsivePostImage(post);
 ---
 <article class:list={['post-card', prominent && 'post-card--prominent']}>
   {hero && (
     <a class="post-card__image" href={postUrl(post)} tabindex="-1" aria-hidden="true">
       <img
-        src={withBase(hero.src)}
+        src={withBase(responsiveHero?.src ?? hero.src)}
+        srcset={responsiveHero?.srcset}
+        sizes="(min-width: 80rem) 44rem, (min-width: 52rem) 46vw, calc(100vw - 2rem)"
         alt=""
         width={hero.width}
         height={hero.height}

@@ -1,0 +1,6 @@
+---
+import { readFile } from 'node:fs/promises';
+
+const logo = await readFile(new URL('../../public/kimeiga-white.svg', import.meta.url), 'utf8');
+---
+<Fragment set:html={logo} />

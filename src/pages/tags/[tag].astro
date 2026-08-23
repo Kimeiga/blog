@@ -15,7 +15,7 @@ export async function getStaticPaths() {
 }
 const { tag, posts } = Astro.props;
 ---
-<BaseLayout title={tag.label} description={`Writing by Hakan Alpay tagged ${tag.label}.`}>
+<BaseLayout title={tag.label} description={`Writing by Hakan Alpay tagged ${tag.label}.`} pageType="CollectionPage">
   <div class="shell shell--article page-header">
     <h1>{tag.label}</h1>
   </div>

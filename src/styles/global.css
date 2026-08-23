@@ -6,7 +6,7 @@
   --text: #f3efe6;
   --text-soft: #c9c5bc;
   --muted: #a09e98;
-  --faint: #737771;
+  --faint: #7b7f79;
   --line: #2b2f32;
   --line-strong: #41464a;
   --accent: #e3bd12;
@@ -31,7 +31,7 @@
   --text: #1a1917;
   --text-soft: #393733;
   --muted: #66625c;
-  --faint: #827d74;
+  --faint: #6f6a62;
   --line: #d6d0c5;
   --line-strong: #aaa398;
   --accent: #8a6a00;
@@ -75,10 +75,8 @@ button { color: inherit; }
 .brand { display: inline-flex; align-items: center; gap: .72rem; text-decoration: none; }
 .brand:hover { color: var(--text); }
 .brand__mark { position: relative; width: 2rem; height: 2rem; flex: none; }
-.logo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
-.logo--light { display: none; }
-:root[data-theme='light'] .logo--dark { display: none; }
-:root[data-theme='light'] .logo--light { display: block; }
+.brand__mark svg { position: absolute; inset: 0; width: 100%; height: 100%; color: var(--text); }
+.brand__mark path { fill: currentColor; }
 .brand__type { display: grid; line-height: 1.05; }
 .brand__type strong { font-size: .92rem; letter-spacing: -.01em; }
 .brand__type span { color: var(--muted); font-size: .72rem; margin-top: .24rem; letter-spacing: .02em; }
@@ -133,6 +131,7 @@ button { color: inherit; }
 
 .post-grid-list { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .post-card { min-width: 0; background: var(--bg); display: grid; }
+.post-card:not(.post-card--prominent) { content-visibility: auto; contain-intrinsic-size: auto 30rem; }
 .post-card__image { aspect-ratio: 16 / 9; overflow: hidden; background: var(--surface); }
 .post-card__image img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s ease; }
 .post-card:hover .post-card__image img { transform: scale(1.018); }
@@ -159,6 +158,7 @@ button { color: inherit; }
 .page-header > p:not(.eyebrow) { max-width: 39rem; margin: 1.5rem 0 0; color: var(--text-soft); font-family: var(--serif); font-size: 1.25rem; line-height: 1.55; }
 .archive { padding-block: 1rem 4rem; }
 .archive-year { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: 1rem; padding-block: 2rem; border-top: 1px solid var(--line); }
+.archive-year:not(:first-child) { content-visibility: auto; contain-intrinsic-size: auto 22rem; }
 .archive-year h2 { margin: 0; color: var(--accent); font-size: 1rem; }
 .archive-year ol { list-style: none; margin: 0; padding: 0; }
 .archive-year li { display: grid; grid-template-columns: 4.6rem minmax(0, 1fr); gap: .5rem 1rem; padding: .8rem 0; border-bottom: 1px solid color-mix(in srgb, var(--line) 65%, transparent); }
@@ -190,6 +190,8 @@ button { color: inherit; }
 .prose h2 { margin: 2.5em 0 .7em; font-size: clamp(1.8rem, 4vw, 2.7rem); line-height: 1.06; letter-spacing: -.045em; }
 .prose h3 { margin: 2em 0 .65em; font-size: 1.35rem; line-height: 1.18; letter-spacing: -.025em; }
 .prose h4 { margin-top: 1.8em; font-size: 1rem; }
+.prose [data-original-heading="3"] { margin: 2em 0 .65em; font-size: 1.35rem; line-height: 1.18; letter-spacing: -.025em; }
+.prose [data-original-heading="4"] { margin-top: 1.8em; font-size: 1rem; line-height: normal; letter-spacing: normal; }
 .prose a { color: var(--accent-soft); }
 .prose strong { color: var(--text); font-weight: 750; }
 .prose blockquote { margin-inline: 0; padding: .2rem 0 .2rem 1.3rem; border-left: 3px solid var(--accent); color: var(--text); font-size: 1.14em; line-height: 1.55; }
@@ -198,6 +200,14 @@ button { color: inherit; }
 .prose code { padding: .12em .28em; border: 1px solid var(--line); background: var(--code-bg); color: var(--text); font-family: var(--mono); font-size: .84em; }
 .prose pre { max-width: 100%; padding: 1.15rem; border: 1px solid var(--line); overflow-x: auto; font-family: var(--mono); font-size: .79rem; line-height: 1.6; tab-size: 2; }
 .prose pre code { padding: 0; border: 0; background: transparent; font-size: inherit; }
+:root[data-theme='dark'] .astro-code,
+:root[data-theme='dark'] .astro-code span {
+  color: var(--shiki-dark) !important;
+  background-color: var(--shiki-dark-bg) !important;
+}
+:root[data-theme='dark'] .astro-code span[style*='--shiki-dark:#6A737D'] {
+  color: #aab2ba !important;
+}
 .prose table { width: 100%; border-collapse: collapse; font-family: var(--sans); font-size: .85rem; }
 .prose th, .prose td { padding: .7rem; border: 1px solid var(--line); text-align: left; vertical-align: top; }
 .prose th { color: var(--text); background: var(--surface); }

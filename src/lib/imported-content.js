@@ -9,6 +9,7 @@ const HERO_MEDIA_CLASSES = new Set([
   'wp-caption',
   'wp-block-image',
   'wp-block-jetpack-story',
+  'separator',
 ]);
 
 const CAPTION_CLASSES = new Set([
@@ -169,6 +170,39 @@ function mediaContainer(target) {
   return known ?? figure ?? target;
 }
 
+function replaceRanges(value, replacements) {
+  let output = value;
+  for (const replacement of replacements.sort((a, b) => b.start - a.start)) {
+    output = `${output.slice(0, replacement.start)}${replacement.value}${output.slice(replacement.end)}`;
+  }
+  return output;
+}
+
+export function normalizeImportedHeadings(html) {
+  const headings = flatten(parseHtml(html)).filter((node) => /^h[1-6]$/.test(node.tag));
+  const replacements = [];
+  let previousDepth = 1;
+
+  for (const heading of headings) {
+    const originalDepth = Number(heading.tag.slice(1));
+    const depth = Math.min(originalDepth, previousDepth + 1);
+    previousDepth = depth;
+    if (depth === originalDepth) continue;
+
+    const opening = html.slice(heading.start, heading.openEnd)
+      .replace(/^<h[1-6]/i, `<h${depth}`)
+      .replace(/>$/, ` data-original-heading="${originalDepth}">`);
+    const closing = html.slice(heading.closeStart, heading.end)
+      .replace(/^<\/h[1-6]/i, `</h${depth}`);
+    replacements.push(
+      { start: heading.start, end: heading.openEnd, value: opening },
+      { start: heading.closeStart, end: heading.end, value: closing },
+    );
+  }
+
+  return replaceRanges(html, replacements);
+}
+
 export function dedupeImportedHero(html, heroSrc) {
   const heroPath = normalizeMediaPath(heroSrc);
   if (!heroPath || !html) return { html, changed: false };
@@ -188,7 +222,7 @@ export function dedupeImportedHero(html, heroSrc) {
   after = after.replace(/^(?:\s*<p\b[^>]*>\s*<\/p>)+/i, '');
 
   return {
-    html: `${before}${after}`,
+    html: normalizeImportedHeadings(`${before}${after}`),
     changed: true,
     captionHtml: extractedCaptionHtml,
   };

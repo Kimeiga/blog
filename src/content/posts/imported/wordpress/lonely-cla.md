@@ -9,8 +9,8 @@ featured: false
 hero:
   src: "/images/imported/wordpress/lonely-cla/img_20200928_130317.live.webp"
   alt: "Royce Hall and its brick plaza under a clear blue sky."
-  width: 1600
-  height: 1200
+  width: 768
+  height: 576
   credit:
     name: "Hakan Alpay"
     source: "WordPress archive"

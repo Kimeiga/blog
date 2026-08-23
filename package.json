@@ -6,12 +6,16 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "prebuild": "node scripts/import-legacy.mjs --if-missing && node scripts/validate-content.mjs",
+    "prebuild": "node scripts/import-legacy.mjs --if-missing && node scripts/validate-content.mjs && node scripts/generate-responsive-images.mjs",
     "build": "astro check && astro build",
+    "postbuild": "node scripts/validate-seo.mjs",
     "preview": "astro preview",
     "new": "node scripts/new-post.mjs",
     "lint:content": "node scripts/validate-content.mjs",
     "verify:media": "node scripts/verify-deployed-media.mjs",
+    "verify:seo": "node scripts/validate-seo.mjs",
+    "images:responsive": "node scripts/generate-responsive-images.mjs",
+    "audit:lighthouse": "node scripts/lighthouse-all.mjs",
     "sync:legacy": "node scripts/import-legacy.mjs --force",
     "astro": "astro"
   },
@@ -21,8 +25,10 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.0",
     "@astrojs/node": "^9.5.0",
+    "lighthouse": "^13.4.1",
     "lightningcss": "^1.33.0",
     "sass": "^1.80.0",
+    "sharp": "^0.33.5",
     "typescript": "^5.6.0"
   }
 }

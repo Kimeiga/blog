@@ -4,7 +4,7 @@ import { allTags, getPublishedPosts, tagUrl } from '../../lib/posts';
 const posts = await getPublishedPosts();
 const tags = allTags(posts);
 ---
-<BaseLayout title="Tags" description="Browse Hakan Alpay’s writing by subject.">
+<BaseLayout title="Tags" description="Browse Hakan Alpay’s writing by subject." pageType="CollectionPage">
   <div class="shell shell--article page-header">
     <h1>Tags</h1>
   </div>

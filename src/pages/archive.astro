@@ -8,7 +8,7 @@ for (const post of posts) {
   years.set(year, [...(years.get(year) ?? []), post]);
 }
 ---
-<BaseLayout title="Archive" description="Writing by Hakan Alpay, ordered by date.">
+<BaseLayout title="Archive" description="Writing by Hakan Alpay, ordered by date." pageType="CollectionPage">
   <div class="shell shell--article page-header">
     <h1>Archive</h1>
   </div>

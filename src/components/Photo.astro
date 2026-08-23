@@ -10,6 +10,8 @@ interface Credit {
 }
 interface Props {
   src: string;
+  srcset?: string;
+  sizes?: string;
   alt: string;
   caption?: string;
   captionHtml?: string;
@@ -20,11 +22,13 @@ interface Props {
   objectPosition?: string;
   class?: string;
 }
-const { src, alt, caption, captionHtml, width, height, credit, eager = false, objectPosition = 'center', class: className } = Astro.props;
+const { src, srcset, sizes, alt, caption, captionHtml, width, height, credit, eager = false, objectPosition = 'center', class: className } = Astro.props;
 ---
 <figure class:list={['photo', className]}>
   <img
     src={withBase(src)}
+    srcset={srcset}
+    sizes={sizes}
     alt={alt}
     width={width}
     height={height}

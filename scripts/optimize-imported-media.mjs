@@ -43,7 +43,15 @@ for (const postPath of postFiles) {
     try { await access(livePath); } catch { liveExists = false; }
     if (!generated.has(livePath) && !liveExists) {
       await mkdir(dirname(livePath), { recursive: true });
-      execFileSync('magick', [sourcePath, '-auto-orient', '-resize', '1600x1600>', '-strip', '-quality', '82', livePath]);
+      const galleryPhoto = sourceUrl.includes('/wordpress/lonely-cla/');
+      execFileSync('magick', [
+        sourcePath,
+        '-auto-orient',
+        '-resize', galleryPhoto ? '768x768>' : '1600x1600>',
+        '-strip',
+        '-quality', galleryPhoto ? '76' : '82',
+        livePath,
+      ]);
       generated.add(livePath);
       console.log(`Generated ${liveUrl}`);
     }

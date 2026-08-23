@@ -1,6 +1,6 @@
 ---
 import { getPublishedPosts, postSlug, type Post } from '../../lib/posts';
-import { dedupeImportedHero } from '../../lib/imported-content';
+import { dedupeImportedHero, normalizeImportedHeadings } from '../../lib/imported-content';
 import PostLayout from '../../layouts/PostLayout.astro';
 import { render } from 'astro:content';
 
@@ -26,8 +26,11 @@ const { Content, headings } = await render(post);
 const prepared = post.data.hero && post.id.startsWith('imported/')
   ? dedupeImportedHero(post.body ?? '', post.data.hero.src)
   : undefined;
+const importedHtml = post.id.startsWith('imported/')
+  ? (prepared?.changed ? prepared.html : normalizeImportedHeadings(post.body ?? ''))
+  : undefined;
 const heroCaptionHtml = prepared?.changed ? prepared.captionHtml : undefined;
 ---
 <PostLayout {post} {headings} {previous} {next} {heroCaptionHtml}>
-  {prepared?.changed ? <Fragment set:html={prepared.html} /> : <Content />}
+  {importedHtml !== undefined ? <Fragment set:html={importedHtml} /> : <Content />}
 </PostLayout>

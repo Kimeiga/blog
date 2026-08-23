@@ -16,29 +16,44 @@
     const container = section.querySelector('.giscus');
     if (!(container instanceof HTMLElement)) return;
 
-    const script = document.createElement('script');
-    script.src = 'https://giscus.app/client.js';
-    script.async = true;
-    script.crossOrigin = 'anonymous';
-    script.dataset.repo = 'Kimeiga/blog';
-    script.dataset.repoId = 'R_kgDOQT_OPw';
-    script.dataset.category = 'Announcements';
-    script.dataset.categoryId = 'DIC_kwDOQT_OP84DD-9g';
-    script.dataset.mapping = 'pathname';
-    script.dataset.strict = '1';
-    script.dataset.reactionsEnabled = '1';
-    script.dataset.emitMetadata = '0';
-    script.dataset.inputPosition = 'top';
-    script.dataset.theme = theme();
-    script.dataset.lang = 'en';
-    script.dataset.loading = 'lazy';
-    container.append(script);
-
     const syncTheme = () => {
       const frame = section.querySelector('iframe.giscus-frame');
       if (!(frame instanceof HTMLIFrameElement) || !frame.contentWindow) return;
       frame.contentWindow.postMessage({ giscus: { setConfig: { theme: theme() } } }, 'https://giscus.app');
     };
     new MutationObserver(syncTheme).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+    const load = () => {
+      if (container.dataset.loaded) return;
+      container.dataset.loaded = 'true';
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.async = true;
+      script.crossOrigin = 'anonymous';
+      script.dataset.repo = 'Kimeiga/blog';
+      script.dataset.repoId = 'R_kgDOQT_OPw';
+      script.dataset.category = 'Announcements';
+      script.dataset.categoryId = 'DIC_kwDOQT_OP84DD-9g';
+      script.dataset.mapping = 'pathname';
+      script.dataset.strict = '1';
+      script.dataset.reactionsEnabled = '1';
+      script.dataset.emitMetadata = '0';
+      script.dataset.inputPosition = 'top';
+      script.dataset.theme = theme();
+      script.dataset.lang = 'en';
+      script.dataset.loading = 'lazy';
+      container.append(script);
+    };
+
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        load();
+      });
+      observer.observe(section);
+    } else {
+      load();
+    }
   })();
 </script>

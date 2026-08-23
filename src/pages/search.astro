@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { withBase } from '../lib/paths';
 ---
-<BaseLayout title="Search" description="Search Hakan Alpay’s blog.">
+<BaseLayout title="Search" description="Search Hakan Alpay’s blog." pageType="SearchResultsPage">
   <div class="shell shell--article page-header page-header--search">
     <h1>Search</h1>
     <form class="search-form" role="search" data-search data-index={withBase('/search-index.json')}>

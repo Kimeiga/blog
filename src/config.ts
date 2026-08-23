@@ -3,6 +3,8 @@ export const SITE = {
   shortName: 'Hakan',
   title: 'Hakan Alpay — Blog',
   description: 'Writing by Hakan Alpay on software, cities, economies, games, design, and language.',
+  locale: 'en_US',
+  language: 'en',
   origin: 'https://hakanalpay.com',
   basePath: '/blog',
   repository: 'Kimeiga/blog',
