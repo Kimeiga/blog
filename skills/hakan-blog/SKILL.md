@@ -72,6 +72,17 @@ Preserve Hakan's directness, strong preferences, specific nouns, occasional digr
 
 Do not make him sound like a brand. Do not make every paragraph tidy. Do not invent lived experience.
 
+## Project posts stay on this blog
+
+Technical project notes, experiment reports, and personal essays share the same canonical collection. Use tags and metadata instead of splitting Hakan's identity across another site.
+
+- Add the `Projects` tag and `project: "<stable-key>"`.
+- Add `projectUrl` only when the public project page or repository is safe to expose.
+- Set `disclosure: "AI-Assisted"` when AI drafts or substantially rewrites the post.
+- Treat negative results, broken harnesses, and abandoned hypotheses as useful outcomes when the evidence supports them.
+- On updates, keep the prior record visible, add `updated`, and distinguish a correction from a new result.
+- Prefer screenshots, plots, diagrams, or real project/device photography over generic technology stock imagery.
+
 ## UI and metadata
 
 Keep public site copy short:
@@ -81,7 +92,7 @@ Keep public site copy short:
 - labels: 1–4 words
 - page titles: literal
 - descriptions: one sentence
-- AI disclosure: usually `AI-assisted.`
+- AI disclosure badge: `AI-Assisted`
 
 The blog accent is golden yellow. Dark mode is default.
 

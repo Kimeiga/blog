@@ -35,6 +35,8 @@ const posts = defineCollection({
     hero: imageSchema.optional(),
     legacySource: z.string().url().optional(),
     disclosure: z.string().optional(),
+    project: z.string().min(1).optional(),
+    projectUrl: z.string().url().optional(),
   }),
 });
 
