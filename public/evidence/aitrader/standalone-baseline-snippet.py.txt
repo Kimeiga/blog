@@ -1,0 +1,105 @@
+def main():
+    print_header("STANDALONE 3-YEAR BACKTEST COMPARISON")
+    print("Period: 2021-01-01 to 2024-01-01")
+    print("Tickers: AAPL, MSFT, GOOGL, AMZN, JPM")
+    print("Strategies: ARIMA(5,1,0), Buy & Hold")
+
+    # Configuration
+    tickers = ["AAPL", "MSFT", "GOOGL", "AMZN", "JPM"]
+    date_from = "2021-01-01"
+    date_to = "2024-01-01"
+
+    # Download data first - include 3 years of training data before the test period
+    # ARIMA needs 3 years (252*3 days) of training data
+    try:
+        # Download from 2018 to include training data
+        download_and_prepare_data(tickers, "2018-01-01", date_to)
+    except Exception as e:
+        print(f"\n✗ Data download failed: {e}")
+        import traceback
+        traceback.print_exc()
+        return
+
+    trade_config = {
+        "tickers": tickers,
+        "date_from": date_from,
+        "date_to": date_to,
+        "cash": 100000.0,
+        "silence": True,  # Reduce noise from backtrader
+        "setup_name": "3year_comparison",
+        "save_results": True,
+    }
+
+    results_summary = {}
+    
+    # ========================================================================
+    # Test 1: Buy & Hold Baseline
+    # ========================================================================
+    print_header("TEST 1: BUY & HOLD BASELINE")
+    print("Running Buy & Hold strategy for 5 tickers...")
+
+    try:
+        operator_bh = FINSABERBt(trade_config)
+        print("  Executing backtest...")
+        results_bh = operator_bh.run_iterative_tickers(BuyAndHoldStrategy)
+        print("  ✓ Backtest complete, processing results...")
+        summary_bh = print_results("Buy & Hold", results_bh)
+        results_summary['buy_and_hold'] = summary_bh
+
+    except Exception as e:
+        print(f"\n✗ Buy & Hold backtest failed: {e}")
+        import traceback
+        traceback.print_exc()
+        results_summary['buy_and_hold'] = None
+    
+    # ========================================================================
+    # Test 2: ARIMA Baseline
+    # ========================================================================
+    print_header("TEST 2: ARIMA BASELINE")
+    print("Running ARIMA(5,1,0) strategy for 5 tickers...")
+    print("Note: ARIMA training can take 5-10 minutes...")
+
+    try:
+        operator_arima = FINSABERBt(trade_config)
+        print("  Training ARIMA models and executing backtest...")
+        results_arima = operator_arima.run_iterative_tickers(ARIMAPredictorStrategy)
+        print("  ✓ Backtest complete, processing results...")
+        summary_arima = print_results("ARIMA(5,1,0)", results_arima)
+        results_summary['arima'] = summary_arima
+
+    except Exception as e:
+        print(f"\n✗ ARIMA backtest failed: {e}")
+        import traceback
+        traceback.print_exc()
+        results_summary['arima'] = None
+    
+    # ========================================================================
+    # Final Comparison
+    # ========================================================================
+    print_header("FINAL COMPARISON SUMMARY")
+    
+    if results_summary.get('buy_and_hold') and results_summary.get('arima'):
+        print("\nStrategy Performance Comparison:")
+        print("-" * 80)
+        print(f"{'Strategy':<20} {'Avg Return':>12} {'Avg Sharpe':>12} {'Avg MaxDD':>12}")
+        print("-" * 80)
+        
+        for strategy_name, summary in results_summary.items():
+            if summary:
+                print(f"{strategy_name.replace('_', ' ').title():<20} "
+                      f"{summary['avg_return']:>11.2%} "
+                      f"{summary['avg_sharpe']:>12.3f} "
+                      f"{summary['avg_drawdown']:>11.2%}")
+    
+    # Save results
+    output_file = f"results/3year_comparison_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+    os.makedirs("results", exist_ok=True)
+    
+    with open(output_file, 'w') as f:
+        json.dump(results_summary, f, indent=2)
+    
+    print(f"\n✓ Results saved to: {output_file}")
+    print("\n" + "="*80)
+
+if __name__ == "__main__":
+    main()

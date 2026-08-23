@@ -1,0 +1,45 @@
+    def _calculate_arima(self, data: pd.DataFrame) -> Dict[str, Any]:
+        """Calculate ARIMA(5,1,0) forecast for next period."""
+        try:
+            close_prices = data["close"].dropna()
+
+            if len(close_prices) < 50:  # Minimum data for ARIMA
+                return {
+                    "arima_forecast": None,
+                    "arima_direction": "INSUFFICIENT_DATA",
+                    "arima_confidence": 0.0,
+                }
+
+            # Fit ARIMA model
+            model = ARIMA(close_prices, order=ARIMA_ORDER)
+            fitted_model = model.fit()
+
+            # Forecast next period
+            forecast = fitted_model.forecast(steps=1)
+            forecast_value = float(forecast.iloc[0])
+            current_price = float(close_prices.iloc[-1])
+
+            # Determine direction
+            if forecast_value > current_price * 1.001:  # >0.1% increase
+                direction = "BULLISH"
+            elif forecast_value < current_price * 0.999:  # >0.1% decrease
+                direction = "BEARISH"
+            else:
+                direction = "NEUTRAL"
+
+            # Calculate confidence based on forecast magnitude
+            pct_change = abs((forecast_value - current_price) / current_price)
+            confidence = min(pct_change * 100, 1.0)  # Cap at 1.0
+
+            return {
+                "arima_forecast": forecast_value,
+                "arima_direction": direction,
+                "arima_confidence": confidence,
+            }
+
+        except Exception as e:
+            return {
+                "arima_forecast": None,
+                "arima_direction": f"ERROR: {str(e)[:50]}",
+                "arima_confidence": 0.0,
+            }

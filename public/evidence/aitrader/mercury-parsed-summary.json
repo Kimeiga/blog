@@ -1,0 +1,54 @@
+{
+  "source_file": "results/mercury2_backtest_20260311_101440.json",
+  "note": "The top-level metrics object was empty because run_mercury2_backtest.py expected an analyzers key; this summary parses the per-ticker raw_results strings saved by the same run.",
+  "config": {
+    "tickers": [
+      "AAPL",
+      "MSFT",
+      "GOOGL",
+      "AMZN",
+      "JPM"
+    ],
+    "period": "2021-01-01 to 2024-01-01",
+    "model": "mercury-2",
+    "cash": 100000.0
+  },
+  "per_ticker": {
+    "AAPL": {
+      "sharpe_ratio": -0.12689366901156923,
+      "annual_return": 0.006338470943887176,
+      "max_drawdown": 18.603552944793126,
+      "total_return": 0.027680997548836128
+    },
+    "MSFT": {
+      "sharpe_ratio": 0.2239617997146545,
+      "annual_return": 0.053349359708880106,
+      "max_drawdown": 22.11780597697599,
+      "total_return": 0.25182946087430325
+    },
+    "GOOGL": {
+      "sharpe_ratio": -0.030558647058123365,
+      "annual_return": 0.009033061539201137,
+      "max_drawdown": 28.7782514503226,
+      "total_return": 0.039625423668753657
+    },
+    "AMZN": {
+      "sharpe_ratio": 0.343111497188954,
+      "annual_return": 0.07832310244007212,
+      "max_drawdown": 33.82503961898679,
+      "total_return": 0.3852305933767086
+    },
+    "JPM": {
+      "sharpe_ratio": -0.3927162986676986,
+      "annual_return": -0.01562978133400028,
+      "max_drawdown": 18.70744457173015,
+      "total_return": -0.06581089182727662
+    }
+  },
+  "averages": {
+    "total_return": 0.12771111672826502,
+    "sharpe_ratio": 0.003380936433243464,
+    "max_drawdown": 24.40641891256173,
+    "annual_return": 0.026282842659608053
+  }
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "file": "results/mercury2_backtest_final.log",
+    "lines": 12504,
+    "http_200_matching_lines": 5610,
+    "http_429_matching_lines": 3531,
+    "contains_completed_run_marker": true,
+    "contains_empty_summary_marker": true
+  },
+  {
+    "file": "results/mercury2_backtest.log",
+    "lines": 40,
+    "http_200_matching_lines": 6,
+    "http_429_matching_lines": 0,
+    "contains_completed_run_marker": true,
+    "contains_empty_summary_marker": true
+  },
+  {
+    "file": "results/mercury2_backtest_v2.log",
+    "lines": 39,
+    "http_200_matching_lines": 5,
+    "http_429_matching_lines": 0,
+    "contains_completed_run_marker": true,
+    "contains_empty_summary_marker": true
+  }
+]

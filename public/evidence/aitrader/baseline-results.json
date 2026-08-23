@@ -1,0 +1,14 @@
+{
+  "buy_and_hold": {
+    "avg_return": 0.46844060962492434,
+    "avg_sharpe": 0.3667538658949563,
+    "avg_drawdown": 41.34452180889514,
+    "ticker_count": 5
+  },
+  "arima": {
+    "avg_return": 1.0940000278945554,
+    "avg_sharpe": 0.9372402872689669,
+    "avg_drawdown": 14.03932525795993,
+    "ticker_count": 5
+  }
+}
