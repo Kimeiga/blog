@@ -1,22 +1,27 @@
 ---
-title: "Mercury 2 did not beat ARIMA"
-description: "I tried to improve a FINSABER-style ARIMA baseline with a Mercury 2 neuro-symbolic trading agent. The saved run made the old baseline look better."
+title: "Trying to beat analytical models with LLMs in the stock market"
+description: "A trading-agent experiment that started with FINSABER, wrapped ARIMA-style signals in Mercury 2, and ended with the analytical baseline winning."
 published: "2026-08-23T16:00:00.000Z"
+updated: "2026-08-23T16:29:33.000Z"
 tags: [Projects, AI, Trading, Research]
 draft: false
 featured: false
 hero:
   src: "/images/aitrader-mercury-arima/metrics.webp"
-  alt: "Bar chart comparing average return, Sharpe ratio, and drawdown for ARIMA, buy and hold, and Mercury 2"
+  alt: "Bar chart comparing average return, Sharpe ratio, and drawdown for ARIMA, buy and hold, and a Mercury 2 LLM strategy"
   width: 1600
   height: 900
 project: "aitrader"
 disclosure: "AI-Assisted"
 ---
 
-The interesting result is not that the diffusion model won. It did not.
+The stock-market version of “can an LLM reason better?” is nastier than the demo version.
 
-The saved `aitrader` run compared a FINSABER-style ARIMA baseline, buy and hold, and a Mercury 2 neuro-symbolic strategy over five tickers from 2021-01-01 to 2024-01-01: AAPL, MSFT, GOOGL, AMZN, and JPM. The baseline averaged 109.40% total return, 0.937 Sharpe, and 14.04% max drawdown. The Mercury 2 strategy averaged 12.77% total return, 0.003 Sharpe, and 24.41% max drawdown. Buy and hold landed between them on return and below both on drawdown.
+A language model can sound plausible about a chart. A backtest asks a colder question: if the model had made decisions one day at a time, using only information available up to that day, would the portfolio have made more money with less risk than a simpler analytical strategy?
+
+In this experiment, the answer was no.
+
+The saved `aitrader` run compared three strategies over five stocks from 2021-01-01 to 2024-01-01: AAPL, MSFT, GOOGL, AMZN, and JPM. The analytical baseline used ARIMA, a classical time-series forecasting model. The LLM strategy used Mercury 2, a diffusion language model from Inception Labs, but gave it ARIMA-derived state plus technical indicators at each decision step. Buy and hold was there as the boring market-exposure check.
 
 | Strategy | Avg total return | Avg Sharpe | Avg max drawdown |
 | --- | ---: | ---: | ---: |
@@ -28,23 +33,31 @@ So did the project finish? Yes, in the useful sense: it produced a saved histori
 
 This is an engineering note about a historical backtest, not investment advice.
 
-## The paper that started it
+## The pieces
 
-This started with the FINSABER paper, [“Can LLM-based Financial Investing Strategies Outperform the Market in Long Run?”](https://arxiv.org/abs/2505.07078), by Weixian Waylon Li, Hyeonjun Kim, Mihai Cucuringu, and Tiejun Ma. The paper’s claim was exactly the kind of claim that makes a small trading-agent project feel both tempting and dangerous: many LLM investing evaluations look good because they are too narrow, too short, or too vulnerable to survivorship and data-snooping bias.
+ARIMA stands for autoregressive integrated moving average. The plain-English version: it is a statistical model that looks at a time series, tries to separate trend-like structure from noise, and forecasts what comes next from past values and past errors. The implementation here used `statsmodels.tsa.arima.model.ARIMA`; the statsmodels docs describe it as the [basic interface for ARIMA-type models](https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html).
 
-The authors built [FINSABER](https://github.com/waylonli/FINSABER) to make that harder to hide. The project frames itself as a backtesting framework for traditional technical strategies, machine learning strategies, and LLM agents. Its current docs describe [FINSABER-2](https://waylonli.github.io/FINSABER/) as a package-oriented framework with explicit execution timing, price adjustment, slippage, liquidity, structured results, and LLM cost accounting. The accompanying [FINSABER V2 dataset](https://huggingface.co/datasets/finsaber-team/FINSABER-V2-Data) is broad enough to make a five-stock toy experiment feel a little embarrassed: years of S&P 500 price data, millions of news rows, SEC filings, and metadata.
+An LLM is doing something different. It is not fitting a small, named statistical model to a price series. It is reading a structured prompt and producing a decision. That makes it flexible, but also suspicious. It can invent confidence. It can overreact to stale context. It can sound better than it trades.
 
-That paper made the challenge clear. If LLM strategies often lose their shine under wider, longer, stricter evaluation, maybe the model should not be asked to invent the whole strategy. Give it a mechanical state: ARIMA direction, MACD, RSI, ATR. Let a fast reasoning model decide whether the state is actionable. Keep the deterministic parts deterministic.
+Mercury 2 is the LLM I used. It comes from Inception Labs, which describes Mercury 2 as a [diffusion language model](https://www.inceptionlabs.ai/blog/introducing-mercury-2). Diffusion is more familiar from image generation, but the relevant claim for this project is not aesthetics; it is speed. Inception Labs says Mercury 2 uses parallel refinement instead of standard left-to-right token generation, advertises high throughput, low token cost, long context, tool use, and schema-aligned JSON. The [Inception API](https://www.inceptionlabs.ai/blog/introducing-inception-api) also exposes an OpenAI-compatible interface, so it was straightforward to put Mercury 2 behind a normal trading-agent call.
 
-Mercury 2 was attractive for that role because Inception Labs presents it as a [diffusion language model](https://www.inceptionlabs.ai/blog/introducing-mercury-2), using parallel refinement instead of standard left-to-right token generation. The product post advertises very high throughput, low token cost, a 128K context window, native tool use, and schema-aligned JSON. The [Inception API](https://www.inceptionlabs.ai/blog/introducing-inception-api) also uses an OpenAI-compatible interface, which made it easy to plug into a normal agent loop.
+FINSABER is the research context. The paper [“Can LLM-based Financial Investing Strategies Outperform the Market in Long Run?”](https://arxiv.org/abs/2505.07078), by Weixian Waylon Li, Hyeonjun Kim, Mihai Cucuringu, and Tiejun Ma, argues that many LLM investing evaluations look good because they are too narrow, too short, or too vulnerable to survivorship and data-snooping bias. The authors built [FINSABER](https://github.com/waylonli/FINSABER) to make that harder to hide. Its current docs describe [FINSABER-2](https://waylonli.github.io/FINSABER/) as a package-oriented framework with explicit execution timing, price adjustment, slippage, liquidity, structured results, and LLM cost accounting.
 
-That was the bet: maybe a fast diffusion LLM, fed with ARIMA and technical indicators at every decision point, could improve on a plain ARIMA baseline without becoming a vibes machine in a suit.
+That was the setup. A classical model makes a forecast. A language model reads the forecast plus other indicators. A backtest decides whether the extra reasoning helped or just added theatrical machinery.
+
+## Why try it
+
+The naive version of an LLM trading system is: send the model market context and ask whether to buy, sell, or hold. That is too easy to fool yourself with. The prompt can smuggle in future information. The benchmark can be too small. The agent can look intelligent while mostly reducing exposure.
+
+The less naive version is neuro-symbolic: let deterministic code compute a state, then ask the model to reason over that state. In `aitrader`, the state included ARIMA direction, MACD, RSI, and ATR. The model did not need to hallucinate those indicators from prose. It received them as structured inputs and returned a trading decision.
+
+That was my attempt to outdo the sober FINSABER lesson instead of denying it. If LLM-only strategies degrade under stricter evaluation, maybe an LLM constrained by analytical signals could still add something.
 
 ## What I built
 
 The project became a neuro-symbolic trading adapter around FINSABER. The strategy gathered historical price data up to the current date, calculated heuristic state, sent that state to Mercury 2, and converted the model decision into buy, sell, or hold actions. The baseline script used `yfinance` to download historical prices; the library documents itself as a way to [download market data from Yahoo Finance’s API](https://ranaroussi.github.io/yfinance/), and the script pulled a 2018-01-01 to 2024-01-01 window so ARIMA had training history before the 2021-01-01 test start.
 
-The ARIMA piece used `statsmodels.tsa.arima.model.ARIMA`; the official statsmodels docs describe that class as the [basic interface for ARIMA-type models](https://www.statsmodels.org/stable/generated/statsmodels.tsa.arima.model.ARIMA.html). In the committed heuristic code, the model is fit on the rolling close-price history and forecasts one step ahead. The key detail is in the code: [_calculate_arima fits inside the decision step](/blog/evidence/aitrader/rolling-arima-snippet.py.txt).
+In the committed heuristic code, ARIMA is fit on the rolling close-price history and forecasts one step ahead. The key detail is in the code: [_calculate_arima fits inside the decision step](/blog/evidence/aitrader/rolling-arima-snippet.py.txt).
 
 That matters because I had been describing the experiment as “precomputed ARIMA at each step.” The saved code does not show a committed precomputed ARIMA cache. It computes ARIMA-derived state at each step, but it does so by fitting on the available rolling window. That is still time-correct in intent, but it is not the same operational design. “Precomputed” would mean a feature table generated once under strict no-look-ahead rules, then reused by the Mercury strategy and the ARIMA ablation. This repo did not get there.
 
