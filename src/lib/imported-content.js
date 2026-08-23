@@ -114,14 +114,36 @@ function flatten(nodes, output = []) {
   return output;
 }
 
+function usefulCaption(value) {
+  const html = String(value || '').trim();
+  const text = decodeEntities(html.replace(/<!--[^]*?-->/g, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
+  return text ? html : undefined;
+}
+
 function captionHtml(container, html) {
   for (const node of flatten(container.children)) {
     const classes = classNames(node);
     const isCaption = node.tag === 'figcaption' || classes.some((name) => CAPTION_CLASSES.has(name));
     if (!isCaption || node.closeStart < node.openEnd) continue;
-    const value = html.slice(node.openEnd, node.closeStart).trim();
-    const text = decodeEntities(value.replace(/<!--[^]*?-->/g, ' ').replace(/<[^>]+>/g, ' ')).replace(/\s+/g, ' ').trim();
-    if (text) return value;
+    const value = usefulCaption(html.slice(node.openEnd, node.closeStart));
+    if (value) return value;
+  }
+
+  // Historical HTML is occasionally malformed enough to confuse the lightweight
+  // tree above. Fall back to the selected media block itself so captions are not
+  // lost when the duplicate body image is removed.
+  const fragment = html.slice(container.start, container.end);
+  const figcaption = fragment.match(/<figcaption\b[^>]*>([\s\S]*?)<\/figcaption>/i)?.[1];
+  const figcaptionValue = usefulCaption(figcaption);
+  if (figcaptionValue) return figcaptionValue;
+
+  const captionElement = /<([A-Za-z][A-Za-z0-9:-]*)\b([^>]*)>([\s\S]*?)<\/\1>/gi;
+  let match;
+  while ((match = captionElement.exec(fragment))) {
+    const classes = attribute(match[2], 'class').split(/\s+/).filter(Boolean);
+    if (!classes.some((name) => CAPTION_CLASSES.has(name))) continue;
+    const value = usefulCaption(match[3]);
+    if (value) return value;
   }
   return undefined;
 }
