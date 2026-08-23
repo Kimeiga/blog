@@ -1,5 +1,6 @@
 ---
 import { getPublishedPosts, postSlug, type Post } from '../../lib/posts';
+import { dedupeImportedHero } from '../../lib/imported-content';
 import PostLayout from '../../layouts/PostLayout.astro';
 import { render } from 'astro:content';
 
@@ -22,7 +23,11 @@ interface Props {
 }
 const { post, previous, next } = Astro.props;
 const { Content, headings } = await render(post);
+const prepared = post.data.hero && post.id.startsWith('imported/')
+  ? dedupeImportedHero(post.body ?? '', post.data.hero.src)
+  : undefined;
+const heroCaptionHtml = prepared?.changed ? prepared.captionHtml : undefined;
 ---
-<PostLayout {post} {headings} {previous} {next}>
-  <Content />
+<PostLayout {post} {headings} {previous} {next} {heroCaptionHtml}>
+  {prepared?.changed ? <Fragment set:html={prepared.html} /> : <Content />}
 </PostLayout>

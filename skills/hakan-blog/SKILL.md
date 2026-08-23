@@ -22,6 +22,7 @@ Older public work imported from GitHub/Jekyll, WordPress, or Substack is Hakan's
 - Preserve the original publication date and URL (`legacySource`).
 - Do not run humanization, compression, or current editorial rewrites over an archival import unless Hakan explicitly asks to revise that old piece.
 - Imported WordPress/Substack source lives under `src/content/posts/imported/`; media lives under `public/images/imported/`.
+- If a body image is promoted to the hero, show it only once: remove the matching body copy and move its original caption under the hero.
 
 ## Source-bible first
 

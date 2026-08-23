@@ -12,6 +12,7 @@ interface Props {
   src: string;
   alt: string;
   caption?: string;
+  captionHtml?: string;
   width: number;
   height: number;
   credit?: Credit;
@@ -19,7 +20,7 @@ interface Props {
   objectPosition?: string;
   class?: string;
 }
-const { src, alt, caption, width, height, credit, eager = false, objectPosition = 'center', class: className } = Astro.props;
+const { src, alt, caption, captionHtml, width, height, credit, eager = false, objectPosition = 'center', class: className } = Astro.props;
 ---
 <figure class:list={['photo', className]}>
   <img
@@ -32,9 +33,11 @@ const { src, alt, caption, width, height, credit, eager = false, objectPosition 
     decoding="async"
     style={`object-position:${objectPosition}`}
   />
-  {(caption || credit) && (
+  {(caption || captionHtml || credit) && (
     <figcaption>
-      {caption && <>{caption}{credit && <br />}</>}
+      {caption && <>{caption}</>}
+      {!caption && captionHtml && <span set:html={captionHtml} />}
+      {(caption || captionHtml) && credit && <br />}
       {credit && <>
         Photo by {credit.url ? <a href={credit.url}>{credit.name}</a> : credit.name}
         {credit.source && <> on {credit.sourceUrl ? <a href={credit.sourceUrl}>{credit.source}</a> : credit.source}</>}

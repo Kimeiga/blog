@@ -24,6 +24,8 @@ Hakan’s older public writing is part of this blog, not source material to rewr
 
 For imported work, preserve the original article text, headings, emphasis, links, blockquotes, captions, image order, and media. Do **not** run the humanize/rewrite workflow over historical prose. The original public URL belongs in `legacySource`. If an upstream image is copied locally, rewrite the article HTML to the local `/blog/images/imported/...` URL rather than hotlinking it.
 
+If an archival body image is promoted to the page hero, render it only once. Remove the matching body copy and move its original caption under the hero; never show the same image as both the hero and an article-body image.
+
 Use `scripts/import-public-archives.mjs`, `scripts/import-substack-by-id.mjs`, and `docs/PUBLIC_ARCHIVE_IMPORT.md` when auditing or deliberately re-running the migration. Do not routinely resync old archives after Hakan starts editing a migrated copy on the new blog.
 
 ## Writing
