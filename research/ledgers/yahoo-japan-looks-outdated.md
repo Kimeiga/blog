@@ -35,7 +35,8 @@ Separate three things that are often collapsed into one argument about Japanese 
 
 - `IMG_6868.png`: Hakan's Yahoo Japan mobile capture, 2026-09-04.
 - `IMG_6869.jpeg`: Hakan's Yahoo US mobile capture, 2026-09-04.
-- `IMG_6866.jpeg` and `IMG_6867.jpeg`: frames supplied by Hakan from https://youtube.com/shorts/GObkBWa9RYI, used for criticism/commentary with source linked in captions.
+- `IMG_6866.jpeg`: frame supplied by Hakan from https://youtube.com/shorts/GObkBWa9RYI, used for criticism/commentary with the source linked in its caption.
+- `IMG_6867.jpeg`: additional frame supplied by Hakan from the same short, reviewed but not used in the published draft.
 - `hero.webp`: composite derived only from Hakan's two mobile captures.
 
 ## Claims explicitly avoided
