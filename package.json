@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "prebuild": "node scripts/import-legacy.mjs --if-missing && node scripts/validate-content.mjs && node scripts/generate-responsive-images.mjs",
+    "prebuild": "node scripts/materialize-base64-assets.mjs && node scripts/import-legacy.mjs --if-missing && node scripts/validate-content.mjs && node scripts/generate-responsive-images.mjs",
     "build": "astro check && astro build",
     "postbuild": "node scripts/validate-seo.mjs",
     "preview": "astro preview",
