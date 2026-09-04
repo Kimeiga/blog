@@ -10,8 +10,8 @@ hero:
   src: "/images/yahoo-japan-homepage/hero.webp"
   alt: "Yahoo Japan and Yahoo US mobile homepages shown side by side"
   caption: "Yahoo Japan and Yahoo US on mobile, captured on September 4, 2026."
-  width: 1600
-  height: 900
+  width: 850
+  height: 478
 ---
 
 [A short about Japanese web design](https://youtube.com/shorts/GObkBWa9RYI) made a familiar point: Yahoo Japan in 2026 still looks suspiciously like Yahoo Japan in 2005. The implication is that Japan's web is stuck because large companies subcontract software work, fear failure, and keep old interfaces alive.
@@ -19,7 +19,7 @@ hero:
 I opened Yahoo Japan and Yahoo US on my phone. The Japanese page does look older. I also immediately preferred it.
 
 <figure class="article-photo">
-  <img src="/blog/images/yahoo-japan-homepage/desktop-2005-2026.webp" width="1206" height="592" loading="lazy" decoding="async" alt="Video frame comparing Yahoo Japan in 2005 and 2026" />
+  <img src="/blog/images/yahoo-japan-homepage/desktop-2005-2026.webp" width="700" height="344" loading="lazy" decoding="async" alt="Video frame comparing Yahoo Japan in 2005 and 2026" />
   <figcaption>A frame from <a href="https://youtube.com/shorts/GObkBWa9RYI">the short that prompted this comparison</a>. Used here for commentary.</figcaption>
 </figure>
 
@@ -52,7 +52,7 @@ This table is only about what is visible in these captures. Yahoo US has weather
 | Personalized article feed | Secondary | Central |
 
 <figure class="article-photo">
-  <img src="/blog/images/yahoo-japan-homepage/yahoo-japan-mobile.webp" width="1206" height="2622" loading="lazy" decoding="async" alt="Full mobile screenshot of Yahoo Japan showing disaster information, weather, service shortcuts and news headlines" />
+  <img src="/blog/images/yahoo-japan-homepage/yahoo-japan-mobile.webp" width="500" height="1087" loading="lazy" decoding="async" alt="Full mobile screenshot of Yahoo Japan showing disaster information, weather, service shortcuts and news headlines" />
   <figcaption>Yahoo Japan on my iPhone, September 4, 2026. The first screen behaves like a dashboard.</figcaption>
 </figure>
 
@@ -61,7 +61,7 @@ Yahoo Japan also has more to expose. [LY Corporation's current service directory
 The American Yahoo ecosystem is not tiny. [Its current homepage help](https://help.yahoo.com/kb/SLN36655.html) lists Mail, Finance, News, Search, Shopping, Sports, Weather and Games. But the mobile homepage I opened does not try to make the ecosystem legible at once. It mostly makes the feed legible.
 
 <figure class="article-photo">
-  <img src="/blog/images/yahoo-japan-homepage/yahoo-us-mobile.webp" width="706" height="1536" loading="lazy" decoding="async" alt="Full mobile screenshot of Yahoo US showing search, a large lead story and the For You feed" />
+  <img src="/blog/images/yahoo-japan-homepage/yahoo-us-mobile.webp" width="450" height="979" loading="lazy" decoding="async" alt="Full mobile screenshot of Yahoo US showing search, a large lead story and the For You feed" />
   <figcaption>Yahoo US on my iPhone one minute later. The first screen behaves like a publication and recommendation feed.</figcaption>
 </figure>
 
@@ -96,11 +96,6 @@ A separate [2020 comparison of nine companies' Japanese and US sites](https://do
 There is production evidence pointing the other way. In a [2025 Japan Times investigation into Japanese web design](https://www.japantimes.co.jp/life/2025/12/15/style-design/japan-internet-web-design/), growth consultant Shoin Wolfe described tests on LIFULL HOME'S in which cleaner pages with more negative space and less rarely used information produced lower engagement and fewer conversions, so the team reverted. That is a reported company test, not a published controlled experiment, and Wolfe himself offered alternative explanations such as familiarity with the existing interface.
 
 So the evidence is annoyingly sensible. Visual clutter can make people slower. Showing more of the system can make navigation easier. Familiarity and local expectations can change what performs well. There is no result that says "Japanese web design is better," and no result that says Western minimalism is universally better either.
-
-<figure class="article-photo">
-  <img src="/blog/images/yahoo-japan-homepage/desktop-japan-us.webp" width="1206" height="394" loading="lazy" decoding="async" alt="Video frame comparing a dense Yahoo Japan desktop homepage with a card-based Yahoo US homepage" />
-  <figcaption>The same tension is obvious on desktop in <a href="https://youtube.com/shorts/GObkBWa9RYI">the original short</a>: a portal on the left, a feed on the right.</figcaption>
-</figure>
 
 ## The "Japan is stuck" story is only partly supported
 
