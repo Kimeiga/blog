@@ -20,7 +20,7 @@ jobs:
       - name: Update Astro
         run: |
           npm install 'astro@^7.3.4'
-          npm install --save-dev '@astrojs/check@^0.9.10' '@astrojs/node@^11.1.6'
+          npm install --save-dev '@astrojs/check@^0.9.10' '@astrojs/node@^11.1.6' '@astrojs/markdown-remark@latest'
       - name: Validate
         run: |
           npm run build
