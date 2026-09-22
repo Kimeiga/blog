@@ -1,0 +1,35 @@
+name: Apply Astro 7 update
+
+on:
+  push:
+    branches:
+      - chore/js-weekly-astro7
+
+permissions:
+  contents: write
+
+jobs:
+  upgrade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - name: Update Astro
+        run: |
+          npm install 'astro@^7.3.4'
+          npm install --save-dev '@astrojs/check@^0.9.10' '@astrojs/node@^11.1.6'
+      - name: Validate
+        run: |
+          npm run build
+          npm run verify:seo
+      - name: Commit generated dependency update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/js-weekly-upgrade.yml
+          git add package.json package-lock.json
+          git commit -m "chore: upgrade blog to Astro 7"
+          git push origin HEAD:chore/js-weekly-astro7
