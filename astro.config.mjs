@@ -1,4 +1,5 @@
 import { defineConfig } from 'astro/config';
+import { unified } from '@astrojs/markdown-remark';
 import { rehypeNormalizeHeadings } from './src/lib/rehype-normalize-headings.mjs';
 
 export default defineConfig({
@@ -10,7 +11,9 @@ export default defineConfig({
     inlineStylesheets: 'always',
   },
   markdown: {
-    rehypePlugins: [rehypeNormalizeHeadings],
+    processor: unified({
+      rehypePlugins: [rehypeNormalizeHeadings],
+    }),
     shikiConfig: {
       themes: {
         light: 'github-light',
