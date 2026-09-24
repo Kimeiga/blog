@@ -1,0 +1,28 @@
+name: Apply blog cleanup
+
+on:
+  push:
+    branches: [cleanup/fallow-blog-maintenance]
+
+permissions:
+  contents: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm uninstall @astrojs/node
+      - run: npm run build
+      - name: Commit validated cleanup
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/fallow-cleanup.yml
+          git add package.json package-lock.json
+          git commit -m "chore: remove unused Astro node adapter"
+          git push origin HEAD:cleanup/fallow-blog-maintenance
